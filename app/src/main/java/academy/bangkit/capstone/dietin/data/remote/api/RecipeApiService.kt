@@ -1,4 +1,4 @@
-package academy.bangkit.capstone.dietin.data.remote.service
+package academy.bangkit.capstone.dietin.data.remote.api
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiResponse
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe

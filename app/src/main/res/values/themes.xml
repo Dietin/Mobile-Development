@@ -1,9 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.Dietn" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Dietin" parent="Base.Theme.Dietin">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Dietn" parent="Base.Theme.Dietn" />
+    <style name="Base.Theme.Dietin" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="fontFamily">@font/inter</item>
+    </style>
 </resources>

@@ -1,14 +1,15 @@
 package academy.bangkit.capstone.dietin
 
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
+import academy.bangkit.capstone.dietin.databinding.FragmentFirstBinding
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import academy.bangkit.capstone.dietin.databinding.FragmentFirstBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 
 /**
@@ -50,6 +51,7 @@ class FirstFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.e("FirstFragment", "onDestroyView")
         _binding = null
     }
 

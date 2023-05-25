@@ -1,5 +1,7 @@
 package academy.bangkit.capstone.dietin.data.remote.service
 
+import academy.bangkit.capstone.dietin.data.remote.api.RecipeApiService
+import academy.bangkit.capstone.dietin.data.remote.api.UserApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
