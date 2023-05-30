@@ -30,13 +30,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnGoToMainActivity.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+        binding.btnGoRegister.setOnClickListener {
+            (activity as AuthenticationActivity).setFragment("register")
         }
 
-        binding.btnGoToRegisterFragment.setOnClickListener {
-            (activity as AuthenticationActivity).setFragment("register")
+        binding.btnLogin.setOnClickListener {
+            val intentHome = Intent(activity, MainActivity::class.java)
+            startActivity(intentHome)
         }
     }
 

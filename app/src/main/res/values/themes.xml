@@ -12,4 +12,37 @@
         <item name="statusBarForeground">@color/white</item>
         <item name="fontFamily">@font/inter</item>
     </style>
+
+    <style name="DietinTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="strokeColor">@color/jet</item>
+    </style>
+
+
+    <style name="DietinTextButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="rippleColor">#19363636</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:minHeight">0dp</item>
+
+    </style>
+
+    <style name="DietinButton" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="rippleColor">#19363636</item>
+    </style>
+
+
+
+
 </resources>

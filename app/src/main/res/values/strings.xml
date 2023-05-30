@@ -25,4 +25,19 @@
     <string name="loading">Loading data dari internet.... tunggu......</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+
+<!--    login resource-->
+    <string name="log_in">Masuk ke Akun</string>
+    <string name="login_hint_username">Username</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_hint_forget_password"><u>Lupa Password</u></string>
+    <string name="login_hint_no_account">Belum ada Akun? <u><b>Daftar</b></u>.</string>
+    <string name="login_hint_remember_me">Remember Me</string>
+    <string name="login_hint_log_in">Masuk</string>
+    <string name="login_hint_login_with_google">Masuk dengan Google</string>
+    <string name="login_or">atau</string>
 </resources>
