@@ -27,17 +27,33 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
-
-<!--    login resource-->
-    <string name="log_in">Masuk ke Akun</string>
-    <string name="login_hint_username">Username</string>
-    <string name="login_hint_password">Password</string>
+<!--    login & register resource -->
+    <string name="login_welcome">Selamat Datang!</string>
+    <string name="login">Masuk ke Akun</string>
     <string name="login_hint_forget_password"><u>Lupa Password</u></string>
     <string name="login_hint_no_account">Belum ada Akun? <u><b>Daftar</b></u>.</string>
     <string name="login_hint_remember_me">Remember Me</string>
     <string name="login_hint_log_in">Masuk</string>
     <string name="login_hint_login_with_google">Masuk dengan Google</string>
     <string name="login_or">atau</string>
+
+    <string name="register_welcome">Salam Kenal! :)</string>
+    <string name="register">Daftar Akun Baru</string>
+    <string name="register_hint_have_account">Sudah memiliki Akun? <u><b>Masuk</b></u>.</string>
+
+
+    <string name="attribute_username">Username</string>
+    <string name="attribute_password">Password</string>
+    <string name="attribute_email">Email</string>
+    <string name="attribute_name">Nama</string>
+    <string name="attribute_gender">Jenis Kelamin</string>
+    <string name="login_hint_make_account">Buat Akun</string>
+
+    <string-array name="genders">
+        <item>Pria</item>
+        <item>Wanita</item>
+    </string-array>
+
+
+
 </resources>
