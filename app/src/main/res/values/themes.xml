@@ -5,7 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Base.Theme.Dietin" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Dietin" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/jet</item>
+        <item name="colorAccent">@color/gunmetal</item>
+        <item name="statusBarBackground">@color/jet</item>
+        <item name="statusBarForeground">@color/white</item>
         <item name="fontFamily">@font/inter</item>
     </style>
 </resources>

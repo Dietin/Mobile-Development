@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="jet">#363636</color>
+    <color name="satin_sheet_gold">#CCA43B</color>
+    <color name="gunmetal">#242F40</color>
+    <color name="platinum">#E5E5E5</color>
 </resources>
