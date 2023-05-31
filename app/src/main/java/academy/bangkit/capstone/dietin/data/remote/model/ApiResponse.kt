@@ -11,13 +11,39 @@ data class ApiResponse<T>(
     val data: T
 )
 
+data class ApiErrorResponse(
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("errors")
+    val errors: HashMap<String, List<String>>? // eg: "email": ["The email has already been taken."]
+) {
+    override fun toString(): String {
+        var errors = ""
+        this.errors?.forEach { (key, value) ->
+            errors += "$key: ${value[0]}\n"
+        }
+        return errors
+    }
+}
+
+data class LoginResponse(
+    @SerializedName("user")
+    val user: User,
+    @SerializedName("access_token")
+    val token: String,
+)
+
 data class User(
     @SerializedName("id")
-    val id: String,
+    val id: Int,
     @SerializedName("name")
     val name: String,
     @SerializedName("email")
-    val email: String
+    val email: String,
+    @SerializedName("weight")
+    val weight: Int,
+    @SerializedName("height")
+    val height: Int,
 )
 
 data class Recipe(

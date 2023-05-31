@@ -3,20 +3,26 @@ package academy.bangkit.capstone.dietin.ui.auth.fragments.login
 import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.databinding.FragmentLoginBinding
 import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationActivity
+import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: LoginViewModel
+    private lateinit var loader: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +30,8 @@ class LoginFragment : Fragment() {
     ): View {
         _binding  = FragmentLoginBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[LoginViewModel::class.java]
+        setupViewModelBinding()
+        loader = Utils.generateLoader(requireActivity())
         return binding.root
     }
 
@@ -35,8 +43,56 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val intentHome = Intent(activity, MainActivity::class.java)
-            startActivity(intentHome)
+            // Reset all errors
+            binding.inputUsername.error = null
+            binding.inputPassword.error = null
+
+            // Continue
+            viewModel.clientLogin(
+                email = binding.inputUsername.editText?.text.toString(),
+                password = binding.inputPassword.editText?.text.toString()
+            )
+        }
+    }
+
+    private fun setupViewModelBinding() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                loader.show()
+            } else {
+                loader.dismiss()
+            }
+        }
+
+        viewModel.message.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Handling login result
+        viewModel.loginResult.observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                if (it.token.isNotEmpty()) {
+                    // Save token to preferences
+                    Utils.setToken(requireContext(), it.token)
+
+                    // Go to homepage
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
+            }
+        }
+
+        // Handling login error
+        viewModel.loginError.observe(viewLifecycleOwner) {
+            it.errors?.forEach { (key, value) ->
+                when (key) {
+                    "email" -> binding.inputUsername.error = value[0]
+                    "password" -> binding.inputPassword.error = value[0]
+                }
+            }
         }
     }
 
