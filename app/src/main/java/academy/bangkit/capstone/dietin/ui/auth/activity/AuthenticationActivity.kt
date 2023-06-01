@@ -3,12 +3,16 @@ package academy.bangkit.capstone.dietin.ui.auth.activity
 import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.ActivityAuthenticationBinding
+import academy.bangkit.capstone.dietin.databinding.FragmentLoginBinding
 import academy.bangkit.capstone.dietin.ui.auth.fragments.login.LoginFragment
 import academy.bangkit.capstone.dietin.ui.auth.fragments.register.RegisterFragment
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.runBlocking
 
@@ -35,18 +39,23 @@ class AuthenticationActivity : AppCompatActivity() {
         setFragment("login", false)
     }
 
-    fun setFragment(frg: String, addToBackStack: Boolean = true) {
-        /**
-         * Fragment animation example: https://developer.android.com/guide/fragments/animate
-         */
+    fun setFragment(
+        frg: String,
+        addToBackStack: Boolean = true,
+        listElements : ArrayList<Pair<View, String>>? = null,
+    ) {
+
         val transaction = supportFragmentManager
             .beginTransaction()
-            .setCustomAnimations(
-                R.anim.fade_in, // enter
-                R.anim.fade_out, // exit
-                R.anim.fade_in, // popEnter
-                R.anim.fade_out // popExit
-            )
+
+            .apply {
+                listElements?.forEach { (view, transitionName) ->
+                    addSharedElement(view, transitionName)
+                }
+            }
+
+
+
         if (addToBackStack) {
             transaction.addToBackStack(null)
         }

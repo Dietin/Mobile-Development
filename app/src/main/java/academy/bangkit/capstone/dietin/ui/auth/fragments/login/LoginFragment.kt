@@ -39,17 +39,28 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnGoRegister.setOnClickListener {
-            (activity as AuthenticationActivity).setFragment("register")
+
+            val listElements : ArrayList<Pair<View, String>> = ArrayList()
+
+            listElements.add(Pair(binding.inputEmail, "se_name"))
+            listElements.add(Pair(binding.inputPassword, "se_password"))
+            listElements.add(Pair(binding.btnLogin, "se_main_button"))
+            listElements.add(Pair(binding.btnGoRegister, "se_go_button"))
+            listElements.add(Pair(binding.mainCard, "se_main_card"))
+            listElements.add(Pair(binding.topCard, "se_top_card"))
+            listElements.add(Pair(binding.bottomCard, "se_bottom_card"))
+
+            (activity as AuthenticationActivity).setFragment("register", listElements = listElements)
         }
 
         binding.btnLogin.setOnClickListener {
             // Reset all errors
-            binding.inputUsername.error = null
+            binding.inputEmail.error = null
             binding.inputPassword.error = null
 
             // Continue
             viewModel.clientLogin(
-                email = binding.inputUsername.editText?.text.toString(),
+                email = binding.inputEmail.editText?.text.toString(),
                 password = binding.inputPassword.editText?.text.toString()
             )
         }
@@ -89,7 +100,7 @@ class LoginFragment : Fragment() {
         viewModel.loginError.observe(viewLifecycleOwner) {
             it.errors?.forEach { (key, value) ->
                 when (key) {
-                    "email" -> binding.inputUsername.error = value[0]
+                    "email" -> binding.inputEmail.error = value[0]
                     "password" -> binding.inputPassword.error = value[0]
                 }
             }
@@ -100,4 +111,6 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

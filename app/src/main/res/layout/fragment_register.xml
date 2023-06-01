@@ -47,11 +47,13 @@
             android:clipToPadding="false">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/top_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:translationZ="1dp"
                 app:cardBackgroundColor="@color/jet"
-                app:cardCornerRadius="@dimen/card_corner_radius">
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                android:transitionName="se_top_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,13 +83,15 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/main_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_overlap_margin"
                 android:elevation="1dp"
                 android:translationZ="2dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/card_corner_radius">
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                android:transitionName="se_main_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,17 +107,18 @@
                         android:textSize="16sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_username"
+                        android:id="@+id/input_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         style="@style/DietinTextInputLayout"
-                        app:startIconDrawable="@drawable/ic_username_divider">
+                        app:startIconDrawable="@drawable/ic_person_divider"
+                        android:transitionName="se_name">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/attribute_username"
+                            android:hint="@string/attribute_name"
                             android:inputType="text"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +130,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         style="@style/DietinTextInputLayout"
-                        app:startIconDrawable="@drawable/ic_email_divider">
+                        app:startIconDrawable="@drawable/ic_email_divider"
+                        android:transitionName="se_password">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -149,22 +155,6 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
                             android:hint="@string/attribute_password" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        style="@style/DietinTextInputLayout"
-                        app:startIconDrawable="@drawable/ic_person_divider">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/attribute_name"
-                            android:inputType="text"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,7 +183,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_gravity="center"
-                        android:text="@string/register_hint_have_account" />
+                        android:text="@string/register_hint_have_account"
+                        android:transitionName="se_go_button"/>
 
 
                 </LinearLayout>
@@ -201,12 +192,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/bottom_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_overlap_margin"
-                android:translationZ="1dp"
+                android:translationZ="0dp"
                 app:cardBackgroundColor="@color/satin_gold"
-                app:cardCornerRadius="@dimen/card_corner_radius">
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                android:transitionName="se_bottom_card">
 
 
                 <LinearLayout
@@ -222,7 +215,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/login_hint_make_account"
-                        style="@style/DietinButton"/>
+                        style="@style/DietinButton"
+                        android:transitionName="se_main_button"/>
 
 
                 </LinearLayout>
