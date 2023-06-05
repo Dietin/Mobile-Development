@@ -11,14 +11,17 @@ import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
+import android.text.Html
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.core.content.ContextCompat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -26,8 +29,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +42,9 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
+
+                    //tinggal memanggil fungsi SetFoodList()
+                    //dengan parameter berupa ArrayList
                     SetCategoryList(createDummyCategoriesData())
                 }
             }
@@ -50,6 +54,9 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
+
+                    //tinggal memanggil fungsi SetFoodList()
+                    //dengan parameter berupa ArrayList
                     SetUserFoodHistory(createDummyUserFoodHistory())
                 }
             }
@@ -59,6 +66,9 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
+
+                    //tinggal memanggil fungsi SetFoodList()
+                    //dengan parameter berupa ArrayList
                     SetFoodList(createDummyFoodList())
                 }
             }
@@ -67,10 +77,51 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setAllContent()
+
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun setAllContent(){
+
+        //untuk di atas
+        //dikasih greet selamat pagi atau apapun itu.. :V
+        //kalau name nanti get nama User
+        val greet = "Selamat Pagi"
+        val name = "Deez Nuts"
+        binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name))
+
+        //set percent terpenuhi dari kalori
+        val percent = 50
+        binding.calPercent.text = Html.fromHtml(getString(R.string.home_hint_percent_calories, percent))
+        binding.caloriesProgress.progress = percent
+
+        //ini untuk namanya.. :))
+        binding.caloriesProgress.setIndicatorColor(
+            ContextCompat.getColor(requireContext(), when(percent){
+                in 0..25 -> R.color.danger
+                in 26..75 -> R.color.warning
+                in 76..100 -> R.color.success
+                else -> R.color.danger
+            })
+        )
+
+        //set color for calories progress
+        val caloriesNeeded = 9110
+        binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, caloriesNeeded))
+
+
+    }
+
+
 
 //    surat cinta untuk jolly
 //    ini untuk dummy data ya Pak... nanti di hapus aja.. :)))) wkwkwwkwkwk
@@ -82,7 +133,7 @@ class HomeFragment : Fragment() {
             categories.add(
                 Category(
                     image = R.drawable.ic_category_plant_based,
-                    title = "Contoh Category ${i}"
+                    title = "Contoh Category $i"
                 )
             )
         }
@@ -118,9 +169,9 @@ class HomeFragment : Fragment() {
             foods.add(
                 Food(
                     image = R.drawable.img_food,
-                    title = "Contoh Food ${i}",
+                    title = "Contoh Food $i",
                     cal = (100+i).toDouble(),
-                    category = "Category ${i}"
+                    category = "Category $i"
                 )
             )
         }
@@ -134,6 +185,8 @@ class HomeFragment : Fragment() {
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
         LazyRow(
+            modifier = Modifier
+                .padding(PaddingValues(bottom = 4.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
 
@@ -145,8 +198,8 @@ class HomeFragment : Fragment() {
                     },
 
                     update = {
-                        this.tvCaloriesEaten.text = item.cal.toString()
-                        this.tvEatTime.text = item.time
+                        this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.cal.toInt()))
+                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time)
 
                         val time = try{
                             LocalTime.parse(item.time, timeFormatter)
@@ -190,6 +243,8 @@ class HomeFragment : Fragment() {
     fun SetCategoryList(categories : ArrayList<Category>){
 
         LazyRow(
+            modifier = Modifier
+                .padding(PaddingValues(vertical = 4.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
 
@@ -215,6 +270,8 @@ class HomeFragment : Fragment() {
     fun SetFoodList(foodList : ArrayList<Food>){
         
         LazyRow(
+            modifier = Modifier
+                .padding(PaddingValues(bottom = 4.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {

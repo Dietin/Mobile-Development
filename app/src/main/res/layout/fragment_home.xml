@@ -47,6 +47,20 @@
                 app:trackThickness="15dp" />
 
             <TextView
+                android:id="@+id/cal_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:lines="2"
+                android:text="@string/home_hint_percent_calories"
+                app:layout_constraintBottom_toBottomOf="@id/calories_progress"
+                app:layout_constraintEnd_toEndOf="@id/calories_progress"
+                app:layout_constraintStart_toStartOf="@id/calories_progress"
+                app:layout_constraintTop_toTopOf="@id/calories_progress"/>
+
+            <TextView
                 android:id="@+id/tv_calories_target"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
