@@ -1,63 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main_screen.home.HomeFragment">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@drawable/common_banner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        tools:context=".ui.main_screen.home.HomeFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/common_banner"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_welcome"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/calories_progress"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="16dp"
+                android:progress="75"
+                app:indicatorColor="@color/warning"
+                app:indicatorSize="150dp"
+                app:layout_constraintStart_toStartOf="@id/tv_welcome"
+                app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+                app:trackColor="@color/platinum"
+                app:trackCornerRadius="5dp"
+                app:trackThickness="15dp" />
+
+            <TextView
+                android:id="@+id/tv_calories_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/home_calories_target"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_title"
+                app:layout_constraintStart_toEndOf="@+id/calories_progress"
+                app:layout_constraintTop_toTopOf="@+id/calories_progress" />
+
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/cv_user_food"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/tv_calories_target"
+                app:layout_constraintTop_toBottomOf="@id/tv_calories_target"/>
+
+            <Button
+                android:id="@+id/btn_record_food"
+                style="@style/DietinButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:padding="4dp"
+                android:text="@string/home_hint_record_food"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cv_user_food"
+                app:layout_constraintTop_toBottomOf="@id/cv_user_food" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_welcome"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginHorizontal="@dimen/common_horizontal_margin"
+            android:layout_marginTop="8dp"
+            style="@style/DietinTextTitle"
+            android:text="@string/home_hint_intro"/>
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/calories_progress"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:indicatorColor="@color/warning"
-            app:indicatorSize="150dp"
-            app:trackThickness="15dp"
-            app:trackCornerRadius="5dp"
-            app:trackColor="@color/platinum"
-            android:progress="75"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_welcome"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:startIconDrawable="@drawable/ic_search"
+            style="@style/DietinTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/home_hint_search_food" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/cv_category_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_calories_target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/home_calories_target"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_title"
-            app:layout_constraintStart_toEndOf="@+id/calories_progress"
-            app:layout_constraintTop_toTopOf="@+id/calories_progress" />
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            style="@style/DietinTextTitle"
+            android:text="@string/home_hint_recommended" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/common_horizontal_margin"
+            android:text="@string/home_hint_info_1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_sub3"/>
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/cv_food_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
+</ScrollView>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>

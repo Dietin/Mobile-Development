@@ -63,6 +63,16 @@
     <!--    Fragment Home -->
     <string name="home_welcome">%s, <b>%s!</b></string>
     <string name="home_calories_target">Target: <b>%d Kalori</b></string>
+    <string name="eat_title">Makan %s</string>
+    <string name="tv_eat_time">09.00 WIB</string>
+    <string name="user_calories"><b>%d</b></string>
+    <string name="calories">Kalori</string>
+    <string name="home_hint_record_food">Catat Makananmu</string>
+    <string name="home_hint_intro">Makan apa hari ini?</string>
+    <string name="home_hint_search_food">Cari Makanan atau Resep</string>
+    <string name="home_hint_recommended">Rekomendasi Untukmu</string>
+    <string name="home_hint_info_1">Makan %s berfaedah dan bergizi</string>
+    <string name="food_cal">%d kal</string>
 
 
 </resources>

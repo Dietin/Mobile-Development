@@ -27,19 +27,26 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.0'
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
+        compose true
         viewBinding true
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -68,4 +75,5 @@ dependencies {
     implementation 'androidx.compose.ui:ui:1.4.3'
     implementation 'androidx.compose.material:material:1.4.3'
     implementation 'androidx.compose.runtime:runtime:1.4.3'
+    implementation 'androidx.compose.ui:ui-viewbinding:1.4.3'
 }
