@@ -27,7 +27,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-<!--    login & register resource -->
+    <!--    login & register resource -->
     <string name="login_welcome">Selamat Datang!</string>
     <string name="login">Masuk ke Akun</string>
     <string name="login_hint_forget_password"><u>Lupa Password</u></string>
@@ -54,6 +54,15 @@
         <item>Wanita</item>
     </string-array>
 
+
+    <string name="title_home">Home</string>
+    <string name="title_search">Cari</string>
+    <string name="title_profile">Profil</string>
+
+
+    <!--    Fragment Home -->
+    <string name="home_welcome">%s, <b>%s!</b></string>
+    <string name="home_calories_target">Target: <b>%d Kalori</b></string>
 
 
 </resources>

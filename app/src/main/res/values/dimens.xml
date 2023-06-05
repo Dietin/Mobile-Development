@@ -3,5 +3,13 @@
 
     <dimen name="card_corner_radius">16dp</dimen>
     <dimen name="card_overlap_margin">-32dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_sub_title">18sp</dimen>
 
 </resources>

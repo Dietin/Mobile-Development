@@ -8,6 +8,9 @@
     <color name="gunmetal">#242F40</color>
     <color name="platinum">#E5E5E5</color>
 
+    <color name="danger">#FF0000</color>
+    <color name="warning">#FFA500</color>
+    <color name="success">#008000</color>
 
 
 </resources>
