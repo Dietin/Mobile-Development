@@ -13,9 +13,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -56,19 +54,17 @@ class FirstFragment : Fragment() {
                     // disable this button
                     it.isEnabled = false
                     try {
-                        ApiConfig.getUserApiService().logout(
+                        ApiConfig.getApiService().logout(
                             "Bearer $token"
                         )
-                        Utils.setToken(requireContext(), "")
-
-                        // Start AuthenticationActivity
-                        val intent = Intent(requireContext(), AuthenticationActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
+                        logout()
                     } catch (e: IOException) {
                         Log.e("FirstFragment", e.message.toString())
                     } catch (e: HttpException) {
                         Log.e("FirstFragment", e.message.toString())
+                        if (e.code() == 401) {
+                            logout()
+                        }
                     } finally {
                         it.isEnabled = true
                         // Do nothing (for now)
@@ -80,23 +76,31 @@ class FirstFragment : Fragment() {
         }
     }
 
+    private suspend fun logout() {
+        Utils.setToken(requireContext(), "")
+        // Start AuthenticationActivity
+        val intent = Intent(requireContext(), AuthenticationActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         Log.e("FirstFragment", "onDestroyView")
         _binding = null
     }
 
-    private fun thisIsNotAGoodArchitecturePleaseMoveToViewModelWithLiveDataButJustForTestingThisIsOkayHere() = runBlocking {
-        val client = ApiConfig.getRecipeApiService()
-        try {
-            val response = client.getRecipes()
-            var recipeTxt = ""
-            response.data.forEach { rec ->
-                recipeTxt += "${rec.name} | ${rec.calories} | ${rec.carbs} | ${rec.fats} | ${rec.proteins}\n\n"
-            }
-            binding.tvDisplayItem.text = recipeTxt
-        } catch (e: Exception) {
-            binding.tvDisplayItem.text = e.message
-        }
-    }
+//    private fun thisIsNotAGoodArchitecturePleaseMoveToViewModelWithLiveDataButJustForTestingThisIsOkayHere() = runBlocking {
+//        val client = ApiConfig.getRecipeApiService()
+//        try {
+//            val response = client.getRecipes()
+//            var recipeTxt = ""
+//            response.data.forEach { rec ->
+//                recipeTxt += "${rec.name} | ${rec.calories} | ${rec.carbs} | ${rec.fats} | ${rec.proteins}\n\n"
+//            }
+//            binding.tvDisplayItem.text = recipeTxt
+//        } catch (e: Exception) {
+//            binding.tvDisplayItem.text = e.message
+//        }
+//    }
 }

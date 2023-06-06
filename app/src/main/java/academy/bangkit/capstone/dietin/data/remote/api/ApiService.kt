@@ -2,19 +2,17 @@ package academy.bangkit.capstone.dietin.data.remote.api
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiResponse
 import academy.bangkit.capstone.dietin.data.remote.model.LoginResponse
+import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.data.remote.model.User
 import retrofit2.http.*
 
-interface UserApiService {
+interface ApiService {
     @POST("register")
     @FormUrlEncoded
     suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("gender") gender: Int,
-        @Field("weight") weight: Int,
-        @Field("height") height: Int
+        @Field("password") password: String
     ): ApiResponse<User>
 
     @POST("login")
@@ -28,4 +26,19 @@ interface UserApiService {
     suspend fun logout(
         @Header("Authorization") token: String
     ): ApiResponse<Nothing>
+
+    @POST("onboarding")
+    suspend fun onboarding(
+        @Field("gender") gender: Int,
+        @Field("weight") weight: Int,
+        @Field("height") height: Int,
+        @Field("goals") goals: Int // Turunkan berat badan, tetap sama, atau naikkan
+    )
+
+    @GET("recipe")
+    suspend fun getRecommendations(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): ApiResponse<List<Recipe>>
 }

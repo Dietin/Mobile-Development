@@ -1,6 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.auth.fragments.login
 
-import academy.bangkit.capstone.dietin.MainActivity
+import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.databinding.FragmentLoginBinding
 import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationActivity
 import academy.bangkit.capstone.dietin.utils.Utils
@@ -89,7 +89,7 @@ class LoginFragment : Fragment() {
                     Utils.setToken(requireContext(), it.token)
 
                     // Go to homepage
-                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    val intent = Intent(requireContext(), MainScreenActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }

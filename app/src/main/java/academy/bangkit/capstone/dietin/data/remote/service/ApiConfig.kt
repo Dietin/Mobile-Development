@@ -1,38 +1,33 @@
 package academy.bangkit.capstone.dietin.data.remote.service
 
-import academy.bangkit.capstone.dietin.data.remote.api.RecipeApiService
-import academy.bangkit.capstone.dietin.data.remote.api.UserApiService
+import academy.bangkit.capstone.dietin.data.remote.api.ApiService
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
-    fun getUserApiService(): UserApiService {
-        val loggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+    private val customHeader = Interceptor { chain ->
+        val request = chain.request().newBuilder()
+            .addHeader("Accept", "application/json")
             .build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://20.25.52.46/git/be_bangkit/public/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-        return retrofit.create(UserApiService::class.java)
+        chain.proceed(request)
     }
 
-    fun getRecipeApiService(): RecipeApiService {
-        val loggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
+    private val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(customHeader)
+        .build()
+
+    fun getApiService(): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://fakecapstonebackend.jollyfrankle.repl.co/recipes/")
+            .baseUrl("https://cloud-backend-w72cmhmh6q-uc.a.run.app/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-        return retrofit.create(RecipeApiService::class.java)
+        return retrofit.create(ApiService::class.java)
     }
 }

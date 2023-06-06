@@ -1,18 +1,25 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
+import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
+import academy.bangkit.capstone.dietin.utils.Utils
+import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.content.Intent
+import android.os.Bundle
 import android.text.Html
-import androidx.compose.foundation.layout.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -22,6 +29,9 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -30,14 +40,23 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var loader: AlertDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
+        setupViewModelBinding()
+        loader = Utils.generateLoader(requireActivity())
 
+        binding.btnRecordFood.setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
         binding.cvCategoryList.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -62,19 +81,41 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.cvFoodList.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                MaterialTheme {
+//        binding.cvFoodList.apply {
+//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+//            setContent {
+//                MaterialTheme {
+//
+//                    //tinggal memanggil fungsi SetFoodList()
+//                    //dengan parameter berupa ArrayList
+////                    SetFoodList()
+//                }
+//            }
+//        }
 
-                    //tinggal memanggil fungsi SetFoodList()
-                    //dengan parameter berupa ArrayList
-                    SetFoodList(createDummyFoodList())
+        return binding.root
+    }
+
+    private fun setupViewModelBinding() {
+        viewModel.recommendations.observe(viewLifecycleOwner) {
+            binding.cvFoodList.apply {
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent {
+                    MaterialTheme {
+
+                        //tinggal memanggil fungsi SetFoodList()
+                        //dengan parameter berupa ArrayList
+                        SetFoodList(it)
+                    }
                 }
             }
         }
 
-        return binding.root
+        viewModel.message.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -238,7 +279,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     @Composable
     fun SetCategoryList(categories : ArrayList<Category>){
 
@@ -267,7 +307,7 @@ class HomeFragment : Fragment() {
     }
 
     @Composable
-    fun SetFoodList(foodList : ArrayList<Food>){
+    fun SetFoodList(foodList: List<Recipe>){
         
         LazyRow(
             modifier = Modifier
@@ -282,13 +322,15 @@ class HomeFragment : Fragment() {
                     },
 
                     update = {
-                        this.ivFoodImage.setImageResource(item.image)
-                        this.chipFoodCategory.text = item.category
+                        Glide.with(this.root)
+                            .load(item.image)
+                            .into(this.ivFoodImage)
+                        this.chipFoodCategory.text = item.category.name
 
                         //nanti set colornya juga
 
-                        this.tvFoodName.text = item.title
-                        this.tvFoodCal.text = item.cal.toString()
+                        this.tvFoodName.text = item.name
+                        this.tvFoodCal.text = item.calories.toInt().toString()
                     }
                 )
             }

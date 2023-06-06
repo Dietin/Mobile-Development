@@ -47,8 +47,8 @@ data class User(
 )
 
 data class Recipe(
-    @SerializedName("id")
-    val id: Int,
+    @SerializedName("recipe_id")
+    val id: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("ingredients")
@@ -63,4 +63,15 @@ data class Recipe(
     val fats: Float,
     @SerializedName("proteins")
     val proteins: Float,
+    @SerializedName("image")
+    val image: String,
+    @SerializedName("category")
+    val category: RecipeCategory,
+)
+
+data class RecipeCategory(
+    @SerializedName("category_id")
+    val id: String,
+    @SerializedName("category_name")
+    val name: String,
 )

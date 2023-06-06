@@ -30,7 +30,7 @@ class LoginViewModel(private val application: Application): ViewModel() {
     fun clientLogin(email: String, password: String) = viewModelScope.launch {
         try {
             _isLoading.value = true
-            _loginResult.value = ApiConfig.getUserApiService().login(
+            _loginResult.value = ApiConfig.getApiService().login(
                 email = email,
                 password = password
             ).data!!

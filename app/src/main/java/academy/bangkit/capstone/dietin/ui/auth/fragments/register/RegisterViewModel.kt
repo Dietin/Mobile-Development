@@ -37,13 +37,13 @@ class RegisterViewModel(private val application: Application): ViewModel() {
     ) = viewModelScope.launch {
         try {
             _isLoading.value = true
-            _registeredUser.value = ApiConfig.getUserApiService().register(
+            _registeredUser.value = ApiConfig.getApiService().register(
                 name = name,
                 email = email,
                 password = password,
-                gender = gender,
-                weight = weight,
-                height = height
+//                gender = gender,
+//                weight = weight,
+//                height = height
             ).data!!
         } catch (e: IOException) {
             // No Internet Connection
