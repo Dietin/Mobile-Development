@@ -271,7 +271,7 @@ class HomeFragment : Fragment() {
         
         LazyRow(
             modifier = Modifier
-                .padding(PaddingValues(bottom = 4.dp)),
+                .padding(PaddingValues(bottom = 8.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {

@@ -147,7 +147,7 @@
             android:id="@+id/cv_food_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginVertical="16dp"/>
 
 
     </LinearLayout>
