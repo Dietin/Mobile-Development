@@ -49,7 +49,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnNavigateUp.setOnClickListener {
-            onSupportNavigateUp()
+            onBackPressed()
         }
 
         binding.btnAddFood.setOnClickListener {
