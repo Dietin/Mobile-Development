@@ -1,7 +1,9 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
+import academy.bangkit.capstone.dietin.data.remote.model.FoodHistoryGroup
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
+import academy.bangkit.capstone.dietin.data.remote.model.RecipeCategory
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
 import academy.bangkit.capstone.dietin.utils.Utils
@@ -25,8 +27,16 @@ class HomeViewModel(private val application: Application) : ViewModel() {
     private val _recommendations = MutableLiveData<List<Recipe>>()
     val recommendations: LiveData<List<Recipe>> = _recommendations
 
+    private val _categories = MutableLiveData<List<RecipeCategory>>()
+    val categories: LiveData<List<RecipeCategory>> = _categories
+
+    private val _foodCaloriesHistory = MutableLiveData<List<FoodHistoryGroup>>()
+    val foodCaloriesHistory: LiveData<List<FoodHistoryGroup>> = _foodCaloriesHistory
+
     init {
         getAllRecommendations()
+        getAllCategories()
+        getCaloriesHistory()
     }
 
     fun getAllRecommendations() = viewModelScope.launch {
@@ -37,6 +47,48 @@ class HomeViewModel(private val application: Application) : ViewModel() {
                 token = "Bearer $token",
                 page = 1,
                 size = 10
+            ).data!!
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    fun getAllCategories() = viewModelScope.launch {
+        try {
+            _isLoading.value = true
+            val token = Utils.getToken(application)
+            _categories.value = ApiConfig.getApiService().getAllCategories(
+                token = "Bearer $token"
+            ).data!!
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    fun getCaloriesHistory() = viewModelScope.launch {
+        try {
+            _isLoading.value = true
+            val token = Utils.getToken(application)
+            val userId = Utils.getUserId(application)
+            // TODO: Temporary: user id should not be stored in shared preferences
+            _foodCaloriesHistory.value = ApiConfig.getApiService().getFoodHistoryGroupedByTime(
+                token = "Bearer $token",
+                date = Utils.getCurrentDate(),
+                userId = userId
             ).data!!
         } catch (e: IOException) {
             // No Internet Connection

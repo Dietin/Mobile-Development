@@ -1,15 +1,18 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
-import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.remote.model.FoodHistoryGroup
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
+import academy.bangkit.capstone.dietin.data.remote.model.RecipeCategory
 import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
+import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -29,10 +32,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
@@ -53,36 +56,6 @@ class HomeFragment : Fragment() {
         setupViewModelBinding()
         loader = Utils.generateLoader(requireActivity())
 
-        binding.btnRecordFood.setOnClickListener {
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            requireActivity().startActivity(intent)
-        }
-
-        binding.cvCategoryList.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                MaterialTheme {
-
-                    //tinggal memanggil fungsi SetFoodList()
-                    //dengan parameter berupa ArrayList
-                    SetCategoryList(createDummyCategoriesData())
-                }
-            }
-        }
-
-        binding.cvUserFood.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                MaterialTheme {
-
-                    //tinggal memanggil fungsi SetFoodList()
-                    //dengan parameter berupa ArrayList
-                    SetUserFoodHistory(createDummyUserFoodHistory())
-                }
-            }
-        }
-
-
         return binding.root
     }
 
@@ -92,10 +65,29 @@ class HomeFragment : Fragment() {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                 setContent {
                     MaterialTheme {
-
-                        //tinggal memanggil fungsi SetFoodList()
-                        //dengan parameter berupa ArrayList
                         SetFoodList(it)
+                    }
+                }
+            }
+        }
+
+        viewModel.categories.observe(viewLifecycleOwner) {
+            binding.cvCategoryList.apply {
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent {
+                    MaterialTheme {
+                        SetCategoryList(it)
+                    }
+                }
+            }
+        }
+
+        viewModel.foodCaloriesHistory.observe(viewLifecycleOwner) {
+            binding.cvUserFood.apply {
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent {
+                    MaterialTheme {
+                        SetUserFoodHistory(it)
                     }
                 }
             }
@@ -147,52 +139,13 @@ class HomeFragment : Fragment() {
 
         //set color for calories progress
         val caloriesNeeded = 9110
-        binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, caloriesNeeded))
+        binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, caloriesNeeded), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
 
     }
-
-
-
-//    surat cinta untuk jolly
-//    ini untuk dummy data ya Pak... nanti di hapus aja.. :)))) wkwkwwkwkwk
-    private fun createDummyCategoriesData() : ArrayList<Category> {
-
-        val categories = ArrayList<Category>()
-
-        for(i in 1..10){
-            categories.add(
-                Category(
-                    image = R.drawable.ic_category_plant_based,
-                    title = "Contoh Category $i"
-                )
-            )
-        }
-
-        return categories
-    }
-
-//    surat cinta untuk jolly
-//    ini untuk dummy data User Food History
-    private fun createDummyUserFoodHistory() : ArrayList<UserFood>{
-
-        val userFoodHistories = ArrayList<UserFood>()
-
-        for(i in 1..10){
-            userFoodHistories.add(
-                UserFood(
-                    cal = (100+i).toDouble(),
-                    time = "${i+3}:00"
-                )
-            )
-        }
-
-        return userFoodHistories
-    }
-
 
     @Composable
-    fun SetUserFoodHistory(foodHistories : ArrayList<UserFood>){
+    fun SetUserFoodHistory(foodHistories: List<FoodHistoryGroup>){
 
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -210,55 +163,37 @@ class HomeFragment : Fragment() {
                     },
 
                     update = {
-                        this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.cal.toInt()))
-                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time)
-
-                        val time = try{
-                            LocalTime.parse(item.time, timeFormatter)
-                        } catch (e : Exception){
-                            null
-                        }
+                        this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.totalCalories.toInt()), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
 
                         //masih belum terlalu oke
+                        val timeData = when(item.time) {
+                            1 -> Pair("Pagi", R.drawable.ic_eat_time_morning)
+                            2 -> Pair("Siang", R.drawable.ic_eat_time_afternoon)
+                            3 -> Pair("Malam", R.drawable.ic_eat_time_afternoon)
+                            else -> Pair("Snack", R.drawable.ic_eat_time_morning)
+                        }
                         this.tvEatTitle.text = getString(
                             R.string.eat_title,
-                            when(time){
-                                null -> "Null"
-                                in LocalTime.of(0, 0)..LocalTime.of(11, 59) -> "Pagi"
-                                in LocalTime.of(12, 0)..LocalTime.of(17, 59) -> "Siang"
-                                in LocalTime.of(18, 0)..LocalTime.of(23, 59) -> "Malam"
-                                else -> "Pagi"
-                            }
+                            timeData.first
                         )
 
                         // set icon, masih belum selesai untuk icon malam
-                        this.ivEatIcon.setImageResource(
-                            when(time){
-                                null -> R.drawable.ic_eat_time_morning
-                                in LocalTime.of(0, 0)..LocalTime.of(11, 59) -> R.drawable.ic_eat_time_morning
-                                in LocalTime.of(12, 0)..LocalTime.of(17, 59) -> R.drawable.ic_eat_time_afternoon
-                                in LocalTime.of(18, 0)..LocalTime.of(23, 59) -> R.drawable.ic_eat_time_afternoon
-                                else -> R.drawable.ic_eat_time_morning
-                            }
-                        )
-
-
-
+                        this.ivEatIcon.setImageResource(timeData.second)
                     }
                 )
             }
         }
     }
 
-
     @Composable
-    fun SetCategoryList(categories : ArrayList<Category>){
+    fun SetCategoryList(categories : List<RecipeCategory>){
 
         LazyRow(
             modifier = Modifier
                 .padding(PaddingValues(vertical = 4.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
+            horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
 
         ) {
             items(categories){ item ->
@@ -268,10 +203,10 @@ class HomeFragment : Fragment() {
                     },
 
                     update = {
-                        this.ivCategoryImage.setImageResource(item.image)
-                        this.tvCategoryTitle.text = item.title
-
-
+                        Glide.with(this.root)
+                            .load(item.icon)
+                            .into(this.ivCategoryImage)
+                        this.tvCategoryTitle.text = item.name
                     }
                 )
             }
@@ -297,31 +232,22 @@ class HomeFragment : Fragment() {
                         Glide.with(this.root)
                             .load(item.image)
                             .into(this.ivFoodImage)
-                        this.chipFoodCategory.text = item.category.name
-
-                        //nanti set colornya juga
+                        this.chipFoodCategory.apply {
+                            text = item.category.name
+                            chipBackgroundColor = ColorStateList.valueOf(item.category.getColourArrayAsHex())
+                        }
 
                         this.tvFoodName.text = item.name
-                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories.toInt())
+                        this.tvFoodCal.text = item.calories.toInt().toString()
+
+                        this.root.setOnClickListener {
+                            val intent = Intent(requireContext(), AddFoodHistoryActivity::class.java)
+                            intent.putExtra(AddFoodHistoryActivity.EXTRA_RECIPE, item)
+                            requireContext().startActivity(intent)
+                        }
                     }
                 )
             }
         }
-
     }
-
 }
-
-//surat cinta untuk jolly
-//ini data sementara jol.. nanti di buatin lah.. :v
-data class Category(
-    val image : Int,
-    val title : String
-)
-
-//surat cinta untuk jolly
-//ini data sementara, intinya ada waktu dia makan dan kalorinya berapa
-data class UserFood(
-    val time : String,
-    val cal : Double,
-)

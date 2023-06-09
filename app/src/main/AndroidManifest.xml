@@ -15,22 +15,22 @@
         android:usesCleartextTraffic="false"
         tools:targetApi="31">
         <activity
+            android:name=".ui.food_history.AddFoodHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Dietin"/>
+            android:exported="true" />
         <activity
             android:name=".ui.auth.activity.AuthenticationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Dietin" />
+            android:exported="false" />
     </application>
 
 </manifest>

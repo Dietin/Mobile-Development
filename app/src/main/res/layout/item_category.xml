@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:id="@+id/card_category"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_category"
+    android:clickable="true"
+    style="@style/Widget.Material3.CardView.Outlined"
     android:layout_width="80dp"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:elevation="@dimen/card_elevation"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="@dimen/card_corner_radius">
-    
+    app:strokeWidth="0dp"
+    app:cardCornerRadius="0dp">
+
     <LinearLayout
         android:id="@+id/layout_category"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_gravity="center">
-        
+        android:paddingVertical="8dp">
+
         <ImageView
             android:id="@+id/iv_category_image"
             android:layout_width="58dp"
             android:layout_height="58dp"
             android:layout_gravity="center"
-            tools:src="@drawable/ic_category_plant_based"/>
-        
+            tools:src="@drawable/ic_category_plant_based" />
+
         <TextView
             android:id="@+id/tv_category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vegetarian"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"
-            android:layout_gravity="center"
+            android:text="Vegetarian"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="@dimen/text_size_sub3" />
-        
-        
+
+
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

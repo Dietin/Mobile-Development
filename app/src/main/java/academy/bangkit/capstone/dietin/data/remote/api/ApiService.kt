@@ -1,9 +1,6 @@
 package academy.bangkit.capstone.dietin.data.remote.api
 
-import academy.bangkit.capstone.dietin.data.remote.model.ApiResponse
-import academy.bangkit.capstone.dietin.data.remote.model.LoginResponse
-import academy.bangkit.capstone.dietin.data.remote.model.Recipe
-import academy.bangkit.capstone.dietin.data.remote.model.User
+import academy.bangkit.capstone.dietin.data.remote.model.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -41,4 +38,22 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): ApiResponse<List<Recipe>>
+
+    @GET("category")
+    suspend fun getAllCategories(
+        @Header("Authorization") token: String
+    ): ApiResponse<List<RecipeCategory>>
+
+    @GET("foodHistoryGroup/{date}/{userId}")
+    suspend fun getFoodHistoryGroupedByTime(
+        @Header("Authorization") token: String,
+        @Path("date") date: String,
+        @Path("userId") userId: Int
+    ): ApiResponse<List<FoodHistoryGroup>>
+
+    @POST("foodHistory")
+    suspend fun addFoodHistory(
+        @Header("Authorization") token: String,
+        @Body foodHistory: FoodHistory
+    ): ApiResponse<FoodHistory>
 }

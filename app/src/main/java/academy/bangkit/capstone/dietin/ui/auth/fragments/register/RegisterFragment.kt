@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.cardview.widget.CardView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -48,7 +47,6 @@ class RegisterFragment : Fragment() {
         val dropdownAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, genders)
 
         ViewCompat.setZ(binding.bottomCard, 0f)
-
 
         binding.actGender.setAdapter(dropdownAdapter)
 

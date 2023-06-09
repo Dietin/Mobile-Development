@@ -88,6 +88,9 @@ class LoginFragment : Fragment() {
                     // Save token to preferences
                     Utils.setToken(requireContext(), it.token)
 
+                    // TODO: Temporary: user id should not be stored in shared preferences
+                    Utils.setUserId(requireContext(), it.user.id)
+
                     // Go to homepage
                     val intent = Intent(requireContext(), MainScreenActivity::class.java)
                     startActivity(intent)
