@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireActivity(), MainActivity::class.java)
             requireActivity().startActivity(intent)
         }
+
         binding.cvCategoryList.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -81,17 +82,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-//        binding.cvFoodList.apply {
-//            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-//            setContent {
-//                MaterialTheme {
-//
-//                    //tinggal memanggil fungsi SetFoodList()
-//                    //dengan parameter berupa ArrayList
-////                    SetFoodList()
-//                }
-//            }
-//        }
 
         return binding.root
     }
@@ -141,8 +131,8 @@ class HomeFragment : Fragment() {
         binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name))
 
         //set percent terpenuhi dari kalori
-        val percent = 50
-        binding.calPercent.text = Html.fromHtml(getString(R.string.home_hint_percent_calories, percent))
+        val percent = 80
+        binding.calPercent.text = Html.fromHtml(getString(R.string.home_percent_calories, percent))
         binding.caloriesProgress.progress = percent
 
         //ini untuk namanya.. :))
@@ -200,25 +190,6 @@ class HomeFragment : Fragment() {
         return userFoodHistories
     }
 
-    // surat cinta untuk jolly
-    // ini untuk dummy data Food Recommend
-    private fun createDummyFoodList() : ArrayList<Food>{
-
-        val foods = ArrayList<Food>()
-
-        for(i in 1..10){
-            foods.add(
-                Food(
-                    image = R.drawable.img_food,
-                    title = "Contoh Food $i",
-                    cal = (100+i).toDouble(),
-                    category = "Category $i"
-                )
-            )
-        }
-
-        return foods
-    }
 
     @Composable
     fun SetUserFoodHistory(foodHistories : ArrayList<UserFood>){
@@ -279,6 +250,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     @Composable
     fun SetCategoryList(categories : ArrayList<Category>){
 
@@ -330,7 +302,7 @@ class HomeFragment : Fragment() {
                         //nanti set colornya juga
 
                         this.tvFoodName.text = item.name
-                        this.tvFoodCal.text = item.calories.toInt().toString()
+                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories.toInt())
                     }
                 )
             }
@@ -352,11 +324,4 @@ data class Category(
 data class UserFood(
     val time : String,
     val cal : Double,
-)
-
-data class Food(
-    val image : Int,
-    val title : String,
-    val cal : Double,
-    val category : String
 )

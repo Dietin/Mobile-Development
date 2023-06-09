@@ -62,4 +62,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="DietinTextTitle.SubTitle" parent="DietinTextTitle">
+        <item name="android:textSize">@dimen/text_size_sub_title</item>
+    </style>
+
 </resources>

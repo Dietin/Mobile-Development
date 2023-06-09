@@ -7,13 +7,26 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_add_food"
+        android:title="Tambah Makanan"/>
+
+    <item
+        android:id="@+id/navigation_history"
+        android:title="History"
+        android:icon="@drawable/ic_history"/>
+
+    <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/ic_search"
         android:title="@string/title_search" />
+
+
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
         android:title="@string/title_profile" />
+
+
 
 </menu>

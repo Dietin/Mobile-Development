@@ -1,5 +1,7 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.search
 
+import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.ui.main_screen.search.before.BeforeSearchFragment
 import academy.bangkit.capstone.dietin.databinding.FragmentSearchBinding
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
@@ -25,10 +27,21 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[SearchViewModel::class.java]
-        // setupViewModelBinding()
-        loader = Utils.generateLoader(requireActivity())
         return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        requireActivity()
+            .supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentSearchHolder.id, BeforeSearchFragment())
+            .commit()
+
+
     }
 
     override fun onDestroyView() {

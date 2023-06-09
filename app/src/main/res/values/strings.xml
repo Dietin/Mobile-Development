@@ -32,7 +32,7 @@
     <string name="login">Masuk ke Akun</string>
     <string name="login_hint_forget_password"><u>Lupa Password</u></string>
     <string name="login_hint_no_account">Belum ada Akun? <u><b>Daftar</b></u>.</string>
-<!--    <string name="login_hint_remember_me">Remember Me</string>-->
+    <!--    <string name="login_hint_remember_me">Remember Me</string>-->
     <string name="login_hint_log_in">Masuk</string>
     <string name="login_hint_login_with_google">Masuk dengan Google</string>
     <string name="login_or">atau</string>
@@ -67,13 +67,17 @@
     <string name="tv_eat_time">%s WIB</string>
     <string name="user_calories">&lt;b&gt;%d&lt;/b&gt;</string>
     <string name="calories">Kalori</string>
-    <string name="home_hint_record_food">Catat Makananmu</string>
-    <string name="home_hint_intro">Makan apa hari ini?</string>
-    <string name="home_hint_search_food">Cari Makanan atau Resep</string>
-    <string name="home_hint_recommended">Rekomendasi Untukmu</string>
-    <string name="home_hint_info_1">Makan %s berfaedah dan bergizi</string>
+    <string name="home_intro">Makan apa hari ini?</string>
     <string name="food_cal">%d kal</string>
-    <string name="home_hint_percent_calories">&lt;b&gt;%d%%&lt;/b&gt;&lt;br&gt;Terpenuhi</string>
+    <string name="home_percent_calories">&lt;b&gt;%d%%&lt;/b&gt;&lt;br&gt;Terpenuhi</string>
+
+
+    <string name="hint_record_food">Catat Makananmu</string>
+    <string name="hint_search_food">Cari Makanan atau Resep</string>
+    <string name="hint_recommended">Rekomendasi Untukmu</string>
+    <string name="hint_info_1">Makan %s berfaedah dan bergizi</string>
+    <string name="hint_latest_search">Pencarian Terbaru</string>
+    <string name="hint_delete_all">Hapus semua</string>
 
 
 </resources>
