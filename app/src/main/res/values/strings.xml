@@ -78,6 +78,8 @@
     <string name="hint_info_1">Makan %s berfaedah dan bergizi</string>
     <string name="hint_latest_search">Pencarian Terbaru</string>
     <string name="hint_delete_all">Hapus semua</string>
+    <string name="title_add">Tambah Makanan</string>
+    <string name="title_history">History</string>
 
 
 </resources>

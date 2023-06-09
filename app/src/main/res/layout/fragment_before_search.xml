@@ -71,7 +71,7 @@
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/cv_food_recommended"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         android:layout_marginTop="8dp"/>
 
 </LinearLayout>
