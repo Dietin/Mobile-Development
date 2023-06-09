@@ -1,12 +1,12 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.Dietin" parent="Base.Theme.Dietin">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
     <style name="Base.Theme.Dietin" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/jet</item>
+        <item name="colorSecondary">@color/satin_gold</item>
         <item name="colorAccent">@color/gunmetal</item>
         <item name="statusBarBackground">@color/jet</item>
         <item name="statusBarForeground">@color/white</item>
@@ -64,6 +64,11 @@
 
     <style name="DietinTextTitle.SubTitle" parent="DietinTextTitle">
         <item name="android:textSize">@dimen/text_size_sub_title</item>
+    </style>
+
+    <style name="Dietin.NavigationActive" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/satin_gold_calmer</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>
