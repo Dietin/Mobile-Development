@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
+import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistoryGroup
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
@@ -55,6 +56,11 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
         setupViewModelBinding()
         loader = Utils.generateLoader(requireActivity())
+
+        binding.btnRecordFood.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }
@@ -152,7 +158,6 @@ class HomeFragment : Fragment() {
         LazyRow(
             modifier = Modifier
                 .padding(PaddingValues(bottom = 4.dp)),
-            contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
 
         ) {

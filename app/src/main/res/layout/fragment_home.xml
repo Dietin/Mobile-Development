@@ -78,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@id/tv_calories_target"
-                app:layout_constraintTop_toBottomOf="@id/tv_calories_target"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_calories_target"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <Button
                 android:id="@+id/btn_record_food"
