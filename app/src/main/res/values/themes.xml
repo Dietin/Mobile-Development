@@ -72,11 +72,18 @@
         <item name="strokeWidth">0dp</item>
     </style>
 
-    <style name="DietinReadonlyChip" parent="Widget.Material3.Chip.Assist">
-        <item name="chipCornerRadius">8dp</item>
-        <item name="chipMinHeight">0dp</item>
+    <style name="Dietin.ReadonlyChip" parent="Widget.Material3.Chip.Assist">
         <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipCornerRadius">8dp</item>
         <item name="chipStrokeWidth">0dp</item>
+        <item name="chipMinHeight">20dp</item>
+        <item name="android:clickable">false</item>
+        <item name="android:checkable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="Dietin.ReadonlyChip.Indicator" parent="Dietin.ReadonlyChip">
+        <item name="chipMinHeight">0dp</item>
         <item name="android:clickable">false</item>
         <item name="android:checkable">false</item>
         <item name="android:focusable">false</item>
@@ -89,12 +96,6 @@
     <style name="Dietin.NavigationActive" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/satin_gold_calmer</item>
         <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="Dietin.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/rbtn</item>
-        <item name="android:button">@android:color/transparent</item>
-        <item name="android:paddingHorizontal">16dp</item>
     </style>
 
     <style name="Dietin.RadioCard.Inactive" parent="Widget.Material3.CardView.Outlined">

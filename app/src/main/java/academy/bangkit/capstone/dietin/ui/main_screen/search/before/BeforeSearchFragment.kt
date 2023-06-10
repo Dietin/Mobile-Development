@@ -1,10 +1,5 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.search.before
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.databinding.FragmentBeforeSearchBinding
@@ -12,6 +7,10 @@ import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard2Binding
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -24,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 
@@ -109,6 +109,7 @@ class BeforeSearchFragment : Fragment() {
                     update = {
                         Glide.with(this.root)
                             .load(item.image)
+                            .placeholder(R.drawable.food_placeholder)
                             .into(this.ivFoodImage)
                         this.chipFoodCategory.text = item.category.name
 
@@ -140,6 +141,7 @@ class BeforeSearchFragment : Fragment() {
                     update = {
                         Glide.with(this.root)
                             .load(item.image)
+                            .placeholder(R.drawable.food_placeholder)
                             .into(this.ivFoodImage)
                         this.chipFoodCategory.text = item.category.name
 

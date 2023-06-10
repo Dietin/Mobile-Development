@@ -217,6 +217,7 @@ class HomeFragment : Fragment() {
                     update = {
                         Glide.with(this.root)
                             .load(item.icon)
+                            .placeholder(R.drawable.food_placeholder)
                             .into(this.ivCategoryImage)
                         this.tvCategoryTitle.text = item.name
                     }
@@ -243,7 +244,7 @@ class HomeFragment : Fragment() {
                     update = {
                         Glide.with(this.root)
                             .load(item.image)
-                            .placeholder(R.drawable.img_food)
+                            .placeholder(R.drawable.food_placeholder)
                             .into(this.ivFoodImage)
                         this.chipFoodCategory.apply {
                             text = item.category.name

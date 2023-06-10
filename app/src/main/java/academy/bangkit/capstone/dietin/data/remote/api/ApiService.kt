@@ -37,6 +37,12 @@ interface ApiService {
         @Query("size") size: Int
     ): ApiResponse<List<Recipe>>
 
+    @GET("recipe/search/{query}")
+    suspend fun searchGlobal(
+        @Header("Authorization") token: String,
+        @Path("query") query: String
+    ): ApiResponse<List<Recipe>>
+
     @GET("category")
     suspend fun getAllCategories(
         @Header("Authorization") token: String

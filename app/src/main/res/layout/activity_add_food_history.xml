@@ -181,7 +181,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.chip.Chip
-                    style="@style/DietinReadonlyChip"
+                    style="@style/Dietin.ReadonlyChip.Indicator"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     app:chipBackgroundColor="@color/bs_primary_accent" />
@@ -195,7 +195,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/DietinReadonlyChip"
+                    style="@style/Dietin.ReadonlyChip.Indicator"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     app:chipBackgroundColor="@color/bs_success_accent" />
@@ -208,7 +208,7 @@
                     android:text="Lemak" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/DietinReadonlyChip"
+                    style="@style/Dietin.ReadonlyChip.Indicator"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     app:chipBackgroundColor="@color/bs_danger_accent" />
@@ -315,7 +315,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.chip.Chip
-                    style="@style/DietinReadonlyChip"
+                    style="@style/Dietin.ReadonlyChip.Indicator"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     app:chipBackgroundColor="@color/bs_primary_accent" />
@@ -329,7 +329,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <com.google.android.material.chip.Chip
-                    style="@style/DietinReadonlyChip"
+                    style="@style/Dietin.ReadonlyChip.Indicator"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     app:chipBackgroundColor="@color/bs_success_accent" />

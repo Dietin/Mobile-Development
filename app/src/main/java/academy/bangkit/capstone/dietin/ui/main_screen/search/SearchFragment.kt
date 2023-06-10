@@ -1,15 +1,13 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.search
 
-import academy.bangkit.capstone.dietin.ui.main_screen.search.before.BeforeSearchFragment
 import academy.bangkit.capstone.dietin.databinding.FragmentSearchBinding
+import academy.bangkit.capstone.dietin.ui.main_screen.search.before.BeforeSearchFragment
 import academy.bangkit.capstone.dietin.ui.main_screen.search.on.OnSearchFragment
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 
 class SearchFragment : Fragment() {
@@ -17,6 +15,10 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
+    private val onSearchFrg = OnSearchFragment()
+    private val beforeSearchFrg = BeforeSearchFragment()
+
+    private val activeFragment: Fragment = beforeSearchFrg
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,45 +29,26 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changeFragmentSearch(BeforeSearchFragment())
+        changeFragmentSearch(onSearchFrg)
+        changeFragmentSearch(beforeSearchFrg)
         setupListener()
-
-
     }
-
 
     private fun setupListener() {
-
-
-        binding.inputSearch.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                //do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                //do nothing
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length!! > 0) {
-                    changeFragmentSearch(OnSearchFragment())
-                }else{
-                    changeFragmentSearch(BeforeSearchFragment())
+        binding.inputSearch.editText?.addTextChangedListener { s ->
+            if (s?.length!! > 0) {
+                if (activeFragment != onSearchFrg) {
+                    changeFragmentSearch(onSearchFrg)
                 }
+                onSearchFrg.updateQuery(s.toString())
+            }else{
+                changeFragmentSearch(beforeSearchFrg)
             }
-        })
+        }
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
     private fun changeFragmentSearch(fragment : Fragment){
         requireActivity()
@@ -76,6 +59,8 @@ class SearchFragment : Fragment() {
             .commit()
     }
 
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -14,8 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="4dp">
+        android:orientation="vertical">
         
         <ImageView
             android:id="@+id/iv_food_image"
@@ -24,51 +23,48 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/img_food"/>
 
-        <TextView
-            android:id="@+id/tv_food_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/DietinTextTitle"
-            android:text="Nasi Goreng Kaki Gajah"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="@dimen/text_size_sub2"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_food_cal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_sub4"
-            android:text="@string/food_cal"
-            android:textColor="@color/black"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/ic_food_info" />
+            <TextView
+                android:id="@+id/tv_food_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/DietinTextTitle"
+                android:text="Nasi Goreng Kaki Gajah"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_sub2"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_food_cal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_sub4"
+                android:text="@string/food_cal"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_food_info" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_food_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chipMinHeight="20dp"
-            app:chipEndPadding="0dp"
-            app:chipStartPadding="0dp"
-            app:chipCornerRadius="12dp"
-            app:chipStrokeWidth="0dp"
-            app:ensureMinTouchTargetSize="false"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="8dp"
-            android:text="Nasi-nasi-an"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_sub2"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_food_category"
+                style="@style/Dietin.ReadonlyChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nasi-nasi-an"
+                android:textSize="@dimen/text_size_sub2"
+                android:textStyle="bold"
+                app:ensureMinTouchTargetSize="false" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

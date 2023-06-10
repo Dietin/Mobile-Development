@@ -89,7 +89,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
         // Initialize UI
         Glide.with(this)
             .load(recipe.image)
-            .placeholder(R.drawable.img_food)
+            .placeholder(R.drawable.food_placeholder)
             .into(binding.ivFoodImage)
         binding.tvFoodName.text = recipe.name
         binding.tvFoodShortDesc.text = Html.fromHtml("${String.format(Locale.getDefault(), "%,.1f", recipe.calories)} kalori • ${recipe.category.name}", Html.FROM_HTML_MODE_COMPACT)
