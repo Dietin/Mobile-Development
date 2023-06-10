@@ -83,13 +83,21 @@ class HomeViewModel(private val application: Application) : ViewModel() {
         try {
             _isLoading.value = true
             val token = Utils.getToken(application)
-            val userId = Utils.getUserId(application)
-            // TODO: Temporary: user id should not be stored in shared preferences
-            _foodCaloriesHistory.value = ApiConfig.getApiService().getFoodHistoryGroupedByTime(
+            val fch = ApiConfig.getApiService().getFoodHistoryGroupedByTime(
                 token = "Bearer $token",
-                date = Utils.getCurrentDate(),
-                userId = userId
+                date = Utils.getCurrentDate()
             ).data!!
+
+            val fchFiltered = mutableListOf<FoodHistoryGroup>()
+            for (i in 1 .. 4) {
+                val totalCalories = fch.filter { it.time == i }.sumOf { it.totalCalories.toDouble() }.toFloat()
+                fchFiltered.add(FoodHistoryGroup(
+                    i,
+                    totalCalories
+                ))
+            }
+
+            _foodCaloriesHistory.value = fchFiltered
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())

@@ -29,29 +29,24 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
     val calories: LiveData<FoodCalories> = _calories
 
     // Holder: berapa banyak task lagi yang harus dikerjakan sebelum loading selesai
-    private var _loadingTask = MutableLiveData<Int>(1)
-    val loadingTask: LiveData<Int> = _loadingTask
+//    private var _loadingTask = MutableLiveData<Int>(1)
+//    val loadingTask: LiveData<Int> = _loadingTask
 
-    init {
-        getCalories()
-        
-        loadingTask.observeForever {
-            _isLoading.value = it > 0
-        }
-    }
+//    init {
+//        loadingTask.observeForever {
+//            _isLoading.value = it > 0
+//        }
+//    }
 
-    fun getCalories() = viewModelScope.launch {
+    fun getCalories(date: String) = viewModelScope.launch {
         val recommendedCalories = 2000f
         try {
             _isLoading.value = true
             val token = Utils.getToken(application)
-            val userId = Utils.getUserId(application)
 
-            // TODO: Temporary: user id should not be stored in shared preferences
             val data = ApiConfig.getApiService().getFoodHistoryGroupedByTime(
                 token = "Bearer $token",
-                date = Utils.getCurrentDate(),
-                userId = userId
+                date = date
             ).data
             var totalCalories = 0f
             data.forEach {
@@ -68,10 +63,14 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _calories.value = FoodCalories(
+                currentCalories = 0f,
+                recommendedCalories = recommendedCalories
+            )
             _message.value = Event(errorResponse.message)
         } finally {
-//            _isLoading.value = false // replaced with loadingTask
-            _loadingTask.value = _loadingTask.value?.minus(1)
+            _isLoading.value = false // replaced with loadingTask
+//            _loadingTask.value = _loadingTask.value?.minus(1)
         }
     }
 
@@ -79,10 +78,10 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
         try {
             _isLoading.value = true
             val token = Utils.getToken(application)
-            val userId = Utils.getUserId(application)
+            val userId = Utils.getUser(application)?.id
 
             // Set user id
-            foodHistory.userId = userId
+            foodHistory.userId = userId ?: 0
             ApiConfig.getApiService().addFoodHistory(
                 token = "Bearer $token",
                 foodHistory = foodHistory,
@@ -102,7 +101,7 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
         }
     }
 
-    inner class FoodCalories(
+    class FoodCalories(
         val currentCalories: Float,
         val recommendedCalories: Float
     )

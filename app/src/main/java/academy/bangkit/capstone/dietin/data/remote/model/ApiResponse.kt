@@ -2,7 +2,8 @@ package academy.bangkit.capstone.dietin.data.remote.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
 data class ApiResponse<T>(
     @SerializedName("error")
@@ -42,22 +43,39 @@ data class User(
     val name: String,
     @SerializedName("email")
     val email: String,
+)
+
+data class DataUser(
+    @SerializedName("dataUser_id")
+    val id: Int,
+    @SerializedName("user_id")
+    val userId: Int,
+    @SerializedName("age")
+    var age: Int,
     @SerializedName("weight")
-    val weight: Int,
+    var weight: Float,
     @SerializedName("height")
-    val height: Int,
+    var height: Float,
+    @SerializedName("bmr")
+    val bmr: Float,
+    @SerializedName("activity_level")
+    var activityLevel: Int,
+    @SerializedName("gender")
+    var gender: Int,
+    @SerializedName("idealCalories")
+    val idealCalories: Float,
+    @SerializedName("goal")
+    var goal: Int?, // Sebenarnya tidak ada di API, tapi untuk memudahkan di UI, jadi ditambahkan
+    @SerializedName("user")
+    val user: User?,
 )
 
 @Parcelize
 data class Recipe(
-    @SerializedName("recipe_id")
-    val id: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("name")
     val name: String,
-    @SerializedName("ingredients")
-    val ingredients: String,
-    @SerializedName("steps")
-    val steps: String,
     @SerializedName("calories")
     val calories: Float,
     @SerializedName("carbs")
@@ -67,10 +85,34 @@ data class Recipe(
     @SerializedName("proteins")
     val proteins: Float,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("category")
     val category: RecipeCategory,
+    @SerializedName("recipe_steps") @IgnoredOnParcel
+    val steps: List<RecipeSteps>? = null,
+    @SerializedName("recipe_ingredients") @IgnoredOnParcel
+    val ingredients: List<RecipeIngredient>? = null,
 ): Parcelable
+
+data class RecipeSteps(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("recipe_id")
+    val recipeId: Int,
+    @SerializedName("step_no")
+    val stepNo: Int,
+    @SerializedName("text")
+    val text: String
+)
+
+data class RecipeIngredient(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("recipe_id")
+    val recipeId: Int,
+    @SerializedName("amount")
+    val amount: Float
+)
 
 @Parcelize
 data class RecipeCategory(

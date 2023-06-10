@@ -1,10 +1,12 @@
 package academy.bangkit.capstone.dietin.ui.food_history
 
+import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.databinding.ActivityAddFoodHistoryBinding
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Html
@@ -60,7 +62,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
             val food = FoodHistory(
                 id = 0,
                 userId = 0, // will be set in viewModel (seharusnya di backend)
-                recipeId = recipe.id,
+                recipeId = recipe.id.toString(), // TODO: Update database type to Int
                 calories = recipe.calories * jumlahPorsi,
                 carbs = recipe.carbs * jumlahPorsi,
                 proteins = recipe.proteins * jumlahPorsi,
@@ -80,12 +82,14 @@ class AddFoodHistoryActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupData(recipe: Recipe) {
         this.recipe = recipe
 
         // Initialize UI
         Glide.with(this)
             .load(recipe.image)
+            .placeholder(R.drawable.img_food)
             .into(binding.ivFoodImage)
         binding.tvFoodName.text = recipe.name
         binding.tvFoodShortDesc.text = Html.fromHtml("${String.format(Locale.getDefault(), "%,.1f", recipe.calories)} kalori • ${recipe.category.name}", Html.FROM_HTML_MODE_COMPACT)
@@ -107,7 +111,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
         binding.tvFatsPerc.text = "${String.format(Locale.getDefault(), "%.0f", percFats * 100)}%"
         binding.tvProteinsPerc.text = "${String.format(Locale.getDefault(), "%.0f", percProteins * 100)}%"
 
-        binding.sliderJumlahPorsi.addOnChangeListener { slider, value, isFromUser ->
+        binding.sliderJumlahPorsi.addOnChangeListener { _, value, _ ->
             setCalories(value)
         }
 
@@ -118,12 +122,17 @@ class AddFoodHistoryActivity : AppCompatActivity() {
             val month = calendar.get(Calendar.MONTH)
             val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = DatePickerDialog(this, {
-                view, _year, _monthOfYear, _dayOfMonth ->
+                _, _year, _monthOfYear, _dayOfMonth ->
                 val newDate = Calendar.getInstance()
                 newDate.set(_year, _monthOfYear, _dayOfMonth)
                 setTanggalMakan(newDate)
             }, year, month, dayOfMonth)
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+            datePickerDialog.datePicker.updateDate(
+                selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH)
+            )
             datePickerDialog.show()
         }
     }
@@ -154,6 +163,8 @@ class AddFoodHistoryActivity : AppCompatActivity() {
     private fun setTanggalMakan(newDate: Calendar) {
         selectedDate = newDate
         binding.tilTanggal.editText?.setText(Utils.formatDate(selectedDate.time, "dd MMMM yyyy"))
+
+        viewModel.getCalories(Utils.formatDate(selectedDate.time, "yyyy-MM-dd"))
     }
 
     private fun setUpWaktu() {

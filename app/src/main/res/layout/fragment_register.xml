@@ -158,24 +158,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        style="@style/DietinTextInputLayout.Dropdown"
-                        app:startIconDrawable="@drawable/ic_question_mark_divider">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/act_gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/attribute_gender"
-                            android:inputType="none"/>
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/btn_go_login"
                         style="@style/DietinTextButton"

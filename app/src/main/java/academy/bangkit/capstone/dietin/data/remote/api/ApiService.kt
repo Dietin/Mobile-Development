@@ -24,12 +24,10 @@ interface ApiService {
         @Header("Authorization") token: String
     ): ApiResponse<Nothing>
 
-    @POST("onboarding")
+    @POST("dataUser")
     suspend fun onboarding(
-        @Field("gender") gender: Int,
-        @Field("weight") weight: Int,
-        @Field("height") height: Int,
-        @Field("goals") goals: Int // Turunkan berat badan, tetap sama, atau naikkan
+        @Header("Authorization") token: String,
+        @Body dataUser: DataUser
     )
 
     @GET("recipe")
@@ -44,11 +42,10 @@ interface ApiService {
         @Header("Authorization") token: String
     ): ApiResponse<List<RecipeCategory>>
 
-    @GET("foodHistoryGroup/{date}/{userId}")
+    @GET("foodHistoryGroup/{date}")
     suspend fun getFoodHistoryGroupedByTime(
         @Header("Authorization") token: String,
-        @Path("date") date: String,
-        @Path("userId") userId: Int
+        @Path("date") date: String
     ): ApiResponse<List<FoodHistoryGroup>>
 
     @POST("foodHistory")

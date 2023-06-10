@@ -4,6 +4,7 @@ import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.databinding.ActivityAuthenticationBinding
 import academy.bangkit.capstone.dietin.ui.auth.fragments.login.LoginFragment
 import academy.bangkit.capstone.dietin.ui.auth.fragments.register.RegisterFragment
+import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
 import android.os.Build
@@ -36,10 +37,8 @@ class AuthenticationActivity : AppCompatActivity() {
 
         // First: check if the user is already logged in
         viewModel = ViewModelProvider(this@AuthenticationActivity, ViewModelFactory.getInstance(application))[AuthenticationViewModel::class.java]
-        if (viewModel.isTokenAvailable()) {
-
-            //surat cinta untuk jolly.. :))
-            //disini saya ubah routenya dari MainActivity ke MainScreenActivity
+        val isFirstTime = viewModel.isFirstTime() || intent.getBooleanExtra("isFirstTime", false)
+        if (viewModel.isTokenAvailable() && !isFirstTime) {
             val intent = Intent(this@AuthenticationActivity, MainScreenActivity::class.java)
             startActivity(intent)
             finish()
@@ -48,6 +47,11 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (isFirstTime) {
+            goToOnboarding()
+            return@runBlocking
+        }
 
         setFragment("login", false)
     }
@@ -82,5 +86,11 @@ class AuthenticationActivity : AppCompatActivity() {
                     .commit()
             }
         }
+    }
+
+    private fun goToOnboarding() {
+        val intent = Intent(this, OnboardingActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

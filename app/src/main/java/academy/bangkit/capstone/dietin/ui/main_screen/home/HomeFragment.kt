@@ -10,6 +10,7 @@ import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryActivity
+import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
@@ -26,18 +27,20 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -65,38 +68,78 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.inputSearch.editText?.setOnClickListener {
+            Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+        }
+
+        setAllContent()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setAllContent() = lifecycleScope.launch {
+
+        //untuk di atas
+        //dikasih greet selamat pagi atau apapun itu.. :V
+        //kalau name nanti get nama User
+        val greet = when(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)){
+            in 0..11 -> "Selamat pagi"
+            in 12..15 -> "Selamat siang"
+            in 16..18 -> "Selamat sore"
+            in 19..23 -> "Selamat malam"
+            else -> "Halo"
+        }
+        val name = Utils.getUser(requireContext())?.name
+        binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
+    private fun setCalories(foodCalories: AddFoodHistoryViewModel.FoodCalories) {
+        //set percent terpenuhi dari kalori
+        val percent = (foodCalories.currentCalories / foodCalories.recommendedCalories) * 100
+        binding.calPercent.text = Html.fromHtml(getString(R.string.home_percent_calories, percent), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.caloriesProgress.progress = percent.toInt()
+
+        //ini untuk namanya.. :))
+        val color = when(percent){
+            in 0f .. 25f -> R.color.danger
+            in 25f .. 75f -> R.color.warning
+            in 75f .. 100f -> R.color.success
+            else -> R.color.success
+        }
+        binding.caloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
+
+        //set color for calories progress
+        binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, String.format(Locale.getDefault(), "%,.0f", foodCalories.recommendedCalories)), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+
     private fun setupViewModelBinding() {
         viewModel.recommendations.observe(viewLifecycleOwner) {
-            binding.cvFoodList.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MaterialTheme {
-                        SetFoodList(it)
-                    }
-                }
-            }
+            Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it) }
         }
 
         viewModel.categories.observe(viewLifecycleOwner) {
-            binding.cvCategoryList.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MaterialTheme {
-                        SetCategoryList(it)
-                    }
-                }
-            }
+            Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it) }
         }
 
         viewModel.foodCaloriesHistory.observe(viewLifecycleOwner) {
-            binding.cvUserFood.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MaterialTheme {
-                        SetUserFoodHistory(it)
-                    }
-                }
+            Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it) }
+
+            var totalCalories = 0f
+            it.forEach {
+                totalCalories += it.totalCalories
             }
+
+            val foodCalories = AddFoodHistoryViewModel.FoodCalories(
+                totalCalories,
+                2000f // TODO: Get from userData
+            )
+            setCalories(foodCalories)
         }
 
         viewModel.message.observe(viewLifecycleOwner) {
@@ -106,48 +149,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setAllContent()
-
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setAllContent(){
-
-        //untuk di atas
-        //dikasih greet selamat pagi atau apapun itu.. :V
-        //kalau name nanti get nama User
-        val greet = "Selamat Pagi"
-        val name = "Deez Nuts"
-        binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name))
-
-        //set percent terpenuhi dari kalori
-        val percent = 80
-        binding.calPercent.text = Html.fromHtml(getString(R.string.home_percent_calories, percent))
-        binding.caloriesProgress.progress = percent
-
-        //ini untuk namanya.. :))
-        binding.caloriesProgress.setIndicatorColor(
-            ContextCompat.getColor(requireContext(), when(percent){
-                in 0..25 -> R.color.danger
-                in 26..75 -> R.color.warning
-                in 76..100 -> R.color.success
-                else -> R.color.danger
-            })
-        )
-
-        //set color for calories progress
-        val caloriesNeeded = 9110
-        binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, caloriesNeeded), HtmlCompat.FROM_HTML_MODE_LEGACY)
-
-
+    override fun onStart() {
+        super.onStart()
+        // Triggers when user open the app or back from other activity
+        viewModel.getCaloriesHistory()
     }
 
     @Composable
@@ -169,19 +174,21 @@ class HomeFragment : Fragment() {
 
                     update = {
                         this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.totalCalories.toInt()), HtmlCompat.FROM_HTML_MODE_LEGACY)
-                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
+//                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
+                        tvEatTime.visibility = View.GONE
 
                         //masih belum terlalu oke
                         val timeData = when(item.time) {
-                            1 -> Pair("Pagi", R.drawable.ic_eat_time_morning)
-                            2 -> Pair("Siang", R.drawable.ic_eat_time_afternoon)
-                            3 -> Pair("Malam", R.drawable.ic_eat_time_afternoon)
-                            else -> Pair("Snack", R.drawable.ic_eat_time_morning)
+                            1 -> Pair("Makan Pagi", R.drawable.ic_eat_time_morning)
+                            2 -> Pair("Makan Siang", R.drawable.ic_eat_time_afternoon)
+                            3 -> Pair("Makan Malam", R.drawable.ic_eat_time_afternoon)
+                            else -> Pair("Cemilan", R.drawable.ic_eat_time_morning)
                         }
-                        this.tvEatTitle.text = getString(
-                            R.string.eat_title,
-                            timeData.first
-                        )
+                        this.tvEatTitle.text = timeData.first
+//                        this.tvEatTitle.text = getString(
+//                            R.string.eat_title,
+//                            timeData.first
+//                        )
 
                         // set icon, masih belum selesai untuk icon malam
                         this.ivEatIcon.setImageResource(timeData.second)
@@ -236,6 +243,7 @@ class HomeFragment : Fragment() {
                     update = {
                         Glide.with(this.root)
                             .load(item.image)
+                            .placeholder(R.drawable.img_food)
                             .into(this.ivFoodImage)
                         this.chipFoodCategory.apply {
                             text = item.category.name

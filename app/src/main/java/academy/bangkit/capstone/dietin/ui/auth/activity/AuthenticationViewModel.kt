@@ -9,4 +9,8 @@ class AuthenticationViewModel(private val application: Application): ViewModel()
         val token = Utils.getToken(application)
         return token.isNotEmpty()
     }
+
+    suspend fun isFirstTime(): Boolean {
+        return Utils.getIsUserFirstTime(application) == 1
+    }
 }

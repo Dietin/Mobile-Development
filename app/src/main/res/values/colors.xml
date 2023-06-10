@@ -4,14 +4,19 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="jet">#363636</color>
+    <color name="jet_calmer">#5A5A5A</color>
     <color name="satin_gold">#CCA43B</color>
     <color name="satin_gold_calmer">#DEC27D</color>
     <color name="gunmetal">#242F40</color>
+    <color name="gunmetal_calmer">#3C4A5B</color>
     <color name="platinum">#E5E5E5</color>
 
     <color name="danger">#FF0000</color>
     <color name="warning">#FFA500</color>
     <color name="success">#008000</color>
 
-
+    <color name="bs_primary_accent">#9ec5fe</color>
+    <color name="bs_success_accent">#a3cfbb</color>
+    <color name="bs_info_accent">#9eeaf9</color>
+    <color name="bs_danger_accent">#f1aeb5</color>
 </resources>

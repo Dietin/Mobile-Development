@@ -7,6 +7,7 @@ import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.profile.ProfileViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.search.SearchViewModel
+import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,8 @@ class ViewModelFactory private constructor(private val application: Application)
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(application) as T
             modelClass.isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(application) as T
             modelClass.isAssignableFrom(AddFoodHistoryViewModel::class.java) -> AddFoodHistoryViewModel(application) as T
+            modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> OnboardingViewModel(application) as T
+//            modelClass.isAssignableFrom(Onboarding1)
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }

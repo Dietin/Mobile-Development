@@ -1,9 +1,9 @@
 package academy.bangkit.capstone.dietin.ui.auth.fragments.register
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
-import academy.bangkit.capstone.dietin.data.remote.model.User
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
+import academy.bangkit.capstone.dietin.utils.Utils
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,8 +21,8 @@ class RegisterViewModel(private val application: Application): ViewModel() {
     private val _message = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> = _message
 
-    private val _registeredUser = MutableLiveData<User>()
-    val registeredUser: LiveData<User> = _registeredUser
+    private val _isSuccess = MutableLiveData<Boolean>()
+    val isSuccess: LiveData<Boolean> = _isSuccess
 
     private val _registerError = MutableLiveData<ApiErrorResponse>()
     val registerError: LiveData<ApiErrorResponse> = _registerError
@@ -30,21 +30,17 @@ class RegisterViewModel(private val application: Application): ViewModel() {
     fun clientRegister(
         name: String,
         email: String,
-        password: String,
-        gender: Int,
-        weight: Int,
-        height: Int
+        password: String
     ) = viewModelScope.launch {
         try {
             _isLoading.value = true
-            _registeredUser.value = ApiConfig.getApiService().register(
+            ApiConfig.getApiService().register(
                 name = name,
                 email = email,
-                password = password,
-//                gender = gender,
-//                weight = weight,
-//                height = height
+                password = password
             ).data!!
+
+            continueToLogin(email, password)
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())
@@ -52,6 +48,34 @@ class RegisterViewModel(private val application: Application): ViewModel() {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
             _registerError.value = errorResponse
+            _message.value = Event(errorResponse.message)
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    private suspend fun continueToLogin(email: String, password: String) {
+        try {
+            _isLoading.value = true
+            val loginData = ApiConfig.getApiService().login(
+                email = email,
+                password = password
+            ).data!!
+
+            // Save to preferences
+            val token = loginData.token
+            val user = loginData.user
+            Utils.setToken(application, token)
+            Utils.setIsUserFirstTime(application, 1)
+            Utils.setUser(application, user)
+
+            _isSuccess.value = true
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
             _message.value = Event(errorResponse.message)
         } finally {
             _isLoading.value = false

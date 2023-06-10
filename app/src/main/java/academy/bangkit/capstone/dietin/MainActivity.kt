@@ -1,7 +1,7 @@
 package academy.bangkit.capstone.dietin
 
 import academy.bangkit.capstone.dietin.databinding.ActivityMainBinding
-import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationActivity
+import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            val intent = Intent(this, AuthenticationActivity::class.java)
+            val intent = Intent(this, OnboardingActivity::class.java)
             startActivity(intent)
         }
     }

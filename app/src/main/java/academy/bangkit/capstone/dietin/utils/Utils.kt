@@ -1,9 +1,14 @@
 package academy.bangkit.capstone.dietin.utils
 
 import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.remote.model.User
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -25,15 +30,24 @@ object Utils {
         pref.setToken(value)
     }
 
-    // TODO: Temporary: user id should not be stored in shared preferences
-    suspend fun getUserId(context: Context): Int {
+    suspend fun getUser(context: Context): User? {
         val pref = AppPreferences.getInstance(context.dataStore)
-        return pref.getUserId().first()
+        return pref.getUser().first()
     }
 
-    suspend fun setUserId(context: Context, value: Int) {
+    suspend fun setUser(context: Context, value: User?) {
         val pref = AppPreferences.getInstance(context.dataStore)
-        pref.setUserId(value)
+        pref.setUser(value)
+    }
+
+    suspend fun getIsUserFirstTime(context: Context): Int {
+        val pref = AppPreferences.getInstance(context.dataStore)
+        return pref.getIsUserFirstTime().first()
+    }
+
+    suspend fun setIsUserFirstTime(context: Context, value: Int) {
+        val pref = AppPreferences.getInstance(context.dataStore)
+        pref.setIsUserFirstTime(value)
     }
 
     fun generateLoader(context: Context): AlertDialog {
@@ -55,5 +69,14 @@ object Utils {
         return formatter.format(time)
     }
 
-    fun formatString(format: String, vararg args: Any?) = String.format(Locale.getDefault(), format, args)
+    fun setComposableFunction(view: ComposeView, composable: @Composable () -> Unit) {
+        view.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                MaterialTheme {
+                    composable()
+                }
+            }
+        }
+    }
 }

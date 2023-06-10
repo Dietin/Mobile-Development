@@ -29,7 +29,7 @@
         <item name="boxCornerRadiusTopStart">16dp</item>
         <item name="boxCornerRadiusBottomEnd">16dp</item>
         <item name="boxCornerRadiusBottomStart">16dp</item>
-        <item name="strokeColor">@color/jet</item>
+        <item name="strokeColor">@color/jet_calmer</item>
     </style>
 
     <style name="DietinTextInputLayout.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -37,7 +37,7 @@
         <item name="boxCornerRadiusTopStart">16dp</item>
         <item name="boxCornerRadiusBottomEnd">16dp</item>
         <item name="boxCornerRadiusBottomStart">16dp</item>
-        <item name="strokeColor">@color/jet</item>
+        <item name="strokeColor">@color/jet_calmer</item>
     </style>
 
 
@@ -89,6 +89,25 @@
     <style name="Dietin.NavigationActive" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/satin_gold_calmer</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Dietin.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/rbtn</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:paddingHorizontal">16dp</item>
+    </style>
+
+    <style name="Dietin.RadioCard.Inactive" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/jet_calmer</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="contentPaddingLeft">16dp</item>
+        <item name="contentPaddingRight">16dp</item>
+        <item name="contentPaddingBottom">12dp</item>
+        <item name="contentPaddingTop">12dp</item>
     </style>
 
 </resources>
