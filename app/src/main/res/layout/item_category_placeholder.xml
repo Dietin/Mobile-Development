@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_category"
     android:clickable="true"
     style="@style/Widget.Material3.CardView.Outlined"
@@ -12,29 +11,28 @@
     app:cardCornerRadius="0dp">
 
     <LinearLayout
-        android:id="@+id/layout_category"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/shimmer_base"
         android:paddingVertical="8dp">
 
         <ImageView
-            android:id="@+id/iv_category_image"
             android:layout_width="58dp"
             android:layout_height="58dp"
             android:layout_gravity="center"
-            tools:src="@drawable/ic_category_plant_based"/>
+            android:background="@color/shimmer_image"/>
 
         <TextView
-            android:id="@+id/tv_category_title"
             android:layout_width="match_parent"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="ini contoh category"
+            android:background="@color/shimmer_text"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_sub3" />

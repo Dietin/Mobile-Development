@@ -5,61 +5,66 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardBackgroundColor="@color/black"
+    app:cardBackgroundColor="@color/shimmer_base"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="6dp">
 
         <TextView
             android:id="@+id/tv_eat_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/eat_title"
-            android:textSize="@dimen/text_size_sub2"
+            android:textSize="@dimen/text_size_sub3"
             android:textColor="@color/white"
+            android:layout_marginEnd="32dp"
+            android:background="@color/shimmer_text"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tv_eat_time"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/tv_eat_time"
             android:textSize="@dimen/text_size_sub5"
             android:textColor="@color/white"
+            android:background="@color/shimmer_text"
             app:layout_constraintTop_toBottomOf="@id/tv_eat_title"
-            app:layout_constraintStart_toStartOf="@id/tv_eat_title"/>
+            app:layout_constraintStart_toStartOf="@id/tv_eat_title" />
 
         <ImageView
             android:id="@+id/iv_eat_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginTop="4dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_eat_time_morning"
+            android:background="@color/shimmer_image"
             app:layout_constraintStart_toStartOf="@id/tv_eat_time"
             app:layout_constraintTop_toBottomOf="@id/tv_eat_time" />
 
         <TextView
             android:id="@+id/tv_calories_eaten"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/user_calories"
+            android:layout_marginHorizontal="8dp"
+            android:textSize="@dimen/text_size_sub3"
             android:textColor="@color/white"
+            android:background="@color/shimmer_text"
             app:layout_constraintStart_toEndOf="@+id/iv_eat_icon"
-            app:layout_constraintTop_toTopOf="@id/iv_eat_icon" />
+            app:layout_constraintTop_toTopOf="@id/iv_eat_icon"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="@string/calories"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_sub4"
+            android:textSize="@dimen/text_size_sub5"
+            android:background="@color/shimmer_text"
             app:layout_constraintStart_toStartOf="@+id/tv_calories_eaten"
             app:layout_constraintTop_toBottomOf="@+id/tv_calories_eaten" />
 

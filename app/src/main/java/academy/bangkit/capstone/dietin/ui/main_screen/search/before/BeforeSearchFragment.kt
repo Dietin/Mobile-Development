@@ -6,6 +6,7 @@ import academy.bangkit.capstone.dietin.databinding.FragmentBeforeSearchBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard2Binding
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
+import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +18,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.fragment.app.Fragment
@@ -46,6 +45,7 @@ class BeforeSearchFragment : Fragment() {
 
         //ini nanti dihpaus, karena supaya agar cuman dapat memiliki data dummy
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
+        setupShimmer()
         setupDataDummy()
         //nanti hapus ini yoo
 
@@ -57,31 +57,25 @@ class BeforeSearchFragment : Fragment() {
         _binding = null
     }
 
+    private fun setupShimmer(){
+        binding.shimmerRecommended.startShimmer()
+        binding.shimmerLatestSearch.startShimmer()
+    }
+
 
     private fun setupDataDummy(){
         viewModel.recommendations.observe(viewLifecycleOwner) {
-            binding.cvLatestSearch.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MaterialTheme {
 
-                        //tinggal ganti disini
-                        SetFoodHistory(it)
-                    }
-                }
-            }
+            binding.shimmerRecommended.stopShimmer()
+            binding.shimmerLatestSearch.stopShimmer()
+
+            binding.shimmerRecommended.visibility = View.GONE
+            binding.shimmerLatestSearch.visibility = View.GONE
 
 
-            binding.cvFoodRecommended.apply {
-                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent {
-                    MaterialTheme {
+            Utils.setComposableFunction(binding.cvLatestSearch) { SetFoodHistory(foodList = it)}
+            Utils.setComposableFunction(binding.cvFoodRecommended) { SetFoodRecommendation(foodList = it)}
 
-                        //tinggal ganti disini
-                        SetFoodRecommendation(it)
-                    }
-                }
-            }
         }
     }
 
@@ -127,8 +121,6 @@ class BeforeSearchFragment : Fragment() {
     @Composable
     fun SetFoodRecommendation(foodList: List<Recipe>){
         LazyColumn(
-            modifier = Modifier
-                .padding(PaddingValues(bottom = 8.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {

@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
+        setupShimmerView()
         setupViewModelBinding()
         loader = Utils.generateLoader(requireActivity())
 
@@ -118,16 +119,31 @@ class HomeFragment : Fragment() {
         binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, String.format(Locale.getDefault(), "%,.0f", foodCalories.recommendedCalories)), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
+
+    private fun setupShimmerView(){
+
+        binding.shimmerCategory.startShimmer()
+        binding.shimmerFoodList.startShimmer()
+        binding.shimmerUserEat.startShimmer()
+
+    }
+
     private fun setupViewModelBinding() {
         viewModel.recommendations.observe(viewLifecycleOwner) {
+            binding.shimmerFoodList.stopShimmer()
+            binding.shimmerFoodList.visibility = View.GONE
             Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it) }
         }
 
         viewModel.categories.observe(viewLifecycleOwner) {
+            binding.shimmerCategory.stopShimmer()
+            binding.shimmerCategory.visibility = View.GONE
             Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it) }
         }
 
         viewModel.foodCaloriesHistory.observe(viewLifecycleOwner) {
+            binding.shimmerUserEat.stopShimmer()
+            binding.shimmerUserEat.visibility = View.GONE
             Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it) }
 
             var totalCalories = 0f
@@ -157,8 +173,6 @@ class HomeFragment : Fragment() {
 
     @Composable
     fun SetUserFoodHistory(foodHistories: List<FoodHistoryGroup>){
-
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
         LazyRow(
             modifier = Modifier

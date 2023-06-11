@@ -19,4 +19,12 @@
     <color name="bs_success_accent">#a3cfbb</color>
     <color name="bs_info_accent">#9eeaf9</color>
     <color name="bs_danger_accent">#f1aeb5</color>
+
+
+    <!-- Shimmer Color -->
+    //shimmer color pallete
+    <color name="shimmer_base">#DDDDDD</color>
+    <color name="shimmer_image">#ADADAD</color>
+    <color name="shimmer_text">#C2C2C2</color>
+
 </resources>

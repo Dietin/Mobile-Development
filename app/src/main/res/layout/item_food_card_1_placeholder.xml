@@ -1,71 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_width="160dp"
+    android:layout_height="210dp"
+    android:layout_margin="4dp"
     android:layout_gravity="center"
-    android:layout_margin="16dp"
     app:cardElevation="@dimen/card_elevation"
     app:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv_food_image"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/img_food"/>
+            android:background="@color/shimmer_image" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_vertical"
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/tv_food_name"
-                style="@style/DietinTextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/DietinTextTitle"
+                android:background="@color/shimmer_text"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Nasi Goreng Kaki Gajah"
-                android:textSize="@dimen/text_size_sub2" />
+                android:textSize="@dimen/text_size_sub2"/>
 
             <TextView
-                android:id="@+id/tv_food_cal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:textSize="@dimen/text_size_sub4"
-                android:text="@string/food_cal"
+                android:background="@color/shimmer_text"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"
-                app:drawableStartCompat="@drawable/ic_food_info" />
+                />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_food_category"
                 style="@style/Dietin.ReadonlyChip"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="20dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/loading"
+                app:chipBackgroundColor="@color/shimmer_image"
                 android:textSize="@dimen/text_size_sub2"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                app:ensureMinTouchTargetSize="false" />
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 
