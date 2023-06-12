@@ -1,14 +1,17 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.search.before
 
 import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
+import academy.bangkit.capstone.dietin.data.remote.model.SearchHistory
 import academy.bangkit.capstone.dietin.databinding.FragmentBeforeSearchBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard2Binding
-import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,11 +33,7 @@ class BeforeSearchFragment : Fragment() {
 
     private var _binding : FragmentBeforeSearchBinding? = null
     private val binding get() = _binding!!
-
-    //nanti dihapus, ini untuk keperluan data dummy, tapi lagnsung dari API saya tembaknya.. :V
-    private lateinit var viewModel: HomeViewModel
-
-
+    private lateinit var viewModel: BeforeSearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +41,47 @@ class BeforeSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBeforeSearchBinding.inflate(inflater, container, false)
-
-        //ini nanti dihpaus, karena supaya agar cuman dapat memiliki data dummy
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
-        setupShimmer()
-        setupDataDummy()
-        //nanti hapus ini yoo
-
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[BeforeSearchViewModel::class.java]
+        setupViewModelBinding()
         return binding.root
+    }
+
+    private fun setupViewModelBinding(){
+        viewModel.favouriteList.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    Utils.setShimmerVisibility(binding.shimmerFavourite, true)
+                }
+                is Result.Success -> {
+                    Utils.setComposableFunction(binding.cvFavouriteFood) { SetFavouriteFoods(it.data) }
+                    Utils.setShimmerVisibility(binding.shimmerFavourite, false)
+                }
+                is Result.Error -> {
+                    Utils.setShimmerVisibility(binding.shimmerFavourite, false)
+                }
+            }
+        }
+
+        viewModel.searchHistory.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    Utils.setShimmerVisibility(binding.shimmerLatestSearch, true)
+                    binding.llNoDataSearchHistory.visibility = View.GONE
+                }
+                is Result.Success -> {
+                    Log.e("TAG", "setupViewModelBinding: ${it.data}")
+                    if (it.data.isNotEmpty()) {
+                        Utils.setComposableFunction(binding.cvLatestSearch) { SetSearchHistory(it.data) }
+                    } else {
+                        binding.llNoDataSearchHistory.visibility = View.VISIBLE
+                    }
+                    Utils.setShimmerVisibility(binding.shimmerLatestSearch, false)
+                }
+                is Result.Error -> {
+                    Utils.setShimmerVisibility(binding.shimmerLatestSearch, false)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -57,43 +89,14 @@ class BeforeSearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupShimmer(){
-        binding.shimmerRecommended.startShimmer()
-        binding.shimmerLatestSearch.startShimmer()
-    }
-
-
-    private fun setupDataDummy(){
-        viewModel.recommendations.observe(viewLifecycleOwner) {
-
-            binding.shimmerRecommended.stopShimmer()
-            binding.shimmerLatestSearch.stopShimmer()
-
-            binding.shimmerRecommended.visibility = View.GONE
-            binding.shimmerLatestSearch.visibility = View.GONE
-
-
-            Utils.setComposableFunction(binding.cvLatestSearch) { SetFoodHistory(foodList = it)}
-            Utils.setComposableFunction(binding.cvFoodRecommended) { SetFoodRecommendation(foodList = it)}
-
-        }
-    }
-
-
-
-
     @Composable
-    fun SetFoodHistory(foodList: List<Recipe>){
+    fun SetSearchHistory(foodList: List<SearchHistory>){
         LazyRow(
             modifier = Modifier
                 .padding(PaddingValues(bottom = 8.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp),
-
-
         ) {
-
-
             items(foodList){ item ->
                 AndroidViewBinding(
                     factory = { layoutInflater, parent, _ ->
@@ -101,16 +104,18 @@ class BeforeSearchFragment : Fragment() {
                     },
 
                     update = {
+                        val recipe = item.recipe
                         Glide.with(this.root)
-                            .load(item.image)
+                            .load(recipe?.image)
                             .placeholder(R.drawable.food_placeholder)
                             .into(this.ivFoodImage)
-                        this.chipFoodCategory.text = item.category.name
+                        this.chipFoodCategory.apply {
+                            text = recipe?.category?.name
+                            chipBackgroundColor = ColorStateList.valueOf(recipe?.category?.getColourArrayAsHex() ?: 0xffffff)
+                        }
 
-                        //nanti set colornya juga
-
-                        this.tvFoodName.text = item.name
-                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories.toInt())
+                        this.tvFoodName.text = recipe?.name
+                        this.tvFoodCal.text = getString(R.string.food_cal, recipe?.calories?.toInt())
                     }
                 )
             }
@@ -119,7 +124,7 @@ class BeforeSearchFragment : Fragment() {
     }
 
     @Composable
-    fun SetFoodRecommendation(foodList: List<Recipe>){
+    fun SetFavouriteFoods(foodList: List<Recipe>){
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
@@ -131,21 +136,21 @@ class BeforeSearchFragment : Fragment() {
                     },
 
                     update = {
+                        val recipe = item
                         Glide.with(this.root)
-                            .load(item.image)
+                            .load(recipe?.image)
                             .placeholder(R.drawable.food_placeholder)
                             .into(this.ivFoodImage)
-                        this.chipFoodCategory.text = item.category.name
+                        this.chipFoodCategory.apply {
+                            text = recipe?.category?.name
+                            chipBackgroundColor = ColorStateList.valueOf(recipe?.category?.getColourArrayAsHex() ?: 0xffffff)
+                        }
 
-                        //nanti set colornya juga
-
-                        this.tvFoodName.text = item.name
-                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories.toInt())
+                        this.tvFoodName.text = recipe?.name
+                        this.tvFoodCal.text = getString(R.string.food_cal, recipe?.calories?.toInt())
                     }
                 )
             }
         }
-
     }
-
 }

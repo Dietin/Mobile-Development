@@ -37,8 +37,13 @@ class AuthenticationActivity : AppCompatActivity() {
 
         // First: check if the user is already logged in
         viewModel = ViewModelProvider(this@AuthenticationActivity, ViewModelFactory.getInstance(application))[AuthenticationViewModel::class.java]
-        val isFirstTime = viewModel.isFirstTime() || intent.getBooleanExtra("isFirstTime", false)
-        if (viewModel.isTokenAvailable() && !isFirstTime) {
+        val isFirstTime = viewModel.isFirstTime()
+        if (isFirstTime) {
+            goToOnboarding()
+            return@runBlocking
+        }
+
+        if (viewModel.isTokenAvailable()) {
             val intent = Intent(this@AuthenticationActivity, MainScreenActivity::class.java)
             startActivity(intent)
             finish()
@@ -47,11 +52,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (isFirstTime) {
-            goToOnboarding()
-            return@runBlocking
-        }
 
         setFragment("login", false)
     }

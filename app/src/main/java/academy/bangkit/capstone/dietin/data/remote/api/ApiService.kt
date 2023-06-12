@@ -17,7 +17,7 @@ interface ApiService {
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): ApiResponse<LoginResponse>
+    ): ApiResponse<LoginInnerResponse>
 
     @POST("logout")
     suspend fun logout(
@@ -37,10 +37,10 @@ interface ApiService {
         @Query("size") size: Int
     ): ApiResponse<List<Recipe>>
 
-    @GET("recipe/search/{query}")
+    @GET("recipe/search")
     suspend fun searchGlobal(
         @Header("Authorization") token: String,
-        @Path("query") query: String
+        @Query("q") query: String,
     ): ApiResponse<List<Recipe>>
 
     @GET("category")
@@ -59,4 +59,32 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body foodHistory: FoodHistory
     ): ApiResponse<FoodHistory>
+
+    @GET("searchHistory")
+    suspend fun getSearchHistory(
+        @Header("Authorization") token: String
+    ): ApiResponse<List<SearchHistory>>
+
+    @POST("searchHistory")
+    suspend fun addSearchHistory(
+        @Header("Authorization") token: String,
+        @Body searchHistory: SearchHistory
+    ): ApiResponse<SearchHistory>
+
+    @GET("favorite")
+    suspend fun getFavouriteRecipes(
+        @Header("Authorization") token: String
+    ): ApiResponse<List<FavouriteRecipe>>
+
+    @POST("favorite")
+    suspend fun addFavouriteRecipe(
+        @Header("Authorization") token: String,
+        @Body favourite: FavouriteRecipe
+    ): ApiResponse<FavouriteRecipe>
+
+    @DELETE("favorite/{id}")
+    suspend fun deleteFavouriteRecipe(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): ApiResponse<Nothing>
 }

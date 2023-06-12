@@ -6,7 +6,6 @@ import academy.bangkit.capstone.dietin.ui.auth.fragments.register.RegisterViewMo
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.profile.ProfileViewModel
-import academy.bangkit.capstone.dietin.ui.main_screen.search.SearchViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.search.before.BeforeSearchViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.search.on.OnSearchViewModel
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
@@ -23,7 +22,6 @@ class ViewModelFactory private constructor(private val application: Application)
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(application) as T
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(application) as T
-            modelClass.isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(application) as T
             modelClass.isAssignableFrom(AddFoodHistoryViewModel::class.java) -> AddFoodHistoryViewModel(application) as T
             modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> OnboardingViewModel(application) as T
             modelClass.isAssignableFrom(OnSearchViewModel::class.java) -> OnSearchViewModel(application) as T

@@ -9,7 +9,6 @@
     tools:context=".ui.auth.fragments.register.RegisterFragment">
 
     <ImageView
-        android:id="@+id/iv_top_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="fitStart"
@@ -19,7 +18,6 @@
         android:src="@drawable/login_background_top" />
 
     <ImageView
-        android:id="@+id/iv_bottom_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scaleType="fitEnd"
@@ -46,11 +44,12 @@
             android:padding="16dp"
             android:clipToPadding="false">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/top_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:translationZ="1dp"
+                style="@style/Widget.Material3.CardView.Elevated"
+                app:cardElevation="3dp"
                 app:cardBackgroundColor="@color/jet"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 android:transitionName="se_top_card">
@@ -79,16 +78,16 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/main_card"
+                style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_overlap_margin"
-                android:elevation="1dp"
-                android:translationZ="2dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 android:transitionName="se_main_card">
@@ -171,14 +170,15 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/bottom_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_marginTop="@dimen/card_overlap_margin"
-                android:translationZ="0dp"
+                app:cardElevation="3dp"
                 app:cardBackgroundColor="@color/satin_gold"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 android:transitionName="se_bottom_card">
@@ -203,7 +203,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

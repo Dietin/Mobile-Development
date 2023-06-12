@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.flow.first
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -77,6 +78,16 @@ object Utils {
                     composable()
                 }
             }
+        }
+    }
+
+    fun setShimmerVisibility(view: ShimmerFrameLayout, state: Boolean) {
+        if (state) {
+            view.visibility = View.VISIBLE
+            view.startShimmer()
+        } else {
+            view.visibility = View.GONE
+            view.stopShimmer()
         }
     }
 }

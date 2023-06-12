@@ -32,7 +32,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Gambar makanan" />
+                    android:contentDescription="@string/afh_food_img" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -169,7 +169,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Kandungan Saji"
+                android:text="@string/afh_title_nutrition"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Karbohidrat"
+                    android:text="@string/afh_nut_label_carbs"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <com.google.android.material.chip.Chip
@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Lemak" />
+                    android:text="@string/afh_nut_label_fats" />
 
                 <com.google.android.material.chip.Chip
                     style="@style/Dietin.ReadonlyChip.Indicator"
@@ -218,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Protein" />
+                    android:text="@string/afh_nut_label_proteins" />
             </LinearLayout>
 
             <LinearLayout
@@ -226,7 +226,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:id="@+id/llCarbs"
@@ -303,7 +304,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Kebutuhan Kalori Harian"
+                android:text="@string/afh_title_daily_calories"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -325,7 +326,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Sudah terpenuhi"
+                    android:text="@string/afh_cal_label_fulfilled"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <com.google.android.material.chip.Chip
@@ -339,7 +340,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Akan dipenuhi" />
+                    android:text="@string/afh_cal_label_will_fulfill" />
 
             </LinearLayout>
 
@@ -376,7 +377,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                android:text="1.000 dari 2.000 kalori terpenuhi." />
+                android:text="@string/afh_cal_desc" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvKaloriBerlebihan"
@@ -403,7 +404,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tampaknya kebutuhan kalori harianmu sudah tercukupi. Makanan ini akan membuat kamu kegemukan!"
+                        android:text="@string/afh_cal_over_recommended"
                         android:textColor="@color/black"/>
 
                 </LinearLayout>
@@ -415,7 +416,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Kapan Dimakan?"
+                android:text="@string/afh_label_eaten_at"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -436,7 +437,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none|text"
                         android:focusable="false"
-                        android:hint="Tanggal" />
+                        android:hint="@string/afh_eat_label_date" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -451,7 +452,7 @@
                         android:id="@+id/actvWaktu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Waktu"
+                        android:hint="@string/afh_eat_label_time"
                         android:lines="1"
                         android:inputType="none" />
 
@@ -477,7 +478,7 @@
                 android:id="@+id/btnAddFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tambah Makanan" />
+                android:text="@string/afh_save_meal" />
 
         </com.google.android.material.card.MaterialCardView>
 

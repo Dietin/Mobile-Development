@@ -2,6 +2,7 @@ package academy.bangkit.capstone.dietin.ui.main_screen.home
 
 import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistoryGroup
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.data.remote.model.RecipeCategory
@@ -24,6 +25,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -38,7 +40,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -57,7 +58,6 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HomeViewModel::class.java]
-        setupShimmerView()
         setupViewModelBinding()
         loader = Utils.generateLoader(requireActivity())
 
@@ -77,6 +77,13 @@ class HomeFragment : Fragment() {
         }
 
         setAllContent()
+
+        binding.root.setOnRefreshListener {
+            viewModel.getAllRecommendations()
+            viewModel.getCaloriesHistory()
+            viewModel.getAllCategories()
+            binding.root.isRefreshing = false
+        }
     }
 
     override fun onDestroyView() {
@@ -85,10 +92,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAllContent() = lifecycleScope.launch {
-
-        //untuk di atas
-        //dikasih greet selamat pagi atau apapun itu.. :V
-        //kalau name nanti get nama User
         val greet = when(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)){
             in 0..11 -> "Selamat pagi"
             in 12..15 -> "Selamat siang"
@@ -119,43 +122,64 @@ class HomeFragment : Fragment() {
         binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, String.format(Locale.getDefault(), "%,.0f", foodCalories.recommendedCalories)), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
-
-    private fun setupShimmerView(){
-
-        binding.shimmerCategory.startShimmer()
-        binding.shimmerFoodList.startShimmer()
-        binding.shimmerUserEat.startShimmer()
-
-    }
-
     private fun setupViewModelBinding() {
         viewModel.recommendations.observe(viewLifecycleOwner) {
-            binding.shimmerFoodList.stopShimmer()
-            binding.shimmerFoodList.visibility = View.GONE
-            Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it) }
+            when (it) {
+                is Result.Loading -> {
+                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(emptyList()) }
+                    Utils.setShimmerVisibility(binding.shimmerFoodList, true)
+                }
+                is Result.Success -> {
+                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it.data) }
+                    Utils.setShimmerVisibility(binding.shimmerFoodList, false)
+                }
+                is Result.Error -> {
+                    Utils.setShimmerVisibility(binding.shimmerFoodList, false)
+                }
+            }
         }
 
         viewModel.categories.observe(viewLifecycleOwner) {
-            binding.shimmerCategory.stopShimmer()
-            binding.shimmerCategory.visibility = View.GONE
-            Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it) }
+            when (it) {
+                is Result.Loading -> {
+                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(emptyList()) }
+                    Utils.setShimmerVisibility(binding.shimmerCategory, true)
+                }
+                is Result.Success -> {
+                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it.data) }
+                    Utils.setShimmerVisibility(binding.shimmerCategory, false)
+                }
+                is Result.Error -> {
+                    Utils.setShimmerVisibility(binding.shimmerCategory, false)
+                }
+            }
         }
 
         viewModel.foodCaloriesHistory.observe(viewLifecycleOwner) {
-            binding.shimmerUserEat.stopShimmer()
-            binding.shimmerUserEat.visibility = View.GONE
-            Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it) }
+            when (it) {
+                is Result.Loading -> {
+                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(emptyList()) }
+                    Utils.setShimmerVisibility(binding.shimmerUserEat, true)
+                }
+                is Result.Success -> {
+                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it.data) }
+                    Utils.setShimmerVisibility(binding.shimmerUserEat, false)
 
-            var totalCalories = 0f
-            it.forEach {
-                totalCalories += it.totalCalories
+                    var totalCalories = 0f
+                    it.data.forEach { fhg ->
+                        totalCalories += fhg.totalCalories
+                    }
+
+                    val foodCalories = AddFoodHistoryViewModel.FoodCalories(
+                        totalCalories,
+                        2000f // TODO: Get from userData
+                    )
+                    setCalories(foodCalories)
+                }
+                is Result.Error -> {
+                    Utils.setShimmerVisibility(binding.shimmerUserEat, false)
+                }
             }
-
-            val foodCalories = AddFoodHistoryViewModel.FoodCalories(
-                totalCalories,
-                2000f // TODO: Get from userData
-            )
-            setCalories(foodCalories)
         }
 
         viewModel.message.observe(viewLifecycleOwner) {
@@ -217,7 +241,7 @@ class HomeFragment : Fragment() {
 
         LazyRow(
             modifier = Modifier
-                .padding(PaddingValues(vertical = 4.dp)),
+                .fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
 

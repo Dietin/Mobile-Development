@@ -24,7 +24,7 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
 
     val userData = MutableLiveData<DataUser>()
 
-    private val _isSuccess = MutableLiveData<Boolean>(false)
+    private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
     fun uploadUserData() = viewModelScope.launch {
@@ -39,10 +39,12 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())
+            _isSuccess.value = false
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
             _message.value = Event(errorResponse.message)
+            _isSuccess.value = false
         } finally {
             _isLoading.value = false
         }

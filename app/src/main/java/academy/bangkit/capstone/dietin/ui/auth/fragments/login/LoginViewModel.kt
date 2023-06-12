@@ -1,7 +1,7 @@
 package academy.bangkit.capstone.dietin.ui.auth.fragments.login
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
-import academy.bangkit.capstone.dietin.data.remote.model.LoginResponse
+import academy.bangkit.capstone.dietin.data.remote.model.LoginInnerResponse
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
 import android.app.Application
@@ -21,8 +21,8 @@ class LoginViewModel(private val application: Application): ViewModel() {
     private val _message = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> = _message
 
-    private val _loginResult = MutableLiveData<LoginResponse>()
-    val loginResult: LiveData<LoginResponse> = _loginResult
+    private val _loginResult = MutableLiveData<LoginInnerResponse>()
+    val loginResult: LiveData<LoginInnerResponse> = _loginResult
 
     private val _loginError = MutableLiveData<ApiErrorResponse>()
     val loginError: LiveData<ApiErrorResponse> = _loginError

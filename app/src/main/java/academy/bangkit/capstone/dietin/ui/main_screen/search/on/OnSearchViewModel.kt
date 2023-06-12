@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.search.on
 
+import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
@@ -17,32 +18,33 @@ import java.io.IOException
 
 class OnSearchViewModel(private val application: Application): ViewModel() {
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
     private val _message = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> = _message
 
-    private val _searchResult = MutableLiveData<List<Recipe>>()
-    val searchResult: LiveData<List<Recipe>> = _searchResult
+    private val _searchResult = MutableLiveData<Result<List<Recipe>>>()
+    val searchResult: LiveData<Result<List<Recipe>>> = _searchResult
 
     fun searchGlobal(query: String) = viewModelScope.launch {
         try {
-            _isLoading.value = true
+            _searchResult.value = Result.Loading
             val token = Utils.getToken(application)
-            _searchResult.value = ApiConfig.getApiService().searchGlobal(
+            _searchResult.value = Result.Success(ApiConfig.getApiService().searchGlobal(
                 token = "Bearer $token",
                 query = query
-            ).data!!
+            ).data)
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())
+            _searchResult.value = Result.Error(e.message.toString())
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
-            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
-            _message.value = Event(errorResponse.message)
-        } finally {
-            _isLoading.value = false
+            if (e.code() == 404) {
+                _searchResult.value = Result.Error("Data tidak ditemukan")
+            } else {
+                val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+                _message.value = Event(errorResponse.message)
+                _searchResult.value = Result.Error(errorResponse.message)
+            }
         }
     }
 }

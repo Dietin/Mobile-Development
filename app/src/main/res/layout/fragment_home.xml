@@ -1,231 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<ScrollView
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="16dp"
-        tools:context=".ui.main_screen.home.HomeFragment">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/home_header"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/common_banner"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            tools:context=".ui.main_screen.home.HomeFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_banner"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_welcome"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/calories_progress"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="16dp"
+                    android:progress="0"
+                    app:indicatorColor="@color/warning"
+                    app:indicatorSize="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_welcome"
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+                    app:trackColor="@color/platinum"
+                    app:trackCornerRadius="5dp"
+                    app:trackThickness="15dp" />
+
+                <TextView
+                    android:id="@+id/cal_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:maxLines="2"
+                    android:text="@string/loading"
+                    app:layout_constraintBottom_toBottomOf="@id/calories_progress"
+                    app:layout_constraintEnd_toEndOf="@id/calories_progress"
+                    app:layout_constraintStart_toStartOf="@id/calories_progress"
+                    app:layout_constraintTop_toTopOf="@id/calories_progress"/>
+
+
+                <TextView
+                    android:id="@+id/tv_calories_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/loading"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/calories_progress"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_user_eat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/cv_user_food"
+                    app:layout_constraintTop_toTopOf="@id/cv_user_food">
+
+                    <include layout="@layout/item_user_eat_placeholder" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/cv_user_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_calories_target"
+                    app:layout_constraintTop_toBottomOf="@id/tv_calories_target"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <Button
+                    android:id="@+id/btn_record_food"
+                    style="@style/DietinButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:padding="4dp"
+                    android:text="@string/hint_record_food"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/cv_user_food" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/tv_welcome"
+                style="@style/DietinTextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/home_welcome"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/calories_progress"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_marginHorizontal="@dimen/common_horizontal_margin"
                 android:layout_marginTop="16dp"
-                android:progress="75"
-                app:indicatorColor="@color/warning"
-                app:indicatorSize="150dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_welcome"
-                app:layout_constraintTop_toBottomOf="@id/tv_welcome"
-                app:trackColor="@color/platinum"
-                app:trackCornerRadius="5dp"
-                app:trackThickness="15dp" />
+                android:text="@string/home_intro" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                app:startIconDrawable="@drawable/ic_search"
+                style="@style/DietinTextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/hint_search_food" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <include layout="@layout/item_category_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"/>
+                        <include layout="@layout/item_category_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"/>
+                        <include layout="@layout/item_category_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"/>
+                        <include layout="@layout/item_category_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/cv_category_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/cal_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:maxLines="2"
-                android:text="@string/loading"
-                app:layout_constraintBottom_toBottomOf="@id/calories_progress"
-                app:layout_constraintEnd_toEndOf="@id/calories_progress"
-                app:layout_constraintStart_toStartOf="@id/calories_progress"
-                app:layout_constraintTop_toTopOf="@id/calories_progress"/>
-
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                style="@style/DietinTextTitle"
+                android:text="@string/hint_recommended" />
 
             <TextView
-                android:id="@+id/tv_calories_target"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/loading"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/calories_progress"
-                app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+                android:layout_marginHorizontal="@dimen/common_horizontal_margin"
+                android:text="@string/hint_info_1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_sub3"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_user_eat"
-                android:layout_width="wrap_content"
+                android:id="@+id/shimmer_food_list"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/cv_user_food"
-                app:layout_constraintStart_toStartOf="@id/cv_user_food"
-                app:layout_constraintTop_toTopOf="@id/cv_user_food">
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
 
-                <include layout="@layout/item_user_eat_placeholder" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <include layout="@layout/item_food_card_1_placeholder"/>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <include layout="@layout/item_food_card_1_placeholder"/>
+
+                </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.compose.ui.platform.ComposeView
-                android:id="@+id/cv_user_food"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@id/tv_calories_target"
-                app:layout_constraintTop_toBottomOf="@id/tv_calories_target"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <Button
-                android:id="@+id/btn_record_food"
-                style="@style/DietinButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:drawableEnd="@drawable/ic_arrow_right"
-                android:padding="4dp"
-                android:text="@string/hint_record_food"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/cv_user_food" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            style="@style/DietinTextTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/common_horizontal_margin"
-            android:layout_marginTop="16dp"
-            android:text="@string/home_intro" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            app:startIconDrawable="@drawable/ic_search"
-            style="@style/DietinTextInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cv_food_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/hint_search_food" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_category_placeholder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"/>
-                <include layout="@layout/item_category_placeholder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"/>
-                <include layout="@layout/item_category_placeholder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"/>
-                <include layout="@layout/item_category_placeholder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"/>
-            </LinearLayout>
+                android:layout_marginVertical="16dp"/>
 
 
+        </LinearLayout>
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
+    </ScrollView>
 
-        <androidx.compose.ui.platform.ComposeView
-            android:id="@+id/cv_category_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-            style="@style/DietinTextTitle"
-            android:text="@string/hint_recommended" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/common_horizontal_margin"
-            android:text="@string/hint_info_1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_sub3"/>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_food_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="@dimen/activity_horizontal_margin">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp">
-
-                <include layout="@layout/item_food_card_1_placeholder"/>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-                <include layout="@layout/item_food_card_1_placeholder"/>
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <androidx.compose.ui.platform.ComposeView
-            android:id="@+id/cv_food_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"/>
-
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

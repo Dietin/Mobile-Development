@@ -54,12 +54,8 @@ class Onboarding5Fragment : Fragment() {
     }
 
     private fun setupViewModelBinding() {
-        var responseNumber = 0
         viewModel.isSuccess.observe(viewLifecycleOwner) {
-            responseNumber++
-            if (it || responseNumber == 2) {
-                setupResponse(it)
-            }
+            setupResponse(it)
         }
     }
 

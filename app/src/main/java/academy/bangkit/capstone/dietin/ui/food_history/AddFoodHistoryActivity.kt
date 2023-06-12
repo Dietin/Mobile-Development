@@ -142,7 +142,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
     }
 
     private fun setCalories(newJumlahPorsi: Float) {
-        binding.tvJumlahPorsi.text = Html.fromHtml("Jumlah Porsi: <b>${String.format(Locale.getDefault(), "%.2f", newJumlahPorsi)}</b>", Html.FROM_HTML_MODE_COMPACT)
+        binding.tvJumlahPorsi.text = Html.fromHtml(getString(R.string.afh_num_portions, String.format(Locale.getDefault(), "%.2f", newJumlahPorsi)), Html.FROM_HTML_MODE_COMPACT)
         jumlahPorsi = newJumlahPorsi
 
         // Set kebutuhan kalori harian
@@ -157,7 +157,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
             binding.cvKaloriBerlebihan.visibility = View.GONE
         }
 
-        binding.tvJumlahKaloriTerpenuhi.text = Html.fromHtml("<b>${String.format(Locale.getDefault(), "%,.0f", currentCalories + (recipe.calories * newJumlahPorsi))}</b> dari <b>${String.format(Locale.getDefault(), "%,.0f", maxCalories)}</b> kalori terpenuhi.", Html.FROM_HTML_MODE_COMPACT)
+        binding.tvJumlahKaloriTerpenuhi.text = Html.fromHtml(getString(R.string.afh_cal_desc, String.format(Locale.getDefault(), "%,.0f", currentCalories + (recipe.calories * newJumlahPorsi)), String.format(Locale.getDefault(), "%,.0f", maxCalories)), Html.FROM_HTML_MODE_COMPACT)
     }
 
     private fun setTanggalMakan(newDate: Calendar) {
