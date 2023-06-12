@@ -23,4 +23,10 @@
         android:name="academy.bangkit.capstone.dietin.ui.main_screen.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="academy.bangkit.capstone.dietin.ui.main_screen.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

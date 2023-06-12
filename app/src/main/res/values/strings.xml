@@ -89,12 +89,15 @@
     <string name="afh_title_daily_calories">Kebutuhan Kalori Harian</string>
     <string name="afh_cal_label_fulfilled">Sudah terpenuhi</string>
     <string name="afh_cal_label_will_fulfill">Akan dipenuhi</string>
-    <string name="afh_cal_desc">&lt;b&gt;%s&lt;/b&gt; dari &lt;b&gt;%s&lt;/b&gt; kalori terpenuhi.</string>
+    <string name="afh_cal_desc">&lt;b&gt;%s&lt;/b&gt; dari &lt;b&gt;%s&lt;/b&gt; Kalori terpenuhi.</string>
     <string name="afh_cal_over_recommended">Tampaknya kebutuhan kalori harianmu sudah tercukupi. Makanan ini akan membuat kamu kegemukan!</string>
     <string name="afh_label_eaten_at">Kapan Dimakan?</string>
     <string name="afh_eat_label_date">Tanggal</string>
     <string name="afh_eat_label_time">Waktu</string>
     <string name="afh_save_meal">Simpan</string>
+    <string name="hint_pick_date">Pilih Tanggal</string>
+    <string name="hint_total_calories">Total Kalori</string>
+    <string name="hint_target_calories">Target Kalori</string>
 
 
 </resources>

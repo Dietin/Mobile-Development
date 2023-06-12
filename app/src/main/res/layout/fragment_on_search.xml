@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.compose.ui.platform.ComposeView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cv_search_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main_screen.search.on.OnSearchFragment"/>
+    tools:context=".ui.main_screen.search.on.OnSearchFragment">
 
-<!--    <androidx.compose.ui.platform.ComposeView-->
-<!--        android:id="@+id/cv_search_result"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/item_food_card_2_placeholder"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/cv_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
 
 
-<!--</androidx.compose.ui.platform.ComposeView>-->
+
+
+
+</LinearLayout>
+
+
+
+

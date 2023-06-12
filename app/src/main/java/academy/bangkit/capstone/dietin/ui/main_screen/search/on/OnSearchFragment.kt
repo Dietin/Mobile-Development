@@ -70,12 +70,15 @@ class OnSearchFragment : Fragment() {
             Utils.setComposableFunction(binding.cvSearchResult) {
                 when (it) {
                     is Result.Loading -> {
+                        Utils.setShimmerVisibility(binding.shimmerSearchResult, true)
                         Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> {
+                        Utils.setShimmerVisibility(binding.shimmerSearchResult, false)
                         SetFoodResult(it.data)
                     }
                     is Result.Error -> {
+                        Utils.setShimmerVisibility(binding.shimmerSearchResult, false)
                         Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                     }
                 }

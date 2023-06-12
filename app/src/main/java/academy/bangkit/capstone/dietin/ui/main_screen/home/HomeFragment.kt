@@ -114,7 +114,7 @@ class HomeFragment : Fragment() {
             in 0f .. 25f -> R.color.danger
             in 25f .. 75f -> R.color.warning
             in 75f .. 100f -> R.color.success
-            else -> R.color.success
+            else -> R.color.overflow
         }
         binding.caloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
 
@@ -219,7 +219,7 @@ class HomeFragment : Fragment() {
                         val timeData = when(item.time) {
                             1 -> Pair("Makan Pagi", R.drawable.ic_eat_time_morning)
                             2 -> Pair("Makan Siang", R.drawable.ic_eat_time_afternoon)
-                            3 -> Pair("Makan Malam", R.drawable.ic_eat_time_afternoon)
+                            3 -> Pair("Makan Malam", R.drawable.ic_eat_time_night)
                             else -> Pair("Cemilan", R.drawable.ic_eat_time_morning)
                         }
                         this.tvEatTitle.text = timeData.first
@@ -228,7 +228,6 @@ class HomeFragment : Fragment() {
 //                            timeData.first
 //                        )
 
-                        // set icon, masih belum selesai untuk icon malam
                         this.ivEatIcon.setImageResource(timeData.second)
                     }
                 )
