@@ -29,6 +29,10 @@ class EditProfileFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        binding.root.backgroundTintMode = PorterDuff.Mode.CLEAR
+//        binding.root.backgroundTintList = ColorStateList.valueOf(resources.getColor(android.R.color.transparent))
+//        binding.root.setBackgroundColor(resources.getColor(android.R.color.transparent))
+
         setupListener()
     }
 

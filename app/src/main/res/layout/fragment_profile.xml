@@ -26,16 +26,16 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DietinButton.IconOnly"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        style="@style/DietinButton.IconOnly"
         app:icon="@drawable/ic_logout"
         app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_profile_detail"
+    <LinearLayout
+        android:id="@+id/ll_profile_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="-36dp"
@@ -238,7 +238,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_profile_main"
@@ -246,10 +246,11 @@
         android:layout_height="150dp"
         android:layout_marginHorizontal="48dp"
         app:cardCornerRadius="32dp"
+        android:elevation="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/card_profile_detail"
-        app:layout_constraintBottom_toTopOf="@id/card_profile_detail"/>
+        app:layout_constraintTop_toTopOf="@id/ll_profile_detail"
+        app:layout_constraintBottom_toTopOf="@id/ll_profile_detail"/>
 
 
     <com.airbnb.lottie.LottieAnimationView

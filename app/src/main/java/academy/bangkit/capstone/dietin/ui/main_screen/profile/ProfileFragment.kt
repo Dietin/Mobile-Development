@@ -106,7 +106,6 @@ class ProfileFragment : Fragment(), BottomSheetHelper {
         binding.tvUserWeight.text = Html.fromHtml(getString(R.string.user_weight, String.format(Locale.getDefault(), "%,.1f", dataUser?.currentWeight)), Html.FROM_HTML_MODE_COMPACT)
         binding.tvUserHeight.text = Html.fromHtml(getString(R.string.user_height, String.format(Locale.getDefault(), "%,.1f", dataUser?.height)), Html.FROM_HTML_MODE_COMPACT)
 
-
     }
 
 

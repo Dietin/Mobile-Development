@@ -228,7 +228,7 @@ class HistoryFragment : Fragment() {
                 ) {
                     Text(
                         text = eatTime,
-                        fontSize = resources.getDimension(R.dimen.text_size_sub4).sp,
+                        fontSize = 10.sp,
                         color = colorResource(id = R.color.white)
                     )
 
@@ -236,7 +236,7 @@ class HistoryFragment : Fragment() {
 
                     Text(
                         text = "${percentFood}%",
-                        fontSize = resources.getDimension(R.dimen.text_size_sub5).sp,
+                        fontSize = 8.sp,
                         color = colorResource(id = R.color.white),
                         modifier = Modifier
                             .padding(end = 16.dp)
@@ -245,7 +245,7 @@ class HistoryFragment : Fragment() {
 
                     Text(
                         text = "${totalCalories} Kal",
-                        fontSize = resources.getDimension(R.dimen.text_size_sub5).sp,
+                        fontSize = 8.sp,
                         fontWeight = FontWeight.Bold,
                         color = colorResource(id = R.color.satin_gold),
                         modifier = Modifier.align(Alignment.CenterVertically)
