@@ -186,9 +186,9 @@
     <string name="attribute_age">Usia</string>
     <string name="user_age">&lt;b&gt;%d&lt;/b&gt; Tahun</string>
     <string name="attribute_weight">Berat Badan</string>
-    <string name="user_weight">&lt;b&gt;%d&lt;/b&gt; Kg</string>
+    <string name="user_weight">&lt;b&gt;%s&lt;/b&gt; Kg</string>
     <string name="attribute_height">Tinggi Badan</string>
-    <string name="user_height">&lt;b&gt;%d&lt;/b&gt; Cm</string>
+    <string name="user_height">&lt;b&gt;%s&lt;/b&gt; Cm</string>
 
 
     <!-- RecipeSearchActivity -->

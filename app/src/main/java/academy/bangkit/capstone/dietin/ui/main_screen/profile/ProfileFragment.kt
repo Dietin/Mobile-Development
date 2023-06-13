@@ -13,6 +13,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -35,32 +38,39 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun setAllContent(){
+    private fun setAllContent() = lifecycleScope.launch {
 
-        binding.tvUserName.text = "Vincent"
-        binding.tvUserEmail.text = "siapanih@gmail.com"
+        val user = viewModel.getUser()
+        val dataUser = viewModel.getDataUser()
 
-        binding.tvUserAge.text = Html.fromHtml(getString(R.string.user_age, 30))
+        binding.tvUserName.text = user?.name
+        binding.tvUserEmail.text = user?.email
 
-        val gender = "Pria"
+        binding.tvUserAge.text = Html.fromHtml(getString(R.string.user_age, dataUser?.age), Html.FROM_HTML_MODE_COMPACT)
+
+        val gender = dataUser?.gender
+        // get string array from resources
+        val genders = resources.getStringArray(R.array.genders)
         when(gender){
-            "Pria" -> {
+            // gender di db: 1 = pria, 0 = wanita
+            // genderdi dropdown: 0 = pria, 1 = wanita
+            1 -> {
                 binding.tvUserGender.apply {
-                    text = gender
+                    text = genders[0]
                     setCompoundDrawables(ResourcesCompat.getDrawable(resources, R.drawable.ic_male_32, null), null, null, null)
                 }
             }
 
-            "Wanita" -> {
+            0 -> {
                 binding.tvUserGender.apply {
-                    text = gender
+                    text = genders[1]
                     setCompoundDrawables(ResourcesCompat.getDrawable(resources, R.drawable.ic_female_32, null), null, null, null)
                 }
             }
         }
 
-        binding.tvUserWeight.text = Html.fromHtml(getString(R.string.user_weight, 70))
-        binding.tvUserHeight.text = Html.fromHtml(getString(R.string.user_height, 170))
+        binding.tvUserWeight.text = Html.fromHtml(getString(R.string.user_weight, String.format(Locale.getDefault(), "%,.1f", dataUser?.currentWeight)), Html.FROM_HTML_MODE_COMPACT)
+        binding.tvUserHeight.text = Html.fromHtml(getString(R.string.user_height, String.format(Locale.getDefault(), "%,.1f", dataUser?.height)), Html.FROM_HTML_MODE_COMPACT)
 
 
     }

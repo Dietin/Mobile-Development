@@ -30,6 +30,14 @@ interface ApiService {
         @Body dataUser: DataUser
     ): ApiResponse<DataUser>
 
+    @PUT("user")
+    @FormUrlEncoded
+    suspend fun updateUser(
+        @Header("Authorization") token: String,
+        @Field("name") name: String,
+        @Field("email") email: String
+    ): ApiResponse<User>
+
     @GET("recipe")
     suspend fun getRecommendations(
         @Header("Authorization") token: String,

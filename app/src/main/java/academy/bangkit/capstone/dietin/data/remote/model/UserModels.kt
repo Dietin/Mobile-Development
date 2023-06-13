@@ -9,6 +9,8 @@ data class User(
     val name: String,
     @SerializedName("email")
     val email: String,
+    @SerializedName("created_at")
+    val createdAt: String,
 )
 
 data class DataUser(
