@@ -122,13 +122,22 @@ class Onboarding4Fragment : Fragment() {
         binding.tilBerat.editText?.setText(if (activity.userData.weight == 0f) {
             ""
         } else {
-            activity.userData.weight.toString()
+            activity.userData.currentWeight.toString()
         })
         binding.tilUmur.editText?.setText(if (activity.userData.age == 0) {
             ""
         } else {
             activity.userData.age.toString()
         })
+        binding.tilBeratHarapan.editText?.setText(if (activity.userData.weight == 0f) {
+            ""
+        } else {
+            activity.userData.weight.toString()
+        })
+        if (activity.userData.goal == 2) {
+            binding.tvBeratHarapanDesc.visibility = View.GONE
+            binding.tilBeratHarapan.visibility = View.GONE
+        }
         updateButtonContinue()
     }
 

@@ -228,15 +228,15 @@ class HistoryFragment : Fragment() {
                 ) {
                     Text(
                         text = eatTime,
-                        fontSize = 10.sp,
+                        fontSize = 14.sp,
                         color = colorResource(id = R.color.white)
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = "${percentFood}%",
-                        fontSize = 8.sp,
+                        text = "${String.format(Locale.getDefault(), "%,.1f", percentFood)}%",
+                        fontSize = 12.sp,
                         color = colorResource(id = R.color.white),
                         modifier = Modifier
                             .padding(end = 16.dp)
@@ -244,8 +244,8 @@ class HistoryFragment : Fragment() {
                     )
 
                     Text(
-                        text = "${totalCalories} Kal",
-                        fontSize = 8.sp,
+                        text = "$totalCalories kal",
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = colorResource(id = R.color.satin_gold),
                         modifier = Modifier.align(Alignment.CenterVertically)
@@ -253,17 +253,6 @@ class HistoryFragment : Fragment() {
 
                 }
 
-
-                //disini nanti pake foreach aja Pak...
-                //di parameter belum ku tambahkan arraylistnya..
-                //karna saya ga tau responsenya.. :V
-                //JANGAN PAKE LAZY COLUMN YA PAK.. KARENA KALO PAKE LAZY COLUMN
-                //NANTI TERIAK2 DIA.. :v
-                /*
-                    dataHistory.foreach{
-                        FoodList(foodName = it.foodName, foodCalories = it.foodCalories)
-                    }
-                */
                 dataHistory.forEach {
                     FoodList(
                         foodName = it.recipe?.name ?: it.recipeId,

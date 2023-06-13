@@ -1,6 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
-import academy.bangkit.capstone.dietin.MainActivity
+import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
@@ -62,9 +62,8 @@ class HomeFragment : Fragment() {
         setupViewModelBinding()
         loader = Utils.generateLoader(requireActivity())
 
-        binding.btnRecordFood.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+        binding.btnViewDiary.setOnClickListener {
+            (activity as MainScreenActivity).bottomNavigation.selectedItemId = R.id.navigation_history
         }
 
         return binding.root

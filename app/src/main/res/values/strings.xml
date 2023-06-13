@@ -80,7 +80,7 @@
     <string name="food_cal">%s kal</string>
     <string name="home_percent_calories">&lt;b&gt;%.0f%%&lt;/b&gt;&lt;br&gt;Terpenuhi</string>
 
-    <string name="hint_record_food">Catat Makananmu</string>
+    <string name="hint_view_diary">Lihat Diary</string>
     <string name="hint_search_food">Cari Makanan atau Resep</string>
     <string name="hint_recommended">Rekomendasi Untukmu</string>
     <string name="hint_did_you_know">Tahukah kamu…?</string>
@@ -101,6 +101,13 @@
     <string name="hint_latest_search">Pencarian Terbaru</string>
     <string name="hint_delete_all">Hapus semua</string>
     <string name="title_add_food">Tambah Makanan</string>
+
+    <!-- Update Profile Fragment -->
+    <string name="title_change_profile">Mengubah Profil</string>
+    <string name="hint_change_profile">Ubah Profil</string>
+    <string name="successfully_updated">Berhasil memperbarui profil</string>
+    <string name="successfully_logout">Berhasil keluar dari akun</string>
+    <string name="session_expired">Sesi telah berakhir, silakan masuk kembali</string>
 
     <!-- Add Food History activity -->
     <string name="afh_food_img">Gambar makanan</string>
@@ -134,6 +141,8 @@
     <string name="fd_btn_add">Tambah ke History</string>
 
     <!-- Onboarding pages -->
+    <string name="ob_btn_next">Lanjut</string>
+    <string name="ob_btn_loading">Memuat data…</string>
     <string name="ob1_title">Hidup sehatmu dimulai di sini.</string>
     <string name="ob1_desc">Diet!n akan membantumu mencapai gaya hidup sehat yang kamu inginkan.</string>
     <string name="ob1_user_data_request">Sebelum memulai, Diet!n perlu beberapa\ndata dirimu dulu agar lebih mengenalmu!</string>
@@ -173,6 +182,8 @@
     <string name="ob4_error_target_weight_low">Berat harapan harus lebih besar dari berat sekarang</string>
     <string name="ob5_title">Selamat datang!</string>
     <string name="ob5_desc">Hidup sehatmu sudah dimulai saat ini!</string>
+    <string name="ob5_title_update">Memperbarui data…</string>
+    <string name="ob5_desc_update">Data dirimu sedang diperbarui…</string>
     <string name="ob5_btn_uploading">Mengunggah data…</string>
     <string name="ob5_btn_uploaded">Lanjutkan</string>
     <string name="ob5_btn_upload_failed">Ulangi</string>
@@ -180,7 +191,7 @@
     <!-- Favorite Fragment -->
     <string name="ff_title">Hidangan Favorit</string>
     <string name="ff_desc">Hidangan yang kamu sukai, disajikan di satu tempat!</string>
-    <string name="hint_update_profile">Perbaharui Profil</string>
+    <string name="hint_update_profile">Perbarui Profil</string>
 
 
     <string name="attribute_age">Usia</string>
@@ -189,11 +200,8 @@
     <string name="user_weight">&lt;b&gt;%s&lt;/b&gt; Kg</string>
     <string name="attribute_height">Tinggi Badan</string>
     <string name="user_height">&lt;b&gt;%s&lt;/b&gt; Cm</string>
-    <string name="user_member_since">Member Since : %s</string>
-
+    <string name="user_member_since">Bergabung sejak &lt;b&gt;%s&lt;/b&gt;</string>
 
     <!-- RecipeSearchActivity -->
     <string name="rs_all_category">Semua</string>
-    <string name="title_change_profile">Mengubah Profil</string>
-    <string name="hint_change_profile">Ubah Profil</string>
 </resources>

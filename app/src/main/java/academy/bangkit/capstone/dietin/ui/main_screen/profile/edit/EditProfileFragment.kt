@@ -15,6 +15,9 @@ class EditProfileFragment : BottomSheetDialogFragment() {
 
     private var bottomSheetListener : BottomSheetHelper? = null
 
+    private var name = ""
+    private var email = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,10 +32,11 @@ class EditProfileFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.root.backgroundTintMode = PorterDuff.Mode.CLEAR
-//        binding.root.backgroundTintList = ColorStateList.valueOf(resources.getColor(android.R.color.transparent))
-//        binding.root.setBackgroundColor(resources.getColor(android.R.color.transparent))
+        name = arguments?.getString(NAME_FIELD).toString()
+        email = arguments?.getString(EMAIL_FIELD).toString()
 
+        binding.inputName.editText?.setText(name)
+        binding.inputEmail.editText?.setText(email)
         setupListener()
     }
 
@@ -45,7 +49,10 @@ class EditProfileFragment : BottomSheetDialogFragment() {
 
     private fun setupListener(){
         binding.btnChangeProfile.setOnClickListener {
-            bottomSheetListener?.dataChange()
+            bottomSheetListener?.dataChange(
+                name = binding.inputName.editText?.text.toString(),
+                email = binding.inputEmail.editText?.text.toString()
+            )
             this.dismiss()
         }
     }
@@ -56,6 +63,8 @@ class EditProfileFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "EditProfileFragment"
+        const val NAME_FIELD = "name"
+        const val EMAIL_FIELD = "email"
     }
 
 }

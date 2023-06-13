@@ -24,7 +24,7 @@
             android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lanjut"
+            android:text="@string/ob_btn_next"
             android:backgroundTint="@color/gunmetal"
             android:textStyle="bold"
             android:textColor="@color/white"

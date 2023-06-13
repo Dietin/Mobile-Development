@@ -78,4 +78,24 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
             _isLoading.value = false
         }
     }
+
+    fun getUserData() = viewModelScope.launch {
+        try {
+            _isLoading.value = true
+            val token = Utils.getToken(application)
+            val data = ApiConfig.getApiService().getDataUser(
+                token = "Bearer $token"
+            ).data
+            userData.value = data
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+        } finally {
+            _isLoading.value = false
+        }
+    }
 }

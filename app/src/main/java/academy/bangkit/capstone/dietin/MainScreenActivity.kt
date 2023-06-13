@@ -7,10 +7,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainScreenBinding
+
+    lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,8 @@ class MainScreenActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         binding.navView.setupWithNavController(navController)
+
+        bottomNavigation = binding.navView
 
         binding.fabSearch.setOnClickListener {
             val intent = Intent(this, RecipeSearchActivity::class.java)

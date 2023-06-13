@@ -40,13 +40,22 @@ class Onboarding5Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup title & text
+        if (activity.isIntentUpdate) {
+            binding.tvTitle.text = getString(R.string.ob5_title_update)
+            binding.tvDesc.text = getString(R.string.ob5_desc_update)
+        }
+
         setBtnGoToHome(false, getString(R.string.ob5_btn_uploading))
 
         binding.btnGoToHome.setOnClickListener {
             if (isUploadSuccess) {
-                // Update preferences
-                val intent = Intent(activity, MainScreenActivity::class.java)
-                startActivity(intent)
+                if (activity.isIntentUpdate) {
+                    activity.finish()
+                } else {
+                    val intent = Intent(activity, MainScreenActivity::class.java)
+                    startActivity(intent)
+                }
             } else {
                 activity.uploadUserData()
                 setBtnGoToHome(false, getString(R.string.ob5_btn_uploading))

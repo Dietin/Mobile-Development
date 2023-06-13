@@ -36,14 +36,14 @@
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/calories_progress"
+                    style="@style/DietinProgressBar.Circular"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginTop="16dp"
                     android:progress="0"
-                    style="@style/DietinProgressBar.Circular"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_welcome"
-                    app:layout_constraintTop_toBottomOf="@id/tv_welcome"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
 
                 <TextView
                     android:id="@+id/cal_percent"
@@ -87,23 +87,23 @@
                     android:id="@+id/cv_user_food"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_calories_target"
-                    app:layout_constraintTop_toBottomOf="@id/tv_calories_target"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_calories_target" />
 
                 <Button
-                    android:id="@+id/btn_record_food"
+                    android:id="@+id/btn_view_diary"
                     style="@style/DietinButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:drawableEnd="@drawable/ic_arrow_right"
-                    android:padding="4dp"
-                    android:text="@string/hint_record_food"
+                    android:text="@string/hint_view_diary"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/cv_user_food" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

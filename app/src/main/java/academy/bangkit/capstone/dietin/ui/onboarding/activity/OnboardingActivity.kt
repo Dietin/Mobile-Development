@@ -11,6 +11,7 @@ import academy.bangkit.capstone.dietin.ui.onboarding.fragments.page5.Onboarding5
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,7 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var viewModel: OnboardingViewModel
     private lateinit var loader: AlertDialog
 
-    private val pages = listOf(
+    private var pages = listOf(
         Onboarding1Fragment(),
         Onboarding2Fragment(),
         Onboarding3Fragment(),
@@ -36,6 +37,8 @@ class OnboardingActivity : AppCompatActivity() {
     private var isFinishedSetup = false
 
     lateinit var userData: DataUser
+
+    var isIntentUpdate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,37 +57,56 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun setupViewModelBinding() {
-//        viewModel.isLoading.observe(this) {
-//            if (it) {
-//                loader.show()
-//            } else {
-//                loader.dismiss()
-//            }
-//        }
-
         viewModel.message.observe(this) {
             it.getContentIfNotHandled()?.let { msg ->
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
             }
         }
 
-        lifecycleScope.launch {
-            val user = Utils.getUser(this@OnboardingActivity)
-            viewModel.userData.value = DataUser(
-                id = 0,
-                userId = user?.id ?: 0,
-                age = 0,
-                weight = 0f,
-                height = 0f,
-                bmr = 0f,
-                activityLevel = 0f,
-                gender = -1, // 0 laki2, 1 perempuan
-                idealCalories = 0f,
-                goal = 0,
-                currentWeight = 0f,
-                user = user
-            )
-            userData = viewModel.userData.value!!
+        isIntentUpdate = intent.getBooleanExtra(EXTRA_IS_UPDATE, false)
+        if (isIntentUpdate) {
+            binding.btnContinue.visibility = View.INVISIBLE
+            binding.btnContinue.text = getString(R.string.ob_btn_loading)
+            viewModel.getUserData()
+
+            viewModel.userData.observe(this) {
+                binding.btnContinue.visibility = View.VISIBLE
+                binding.btnContinue.text = getString(R.string.ob_btn_next)
+                viewModel.userData.removeObservers(this)
+                userData = it
+
+                // Balikkan jenis kelamin
+                userData.gender = if (userData.gender == 0) 1 else 0
+
+                // Set activity level
+                userData.activityLevel = when(userData.activityLevel) {
+                    1.2f -> 1f
+                    1.3f -> 2f
+                    1.5f -> 3f
+                    1.7f -> 4f
+                    1.9f -> 5f
+                    else -> 0f
+                }
+            }
+        } else {
+            lifecycleScope.launch {
+                val user = Utils.getUser(this@OnboardingActivity)
+                viewModel.userData.value = DataUser(
+                    id = 0,
+                    userId = user?.id ?: 0,
+                    age = 0,
+                    weight = 0f,
+                    height = 0f,
+                    bmr = 0f,
+                    activityLevel = 0f,
+                    gender = -1, // 0 laki2, 1 perempuan
+                    idealCalories = 0f,
+                    goal = 0,
+                    currentWeight = 0f,
+                    user = user
+                )
+                userData = viewModel.userData.value!!
+            }
         }
     }
 
@@ -168,5 +190,9 @@ class OnboardingActivity : AppCompatActivity() {
         } else {
             toPrevPage()
         }
+    }
+
+    companion object {
+        const val EXTRA_IS_UPDATE = "extra_is_update"
     }
 }

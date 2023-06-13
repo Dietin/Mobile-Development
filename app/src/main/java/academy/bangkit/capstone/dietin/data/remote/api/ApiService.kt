@@ -30,6 +30,11 @@ interface ApiService {
         @Body dataUser: DataUser
     ): ApiResponse<DataUser>
 
+    @GET("dataUser")
+    suspend fun getDataUser(
+        @Header("Authorization") token: String
+    ): ApiResponse<DataUser>
+
     @PUT("user")
     @FormUrlEncoded
     suspend fun updateUser(
