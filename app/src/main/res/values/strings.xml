@@ -189,8 +189,11 @@
     <string name="user_weight">&lt;b&gt;%s&lt;/b&gt; Kg</string>
     <string name="attribute_height">Tinggi Badan</string>
     <string name="user_height">&lt;b&gt;%s&lt;/b&gt; Cm</string>
+    <string name="user_member_since">Member Since : %s</string>
 
 
     <!-- RecipeSearchActivity -->
     <string name="rs_all_category">Semua</string>
+    <string name="title_change_profile">Mengubah Profil</string>
+    <string name="hint_change_profile">Ubah Profil</string>
 </resources>

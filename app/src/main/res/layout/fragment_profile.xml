@@ -21,13 +21,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/DietinButton.IconOnly"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:icon="@drawable/ic_logout"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_profile_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="-36dp"
         android:background="@drawable/banner_bottom"
-        app:cardBackgroundColor="@color/platinum"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,15 +50,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="110dp">
+            android:paddingTop="110dp"
+            android:paddingBottom="12dp">
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_user_age"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_width="170dp"
+                android:layout_height="80dp"
                 app:cardCornerRadius="16dp"
+                android:elevation="2dp"
                 app:layout_constraintEnd_toStartOf="@+id/cv_user_gender"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +70,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="8dp">
 
 
                     <TextView
@@ -75,7 +89,7 @@
                         android:id="@+id/tv_user_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="36dp"
                         android:text="@string/user_age"
                         android:textSize="@dimen/text_size_sub1" />
 
@@ -84,13 +98,12 @@
 
             </androidx.cardview.widget.CardView>
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_user_gender"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_width="170dp"
+                android:layout_height="80dp"
                 app:cardCornerRadius="16dp"
+                android:elevation="2dp"
                 app:layout_constraintBottom_toBottomOf="@id/cv_user_age"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -102,7 +115,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="8dp">
 
 
                     <TextView
@@ -121,7 +134,7 @@
                         android:id="@+id/tv_user_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="36dp"
                         android:textSize="@dimen/text_size_sub1"
                         tools:text="Pria" />
 
@@ -132,14 +145,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_user_weight"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="2dp"
                 app:cardCornerRadius="16dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cv_user_height"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cv_user_age">
 
                 <LinearLayout
@@ -147,7 +162,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="8dp">
 
 
                     <TextView
@@ -166,7 +181,7 @@
                         android:id="@+id/tv_user_weight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="36dp"
                         android:text="@string/user_weight"
                         android:textSize="@dimen/text_size_sub1" />
 
@@ -177,8 +192,9 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_user_height"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:layout_height="80dp"
+                android:elevation="2dp"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/cv_user_weight"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +207,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="8dp">
 
 
                     <TextView
@@ -210,7 +226,7 @@
                         android:id="@+id/tv_user_height"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="36dp"
                         android:text="@string/user_height"
                         android:textSize="@dimen/text_size_sub1" />
 
@@ -224,12 +240,10 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_profile_main"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:layout_marginHorizontal="48dp"
         app:cardCornerRadius="32dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -237,18 +251,6 @@
         app:layout_constraintTop_toTopOf="@id/card_profile_detail"
         app:layout_constraintBottom_toTopOf="@id/card_profile_detail"/>
 
-    <ImageView
-        android:id="@+id/img_profile"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        android:background="@drawable/banner_all_rounded"
-        android:src="@drawable/ic_person"
-        app:layout_constraintStart_toStartOf="@id/card_profile_main"
-        app:layout_constraintEnd_toEndOf="@id/card_profile_main"
-        app:layout_constraintTop_toTopOf="@id/card_profile_main"
-        app:layout_constraintBottom_toTopOf="@id/card_profile_main"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_user_profile"
@@ -271,27 +273,41 @@
         android:layout_marginTop="4dp"
         style="@style/DietinTextTitle"
         tools:text="Nama Saya"
-        app:layout_constraintStart_toStartOf="@id/img_profile"
-        app:layout_constraintEnd_toEndOf="@id/img_profile"
-        app:layout_constraintTop_toBottomOf="@id/img_profile"/>
+        app:layout_constraintStart_toStartOf="@id/lottie_user_profile"
+        app:layout_constraintEnd_toEndOf="@id/lottie_user_profile"
+        app:layout_constraintTop_toBottomOf="@id/lottie_user_profile"/>
 
     <TextView
         android:id="@+id/tv_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_sub2"
         tools:text="siapanih@gmail.com"
+        android:layout_marginTop="2dp"
         app:layout_constraintTop_toBottomOf="@id/tv_user_name"
         app:layout_constraintStart_toStartOf="@id/tv_user_name"
         app:layout_constraintEnd_toEndOf="@id/tv_user_name"/>
+
+    <TextView
+        android:id="@+id/tv_user_member_since"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_member_since"
+        android:textSize="@dimen/text_size_sub3"
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_email"
+        app:layout_constraintStart_toStartOf="@id/tv_user_email"
+        app:layout_constraintEnd_toEndOf="@id/tv_user_email" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_update_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hint_update_profile"
-        android:background="@color/jet_calmer"
         android:textColor="@color/white"
-        style="@style/DietinButton"
+        app:icon="@drawable/ic_edit"
+        app:cornerRadius="20dp"
         app:layout_constraintStart_toStartOf="@id/card_profile_main"
         app:layout_constraintEnd_toEndOf="@id/card_profile_main"
         app:layout_constraintTop_toBottomOf="@id/card_profile_main"

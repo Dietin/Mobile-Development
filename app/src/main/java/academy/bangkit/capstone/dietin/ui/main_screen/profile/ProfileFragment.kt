@@ -2,6 +2,8 @@ package academy.bangkit.capstone.dietin.ui.main_screen.profile
 
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentProfileBinding
+import academy.bangkit.capstone.dietin.di.BottomSheetHelper
+import academy.bangkit.capstone.dietin.ui.main_screen.profile.edit.EditProfileFragment
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.os.Bundle
@@ -9,6 +11,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -17,13 +20,15 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), BottomSheetHelper {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var loader: AlertDialog
+
+    private var editProfileFragment : EditProfileFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +37,38 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[ProfileViewModel::class.java]
+
         setAllContent()
         loader = Utils.generateLoader(requireActivity())
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        editProfileFragment = EditProfileFragment()
+        editProfileFragment!!.setBottomSheetListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun setupListener(){
+
+        binding.btnUpdateProfile.setOnClickListener {
+            editProfileFragment!!.show(parentFragmentManager, EditProfileFragment.TAG)
+        }
+
+        binding.btnLogout.setOnClickListener {
+
+        }
     }
 
 
@@ -76,10 +110,10 @@ class ProfileFragment : Fragment() {
     }
 
 
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun dataChange() {
+        Toast.makeText(requireContext(), "Data changed", Toast.LENGTH_SHORT).show()
     }
+
+
+
 }
