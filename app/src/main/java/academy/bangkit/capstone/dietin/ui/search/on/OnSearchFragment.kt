@@ -141,7 +141,6 @@ class OnSearchFragment : Fragment() {
                         val intent = Intent(requireContext(), FoodDetailActivity::class.java)
                         intent.putExtra(FoodDetailActivity.EXTRA_RECIPE_ID, item.id)
                         startActivity(intent)
-                        requireActivity().finish()
                     }
                 }
             }

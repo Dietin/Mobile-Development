@@ -53,7 +53,7 @@ class Onboarding2Fragment : Fragment() {
     }
 
     private fun setupRadioCard(linearLayout: LinearLayout) {
-        val selected = activity.userData.goal!!
+        val selected = activity.userData.goal
         for (i in 0 until linearLayout.childCount) {
             val card = linearLayout.getChildAt(i) as MaterialCardView
             card.setOnClickListener {

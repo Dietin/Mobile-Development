@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Selamat datang!"
+        android:text="@string/ob5_title"
         android:textAlignment="center"
         android:textColor="@color/gunmetal"
         android:textSize="24sp"
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Hidup sehatmu sudah dimulai saat ini!"
+        android:text="@string/ob5_desc"
         android:textAlignment="center"
         android:textColor="@color/gunmetal"
         android:textSize="16sp" />
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gunmetal"
-        android:text="Menyimpan data..."
+        android:text="@string/ob5_btn_uploading"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

@@ -103,7 +103,7 @@ class BeforeSearchFragment : Fragment() {
                 is Result.Success -> {
                     if (it.data.isNotEmpty()) {
                         Utils.setComposableFunction(binding.cvLatestSearch) { SetSearchHistory(it.data) }
-                        binding.llNoDataFavourite.visibility = View.GONE
+                        binding.llNoDataSearchHistory.visibility = View.GONE
                     } else {
                         binding.llNoDataSearchHistory.visibility = View.VISIBLE
                     }
@@ -150,7 +150,6 @@ class BeforeSearchFragment : Fragment() {
                             val intent = Intent(requireContext(), FoodDetailActivity::class.java)
                             intent.putExtra(FoodDetailActivity.EXTRA_RECIPE_ID, recipe?.id)
                             startActivity(intent)
-                            requireActivity().finish() // Tutup search activity
                         }
 
                         this.tvFoodName.text = recipe?.name
@@ -190,7 +189,6 @@ class BeforeSearchFragment : Fragment() {
                             val intent = Intent(requireContext(), FoodDetailActivity::class.java)
                             intent.putExtra(FoodDetailActivity.EXTRA_RECIPE_ID, recipe?.id)
                             startActivity(intent)
-                            requireActivity().finish() // Tutup search activity
                         }
 
                         this.tvFoodName.text = recipe?.name

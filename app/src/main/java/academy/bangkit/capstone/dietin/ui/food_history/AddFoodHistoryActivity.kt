@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.food_history
 
+import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
@@ -8,6 +9,7 @@ import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.View
@@ -228,7 +230,9 @@ class AddFoodHistoryActivity : AppCompatActivity() {
 
         viewModel.isSuccess.observe(this) {
             if (it) {
-                finish()
+                val intent = Intent(this, MainScreenActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
         }
 

@@ -120,9 +120,9 @@ class FoodDetailActivity : AppCompatActivity() {
         }
 
         binding.tvFoodCalories.text = String.format(Locale.getDefault(), "%.0f", recipe.calories)
-        binding.tvFoodCarbs.text = "${String.format(Locale.getDefault(), "%.2f", recipe.carbs)}g"
-        binding.tvFoodFats.text = "${String.format(Locale.getDefault(), "%.2f", recipe.fats)}g"
-        binding.tvFoodProteins.text = "${String.format(Locale.getDefault(), "%.2f", recipe.proteins)}g"
+        binding.tvFoodCarbs.text = getString(R.string.fd_nut_unit_grams, String.format(Locale.getDefault(), "%.1f", recipe.carbs))
+        binding.tvFoodFats.text = getString(R.string.fd_nut_unit_grams, String.format(Locale.getDefault(), "%.1f", recipe.fats))
+        binding.tvFoodProteins.text = getString(R.string.fd_nut_unit_grams, String.format(Locale.getDefault(), "%.1f", recipe.proteins))
 
         Utils.setComposableFunction(binding.cvIngredients) { SetListIngredients(recipe.ingredients!!) }
         Utils.setComposableFunction(binding.cvSteps) { SetListSteps(recipe.steps!!) }

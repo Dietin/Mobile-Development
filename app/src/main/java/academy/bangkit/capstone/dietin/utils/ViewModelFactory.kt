@@ -5,6 +5,7 @@ import academy.bangkit.capstone.dietin.ui.auth.fragments.login.LoginViewModel
 import academy.bangkit.capstone.dietin.ui.auth.fragments.register.RegisterViewModel
 import academy.bangkit.capstone.dietin.ui.food_detail.FoodDetailViewModel
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
+import academy.bangkit.capstone.dietin.ui.main_screen.favourite.FavouriteViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.profile.ProfileViewModel
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
@@ -30,6 +31,7 @@ class ViewModelFactory private constructor(private val application: Application)
             modelClass.isAssignableFrom(BeforeSearchViewModel::class.java) -> BeforeSearchViewModel(application) as T
             modelClass.isAssignableFrom(RecipeSearchViewModel::class.java) -> RecipeSearchViewModel(application) as T
             modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> FoodDetailViewModel(application) as T
+            modelClass.isAssignableFrom(FavouriteViewModel::class.java) -> FavouriteViewModel(application) as T
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }

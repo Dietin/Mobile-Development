@@ -73,14 +73,14 @@ class Onboarding4Fragment : Fragment() {
             activity.userData.age = umur
 
             if (umur < 17 && umur != 0) {
-                binding.tilUmur.error = "Umur minimal 17 tahun"
+                binding.tilUmur.error = getString(R.string.ob4_error_age)
             } else {
                 binding.tilUmur.error = null
             }
             updateButtonContinue()
         }
 
-        binding.tilBeratHarapan.editText?.doOnTextChanged { text, start, before, count ->
+        binding.tilBeratHarapan.editText?.doOnTextChanged { text, _, _, _ ->
             val beratHarapan = try {
                 text.toString().toFloat()
             } catch (e: Exception) {
@@ -88,10 +88,10 @@ class Onboarding4Fragment : Fragment() {
             }
             when {
                 activity.userData.goal == 1 && beratHarapan > activity.userData.currentWeight -> {
-                    binding.tilBeratHarapan.error = "Berat harapan harus lebih kecil dari berat sekarang"
+                    binding.tilBeratHarapan.error = getString(R.string.ob4_error_target_weight_high)
                 }
                 activity.userData.goal == 3 && beratHarapan < activity.userData.currentWeight -> {
-                    binding.tilBeratHarapan.error = "Berat harapan harus lebih besar dari berat sekarang"
+                    binding.tilBeratHarapan.error = getString(R.string.ob4_error_target_weight_low)
                 }
                 else -> {
                     binding.tilBeratHarapan.error = null

@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hidup sehatmu dimulai di sini."
+        android:text="@string/ob1_title"
         android:textSize="24sp"
         android:textColor="@color/gunmetal"
         android:textAlignment="center"
@@ -31,16 +31,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Diet!n akan membantumu mencapai gaya hidup sehat yang kamu inginkan."
+        android:text="@string/ob1_desc"
         android:textSize="16sp"
         android:textColor="@color/gunmetal"
         android:textAlignment="center"
         android:layout_marginBottom="16dp" />
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sebelum memulai, Diet!n perlu beberapa data dirimu dulu agar lebih mengenalmu!"
+        android:text="@string/ob1_user_data_request"
         android:textColor="@color/gunmetal"
         android:textAlignment="center"
         android:layout_marginBottom="16dp" />

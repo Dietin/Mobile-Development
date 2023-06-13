@@ -56,6 +56,11 @@ class FoodDetailViewModel(private val application: Application): ViewModel() {
                 token = "Bearer $token",
                 id = recipeId
             ).data!!
+
+            // sort steps by step number
+            val stepsSorted = _recipe.value?.steps?.sortedBy { it.stepNo }
+            _recipe.value?.steps = stepsSorted
+
             addToSearchHistory()
         } catch (e: IOException) {
             // No Internet Connection

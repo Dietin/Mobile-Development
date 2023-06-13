@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Data Diri"
+            android:text="@string/ob4_title"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Langkah terakhir! Kami perlu data dirimu agar semua perhitungan bisa dilakukan dengan benar!" />
+            android:text="@string/ob4_desc" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_gender"
@@ -49,13 +49,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Tinggi dan berat diperlukan untuk bisa menghitung kalori dengan benar. Jika ada perubahan, bisa diedit di menu profil!" />
+            android:text="@string/ob4_desc_weight_height" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilTinggi"
@@ -69,7 +70,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Tinggi"
+                    android:hint="@string/ob4_label_height"
                     android:inputType="number|numberDecimal"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +87,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Berat"
+                    android:hint="@string/ob4_label_weight"
                     android:inputType="number|numberDecimal"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Umur diperlukan juga untuk bisa menghitung kalori dengan benar." />
+            android:text="@string/ob4_desc_age" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUmur"
@@ -109,7 +110,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Umur"
+                android:hint="@string/ob4_label_age"
                 android:inputType="number"
                 android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Berapa berat badan yang kamu harapkan dengan menggunakan aplikasi ini?" />
+            android:text="@string/ob4_desc_target_weight" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBeratHarapan"
@@ -130,7 +131,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Berat Badan Harapan"
+                android:hint="@string/ob4_label_target_weight"
                 android:inputType="number|numberDecimal"
                 android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -151,13 +152,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Setelah kamu klik lanjut, data yang diinput akan disimpan."
+                    android:text="@string/ob4_warning_title"
                     android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Silakan periksa kembali semua data yang sudah diisi sebelum menekan tombol lanjut!"
+                    android:text="@string/ob4_warning_desc"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 

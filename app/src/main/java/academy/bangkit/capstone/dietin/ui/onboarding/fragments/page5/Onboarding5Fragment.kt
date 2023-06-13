@@ -1,6 +1,7 @@
 package academy.bangkit.capstone.dietin.ui.onboarding.fragments.page5
 
 import academy.bangkit.capstone.dietin.MainScreenActivity
+import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentOnboarding5Binding
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
@@ -39,7 +40,7 @@ class Onboarding5Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setBtnGoToHome(false, "Mengunggah data...")
+        setBtnGoToHome(false, getString(R.string.ob5_btn_uploading))
 
         binding.btnGoToHome.setOnClickListener {
             if (isUploadSuccess) {
@@ -48,7 +49,7 @@ class Onboarding5Fragment : Fragment() {
                 startActivity(intent)
             } else {
                 activity.uploadUserData()
-                setBtnGoToHome(false, "Mengunggah data...")
+                setBtnGoToHome(false, getString(R.string.ob5_btn_uploading))
             }
         }
     }
@@ -59,16 +60,16 @@ class Onboarding5Fragment : Fragment() {
         }
     }
 
-    fun setupResponse(isSuccess: Boolean) = lifecycleScope.launch {
+    private fun setupResponse(isSuccess: Boolean) = lifecycleScope.launch {
         if (isSuccess) {
             isUploadSuccess = true
-            setBtnGoToHome(true, "Lanjutkan")
+            setBtnGoToHome(true, getString(R.string.ob5_btn_uploaded))
 
             // Update preferences
             Utils.setIsUserFirstTime(requireActivity(), 0)
         } else {
             isUploadSuccess = false
-            setBtnGoToHome(true, "Coba lagi")
+            setBtnGoToHome(true, getString(R.string.ob5_btn_upload_failed))
         }
     }
 

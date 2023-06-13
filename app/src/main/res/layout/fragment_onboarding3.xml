@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Tingkatan Aktivitas"
+            android:text="@string/ob3_title"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Seberapa sering kamu beraktivitas setiap hari?" />
+            android:text="@string/ob3_desc" />
 
         <LinearLayout
             android:id="@+id/llAktivitas"
@@ -49,13 +49,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/black"
-                        android:text="Jarang beraktivitas (sedentary)" />
+                        android:text="@string/ob3_o1_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Kamu jarang beraktivitas, seperti hanya duduk atau berbaring saja. Contohnya, kamu hanya duduk di depan komputer atau TV, atau hanya berbaring di tempat tidur." />
+                        android:text="@string/ob3_o1_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -77,13 +77,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/black"
-                        android:text="Sedikit beraktivitas (lightly active)" />
+                        android:text="@string/ob3_o2_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Kamu sedikit beraktivitas, seperti berjalan-jalan atau berdiri. Contohnya, kamu berjalan-jalan di rumah atau di kantor. Kamu berolahraga kurang lebih 1-3 hari seminggu." />
+                        android:text="@string/ob3_o2_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -105,13 +105,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/black"
-                        android:text="Cukup aktif (moderately active)" />
+                        android:text="@string/ob3_o3_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Sebagian besar waktu harianmu dipakai untuk beraktifitas. Kamu berolahraga kurang lebih 3-5 hari seminggu." />
+                        android:text="@string/ob3_o3_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -133,13 +133,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/black"
-                        android:text="Aktif (active)" />
+                        android:text="@string/ob3_o4_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Kamu rutin melakukan aktifitas fisik setiap hari dalam skala ringan-sedang, seperti berolahraga 6-7 hari seminggu." />
+                        android:text="@string/ob3_o4_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -160,13 +160,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:textColor="@color/black"
-                        android:text="Sangat aktif (very active)" />
+                        android:text="@string/ob3_o5_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Kamu sangat aktif, seperti berolahraga setiap hari dalam skala berat. Contohnya, kamu berolahraga 2 kali sehari." />
+                        android:text="@string/ob3_o5_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

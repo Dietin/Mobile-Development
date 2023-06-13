@@ -10,8 +10,9 @@ import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
-import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryActivity
+import academy.bangkit.capstone.dietin.ui.food_detail.FoodDetailActivity
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
+import academy.bangkit.capstone.dietin.ui.search.RecipeSearchActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
@@ -74,7 +75,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.inputSearch.editText?.setOnClickListener {
-            Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), RecipeSearchActivity::class.java)
+            startActivity(intent)
         }
 
         setAllContent()
@@ -83,6 +85,7 @@ class HomeFragment : Fragment() {
             viewModel.getAllRecommendations()
             viewModel.getCaloriesHistory()
             viewModel.getAllCategories()
+            getRandomFact()
             binding.root.isRefreshing = false
         }
     }
@@ -93,16 +96,40 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAllContent() = lifecycleScope.launch {
-        val greet = when(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)){
-            in 0..11 -> "Selamat pagi"
-            in 12..15 -> "Selamat siang"
-            in 16..18 -> "Selamat sore"
-            in 19..23 -> "Selamat malam"
-            else -> "Halo"
+        val greet: String
+        val timelyDesc: String
+        when(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)){
+            in 0..11 -> {
+                greet = getString(R.string.txt_morning)
+                timelyDesc = getString(R.string.msa_morning_desc)
+            }
+            in 12..15 -> {
+                greet = getString(R.string.txt_afternoon)
+                timelyDesc = getString(R.string.msa_afternoon_desc)
+            }
+            in 16..18 -> {
+                greet = getString(R.string.txt_evening)
+                timelyDesc = getString(R.string.msa_evening_desc)
+            }
+            in 19..23 -> {
+                greet = getString(R.string.txt_night)
+                timelyDesc = getString(R.string.msa_night_desc)
+            }
+            else -> {
+                greet = getString(R.string.txt_morning)
+                timelyDesc = getString(R.string.msa_morning_desc)
+            }
         }
         val name = Utils.getUser(requireContext())?.name
-        Log.e("HomeFragment", "setAllContent: ${Utils.getUser(requireContext())}}")
         binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.tvFoodListDesc.text = timelyDesc
+
+        getRandomFact()
+    }
+
+    private fun getRandomFact() {
+        val randomFact = resources.getStringArray(R.array.diet_tips).random()
+        binding.tvRandomFact.text = randomFact
     }
 
     private fun setCalories(foodCalories: AddFoodHistoryViewModel.FoodCalories) {
@@ -222,10 +249,10 @@ class HomeFragment : Fragment() {
 
                         //masih belum terlalu oke
                         val timeData = when(item.time) {
-                            1 -> Pair("Makan Pagi", R.drawable.ic_eat_time_morning)
-                            2 -> Pair("Makan Siang", R.drawable.ic_eat_time_afternoon)
-                            3 -> Pair("Makan Malam", R.drawable.ic_eat_time_night)
-                            else -> Pair("Cemilan", R.drawable.ic_eat_time_morning)
+                            1 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_morning)), R.drawable.ic_eat_time_morning)
+                            2 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_afternoon)), R.drawable.ic_eat_time_afternoon)
+                            3 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_evening)), R.drawable.ic_eat_time_night)
+                            else -> Pair(getString(R.string.snacks), R.drawable.ic_eat_time_morning)
                         }
                         this.tvEatTitle.text = timeData.first
 
@@ -293,9 +320,9 @@ class HomeFragment : Fragment() {
                         this.tvFoodCal.text = item.calories.toInt().toString()
 
                         this.root.setOnClickListener {
-                            val intent = Intent(requireContext(), AddFoodHistoryActivity::class.java)
-                            intent.putExtra(AddFoodHistoryActivity.EXTRA_RECIPE, item)
-                            requireContext().startActivity(intent)
+                            val intent = Intent(requireContext(), FoodDetailActivity::class.java)
+                            intent.putExtra(FoodDetailActivity.EXTRA_RECIPE_ID, item.id)
+                            startActivity(intent)
                         }
                     }
                 )

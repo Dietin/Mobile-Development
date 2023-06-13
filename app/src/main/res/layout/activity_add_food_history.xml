@@ -1,438 +1,448 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.food_history.AddFoodHistoryActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.google.android.material.card.MaterialCardView
-            style="@style/DietinLayoutCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-16dp"
-            app:contentPaddingTop="16dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp">
-
-                <ImageView
-                    android:id="@+id/ivFoodImage"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/food_placeholder"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/afh_food_img" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@drawable/gradient_black"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <Button
-                        android:id="@+id/btnNavigateUp"
-                        style="@style/Widget.Material3.Button.IconButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:tooltipText="Navigate up"
-                        app:icon="@drawable/ic_navigate_up"
-                        app:iconTint="@color/white" />
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            style="@style/DietinLayoutCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-32dp"
-            app:cardBackgroundColor="@color/platinum"
-            app:cardElevation="-1dp"
-            app:contentPaddingTop="32dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/tv_food_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/loading"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvFoodShortDesc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/loading" />
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnFavourite"
-                        style="@style/Widget.Material3.Button.IconButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:icon="@drawable/ic_star_outlined"
-                        app:iconTint="@color/satin_gold" />
-                </LinearLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/DietinLayoutCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="8dp"
-                        android:paddingVertical="16dp">
-
-                        <com.google.android.material.slider.Slider
-                            android:id="@+id/sliderJumlahPorsi"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:stepSize="0.25"
-                            android:value="1"
-                            android:valueFrom="0.0"
-                            android:valueTo="5.0"
-                            app:labelBehavior="floating"
-                            app:tickVisible="false"
-                            app:trackColorInactive="@color/platinum" />
-
-                        <TextView
-                            android:id="@+id/tvJumlahPorsi"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/loading"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:clipToPadding="false"
-            android:padding="16dp">
+            android:paddingBottom="72dp"
+            android:clipToPadding="false">
 
-            <TextView
+            <com.google.android.material.card.MaterialCardView
+                style="@style/DietinLayoutCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@string/afh_title_nutrition"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="-16dp"
+                app:contentPaddingTop="16dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Dietin.ReadonlyChip.Indicator"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    app:chipBackgroundColor="@color/bs_primary_accent" />
+                    <ImageView
+                        android:id="@+id/ivFoodImage"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:contentDescription="@string/afh_food_img"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/food_placeholder"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/afh_nut_label_carbs"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@drawable/gradient_black"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Dietin.ReadonlyChip.Indicator"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    app:chipBackgroundColor="@color/bs_success_accent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/afh_nut_label_fats" />
+                        <Button
+                            android:id="@+id/btnNavigateUp"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tooltipText="Navigate up"
+                            app:icon="@drawable/ic_navigate_up"
+                            app:iconTint="@color/white" />
+                    </LinearLayout>
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Dietin.ReadonlyChip.Indicator"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    app:chipBackgroundColor="@color/bs_danger_accent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/afh_nut_label_proteins" />
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                style="@style/DietinLayoutCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_marginBottom="16dp"
-                android:baselineAligned="false">
+                android:layout_marginTop="-32dp"
+                app:cardBackgroundColor="@color/platinum"
+                app:cardElevation="-1dp"
+                app:contentPaddingTop="32dp">
 
                 <LinearLayout
-                    android:id="@+id/llCarbs"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_food_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loading"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvFoodShortDesc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loading" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFavourite"
+                            style="@style/Widget.Material3.Button.IconButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_star_outlined"
+                            app:iconTint="@color/satin_gold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/DietinLayoutCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="16dp">
+
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/sliderJumlahPorsi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:stepSize="0.25"
+                                android:value="1"
+                                android:valueFrom="0.0"
+                                android:valueTo="5.0"
+                                app:labelBehavior="floating"
+                                app:tickVisible="false"
+                                app:trackColorInactive="@color/platinum" />
+
+                            <TextView
+                                android:id="@+id/tvJumlahPorsi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loading"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/afh_title_nutrition"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Dietin.ReadonlyChip.Indicator"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:chipBackgroundColor="@color/bs_primary_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/afh_nut_label_carbs"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Dietin.ReadonlyChip.Indicator"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:chipBackgroundColor="@color/bs_success_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/afh_nut_label_fats" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Dietin.ReadonlyChip.Indicator"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:chipBackgroundColor="@color/bs_danger_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/afh_nut_label_proteins" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:id="@+id/llCarbs"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:progress="100"
+                            app:indicatorColor="@color/bs_primary_accent"
+                            app:trackThickness="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvCarbsPerc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:text="@string/loading" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llFats"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:progress="100"
+                            app:indicatorColor="@color/bs_success_accent"
+                            app:trackThickness="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvFatsPerc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:text="@string/loading" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llProteins"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".2"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:progress="100"
+                            app:indicatorColor="@color/bs_danger_accent"
+                            app:trackThickness="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvProteinsPerc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:text="@string/loading" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/afh_title_daily_calories"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Dietin.ReadonlyChip.Indicator"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:chipBackgroundColor="@color/bs_primary_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/afh_cal_label_fulfilled"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Dietin.ReadonlyChip.Indicator"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:chipBackgroundColor="@color/bs_success_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/afh_cal_label_will_fulfill" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/platinum"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/lpiKaloriTerpenuhi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
                         android:progress="100"
                         app:indicatorColor="@color/bs_primary_accent"
                         app:trackThickness="8dp" />
 
-                    <TextView
-                        android:id="@+id/tvCarbsPerc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:text="@string/loading" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llFats"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".3"
-                    android:orientation="vertical">
-
                     <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:layout_width="match_parent"
+                        android:id="@+id/lpiKaloriAkanDipenuhi"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
                         android:progress="100"
                         app:indicatorColor="@color/bs_success_accent"
                         app:trackThickness="8dp" />
 
-                    <TextView
-                        android:id="@+id/tvFatsPerc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:text="@string/loading" />
-
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/llProteins"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".2"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.progressindicator.LinearProgressIndicator
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:progress="100"
-                        app:indicatorColor="@color/bs_danger_accent"
-                        app:trackThickness="8dp" />
-
-                    <TextView
-                        android:id="@+id/tvProteinsPerc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:text="@string/loading" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@string/afh_title_daily_calories"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Dietin.ReadonlyChip.Indicator"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    app:chipBackgroundColor="@color/bs_primary_accent" />
-
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/afh_cal_label_fulfilled"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Dietin.ReadonlyChip.Indicator"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    app:chipBackgroundColor="@color/bs_success_accent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/afh_cal_label_will_fulfill" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:background="@color/platinum"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/lpiKaloriTerpenuhi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:progress="100"
-                    app:indicatorColor="@color/bs_primary_accent"
-                    app:trackThickness="8dp" />
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/lpiKaloriAkanDipenuhi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:progress="100"
-                    app:indicatorColor="@color/bs_success_accent"
-                    app:trackThickness="8dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvJumlahKaloriTerpenuhi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:text="@string/afh_cal_desc" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvKaloriBerlebihan"
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/bs_danger_accent"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
+                    android:id="@+id/tvJumlahKaloriTerpenuhi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:gravity="center_vertical">
+                    android:text="@string/loading"
+                    android:textAlignment="textEnd" />
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_lock"
-                        android:layout_marginEnd="8dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvKaloriBerlebihan"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="@color/bs_danger_accent"
+                    app:strokeWidth="0dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/afh_cal_over_recommended"
-                        android:textColor="@color/black"/>
+                        android:gravity="center_vertical"
+                        android:padding="12dp">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            app:srcCompat="@drawable/ic_lock" />
 
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/afh_cal_over_recommended"
+                            android:textColor="@color/black" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/afh_label_eaten_at"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/afh_title_eaten_at"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilTanggal"
                     style="@style/DietinTextInputLayout"
-                    android:clickable="true"
-                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    app:endIconMode="custom"
+                    android:layout_weight="0.5"
+                    android:clickable="true"
+                    android:focusable="false"
                     app:endIconDrawable="@drawable/ic_calendar"
-                    android:layout_weight="0.5">
+                    app:endIconMode="custom">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none|text"
                         android:focusable="false"
-                        android:hint="@string/afh_eat_label_date" />
+                        android:hint="@string/afh_eat_label_date"
+                        android:inputType="none|text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -440,7 +450,6 @@
                     style="@style/DietinTextInputLayout.Dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_weight="0.5">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -448,36 +457,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/afh_eat_label_time"
-                        android:lines="1"
-                        android:inputType="none" />
+                        android:inputType="none"
+                        android:lines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+            </LinearLayout>
+
         </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            style="@style/DietinLayoutCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-16dp"
-            app:cardBackgroundColor="@color/jet"
-            app:contentPaddingTop="16dp"
-            app:contentPaddingRight="16dp"
-            app:contentPaddingLeft="16dp"
-            app:contentPaddingBottom="32dp"
-            android:layout_marginBottom="-16dp"
-            >
+    </ScrollView>
 
-            <Button
-                style="@style/DietinButton"
-                android:id="@+id/btnAddFood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/afh_save_meal" />
+    <Button
+        android:id="@+id/btnAddFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/gunmetal"
+        android:text="@string/afh_save_meal"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        </com.google.android.material.card.MaterialCardView>
-
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

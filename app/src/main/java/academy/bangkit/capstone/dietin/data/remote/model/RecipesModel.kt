@@ -25,7 +25,7 @@ data class Recipe(
     @SerializedName("category")
     val category: RecipeCategory,
     @SerializedName("recipe_steps") @IgnoredOnParcel
-    val steps: List<RecipeSteps>? = null,
+    var steps: List<RecipeSteps>? = null,
     @SerializedName("recipe_ingredients") @IgnoredOnParcel
     val ingredients: List<RecipeIngredient>? = null,
 ): Parcelable

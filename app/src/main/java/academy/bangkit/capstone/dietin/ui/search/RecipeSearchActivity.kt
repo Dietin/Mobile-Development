@@ -26,6 +26,9 @@ class RecipeSearchActivity : AppCompatActivity() {
         changeFragmentSearch(beforeSearchFrg)
         setupListener()
 
+        // Auto focus on the search bar
+        binding.inputSearch.editText?.requestFocus()
+
         binding.btnBack.setOnClickListener {
             goBack()
         }
@@ -50,6 +53,7 @@ class RecipeSearchActivity : AppCompatActivity() {
             .replace(binding.fragmentSearchHolder.id, fragment)
             .addToBackStack(null)
             .commit()
+        activeFragment = fragment
     }
 
     private fun goBack() {
