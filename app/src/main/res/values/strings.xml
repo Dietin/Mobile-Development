@@ -64,7 +64,7 @@
 
     <!-- Navigation bar buttons -->
     <string name="title_home">Home</string>
-    <string name="title_search">Cari Resep</string>
+    <string name="title_search">Cari Hidangan</string>
     <string name="title_favourite">Favorit</string>
     <string name="title_profile">Profil</string>
     <string name="title_history">History</string>
@@ -77,7 +77,7 @@
     <string name="user_calories">&lt;b&gt;%d&lt;/b&gt;</string>
     <string name="calories">Kalori</string>
     <string name="home_intro">Makan apa hari ini?</string>
-    <string name="food_cal">%d kal</string>
+    <string name="food_cal">%s kal</string>
     <string name="home_percent_calories">&lt;b&gt;%.0f%%&lt;/b&gt;&lt;br&gt;Terpenuhi</string>
 
     <string name="hint_record_food">Catat Makananmu</string>
@@ -88,7 +88,7 @@
     <string name="msa_morning_desc">Awali pagimu dengan sarapan yang sehat dan bergizi!</string>
     <string name="msa_afternoon_desc">Waktunya makan siang! Diet tidak berarti kamu harus menahan lapar, lho!</string>
     <string name="msa_evening_desc">Makan malam yang sehat dan bergizi dapat membantu kamu tidur lebih nyenyak!</string>
-    <string name="msa_night_desc">Begadang? Jangan lupa diiringi makanan bergizi!</string>
+    <string name="msa_snack_desc">Jam nanggung? Cemilan sehat dapat membantu kamu tetap fokus!</string>
 
     <!-- Greetings -->
     <string name="txt_morning">pagi</string>
@@ -118,6 +118,7 @@
     <string name="afh_eat_label_date">Tanggal</string>
     <string name="afh_eat_label_time">Waktu</string>
     <string name="afh_save_meal">Simpan</string>
+    <string name="afh_success_add_food">Berhasil menambahkan hidangan ke history!</string>
     <string name="hint_pick_date">Pilih Tanggal</string>
     <string name="hint_total_calories">Total Kalori</string>
     <string name="hint_target_calories">Target Kalori</string>
@@ -175,6 +176,8 @@
     <string name="ob5_btn_uploading">Mengunggah data…</string>
     <string name="ob5_btn_uploaded">Lanjutkan</string>
     <string name="ob5_btn_upload_failed">Ulangi</string>
+
+    <!-- Favorite Fragment -->
     <string name="ff_title">Hidangan Favorit</string>
     <string name="ff_desc">Hidangan yang kamu sukai, disajikan di satu tempat!</string>
     <string name="hint_update_profile">Perbaharui Profil</string>
@@ -188,6 +191,6 @@
     <string name="user_height">&lt;b&gt;%d&lt;/b&gt; Cm</string>
 
 
-    <!-- Favorite Fragment -->
-
+    <!-- RecipeSearchActivity -->
+    <string name="rs_all_category">Semua</string>
 </resources>

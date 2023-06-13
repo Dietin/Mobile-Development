@@ -68,13 +68,15 @@
         <item name="rippleColor">#19363636</item>
     </style>
 
-    <style name="DietinButton.IconOnly" parent="DietinButton">
+    <style name="DietinButton.IconOnly" parent="Widget.Material3.Button.IconButton">
         <item name="iconPadding">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:minWidth">48dp</item>
+        <item name="iconGravity">textStart</item>
     </style>
 
 

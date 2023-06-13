@@ -21,6 +21,8 @@ data class FoodHistory(
     val date: String,
     @SerializedName("food_time")
     val time: Int,
+    @SerializedName("recipe")
+    val recipe: Recipe? = null
 )
 
 data class SearchHistory(

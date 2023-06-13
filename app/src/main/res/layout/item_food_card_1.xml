@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:layout_width="160dp"
-    android:layout_height="210dp"
+    android:layout_height="230dp"
     android:layout_margin="4dp"
     android:layout_gravity="center"
     app:cardElevation="@dimen/card_elevation"
@@ -36,14 +36,14 @@
                 style="@style/DietinTextTitle"
                 android:text="Nasi Goreng Kaki Gajah"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textSize="@dimen/text_size_sub2"/>
 
             <TextView
                 android:id="@+id/tv_food_cal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_sub4"
+                android:textSize="@dimen/text_size_sub3"
                 android:text="@string/food_cal"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"

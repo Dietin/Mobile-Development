@@ -85,7 +85,7 @@ class HomeViewModel(private val application: Application) : ViewModel() {
             val fch = ApiConfig.getApiService().getFoodHistoryGroupedByTime(
                 token = "Bearer $token",
                 date = Utils.getCurrentDate()
-            ).data!!
+            ).data
 
             val fchFiltered = mutableListOf<FoodHistoryGroup>()
             for (i in 1 .. 4) {

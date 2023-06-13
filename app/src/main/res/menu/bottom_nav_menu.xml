@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_favourite"
-        android:icon="@drawable/ic_star_outlined"
+        android:icon="@drawable/ic_star_filled"
         android:title="@string/title_favourite" />
 
     <item

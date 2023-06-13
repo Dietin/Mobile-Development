@@ -3,9 +3,6 @@ package academy.bangkit.capstone.dietin.ui.main_screen.home
 import academy.bangkit.capstone.dietin.MainActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.Result
-import academy.bangkit.capstone.dietin.data.remote.model.FoodHistoryGroup
-import academy.bangkit.capstone.dietin.data.remote.model.Recipe
-import academy.bangkit.capstone.dietin.data.remote.model.RecipeCategory
 import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
@@ -32,6 +29,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
@@ -109,11 +108,11 @@ class HomeFragment : Fragment() {
             }
             in 16..18 -> {
                 greet = getString(R.string.txt_evening)
-                timelyDesc = getString(R.string.msa_evening_desc)
+                timelyDesc = getString(R.string.msa_snack_desc)
             }
             in 19..23 -> {
                 greet = getString(R.string.txt_night)
-                timelyDesc = getString(R.string.msa_night_desc)
+                timelyDesc = getString(R.string.msa_evening_desc)
             }
             else -> {
                 greet = getString(R.string.txt_morning)
@@ -155,11 +154,11 @@ class HomeFragment : Fragment() {
         viewModel.recommendations.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(emptyList()) }
+//                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(emptyList()) }
                     Utils.setShimmerVisibility(binding.shimmerFoodList, true)
                 }
                 is Result.Success -> {
-                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it.data) }
+//                    Utils.setComposableFunction(binding.cvFoodList) { SetFoodList(it.data) }
                     Utils.setShimmerVisibility(binding.shimmerFoodList, false)
                 }
                 is Result.Error -> {
@@ -171,11 +170,11 @@ class HomeFragment : Fragment() {
         viewModel.categories.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(emptyList()) }
+//                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(emptyList()) }
                     Utils.setShimmerVisibility(binding.shimmerCategory, true)
                 }
                 is Result.Success -> {
-                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it.data) }
+//                    Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList(it.data) }
                     Utils.setShimmerVisibility(binding.shimmerCategory, false)
                 }
                 is Result.Error -> {
@@ -187,11 +186,11 @@ class HomeFragment : Fragment() {
         viewModel.foodCaloriesHistory.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(emptyList()) }
+//                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(emptyList()) }
                     Utils.setShimmerVisibility(binding.shimmerUserEat, true)
                 }
                 is Result.Success -> {
-                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it.data) }
+//                    Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory(it.data) }
                     Utils.setShimmerVisibility(binding.shimmerUserEat, false)
 
                     var totalCalories = 0f
@@ -219,6 +218,10 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             }
         }
+
+        Utils.setComposableFunction(binding.cvFoodList) { SetFoodList() }
+        Utils.setComposableFunction(binding.cvCategoryList) { SetCategoryList() }
+        Utils.setComposableFunction(binding.cvUserFood) { SetUserFoodHistory() }
     }
 
     override fun onStart() {
@@ -228,7 +231,8 @@ class HomeFragment : Fragment() {
     }
 
     @Composable
-    fun SetUserFoodHistory(foodHistories: List<FoodHistoryGroup>){
+    fun SetUserFoodHistory(){
+        val foodHistories by viewModel.foodCaloriesHistory.observeAsState()
 
         LazyRow(
             modifier = Modifier
@@ -236,35 +240,32 @@ class HomeFragment : Fragment() {
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp)
 
         ) {
-            items(foodHistories){ item ->
-                AndroidViewBinding(
-                    factory = { layoutInflater, parent, _ ->
-                        ItemUserEatBinding.inflate(layoutInflater, parent, false)
-                    },
-
-                    update = {
+            if (foodHistories is Result.Success) {
+                items((foodHistories as Result.Success).data){ item ->
+                    AndroidViewBinding(ItemUserEatBinding::inflate) {
                         this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.totalCalories.toInt()), HtmlCompat.FROM_HTML_MODE_LEGACY)
-//                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
+    //                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
                         tvEatTime.visibility = View.GONE
 
                         //masih belum terlalu oke
                         val timeData = when(item.time) {
                             1 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_morning)), R.drawable.ic_eat_time_morning)
                             2 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_afternoon)), R.drawable.ic_eat_time_afternoon)
-                            3 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_evening)), R.drawable.ic_eat_time_night)
+                            3 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_night)), R.drawable.ic_eat_time_night)
                             else -> Pair(getString(R.string.snacks), R.drawable.ic_eat_time_morning)
                         }
                         this.tvEatTitle.text = timeData.first
 
                         this.ivEatIcon.setImageResource(timeData.second)
                     }
-                )
+                }
             }
         }
     }
 
     @Composable
-    fun SetCategoryList(categories : List<RecipeCategory>){
+    fun SetCategoryList(){
+        val categories by viewModel.categories.observeAsState()
 
         LazyRow(
             modifier = Modifier
@@ -273,40 +274,39 @@ class HomeFragment : Fragment() {
             horizontalArrangement = Arrangement.spacedBy(space = 8.dp)
 
         ) {
-            items(categories){ item ->
-                AndroidViewBinding(
-                    factory = { layoutInflater, parent, _ ->
-                        ItemCategoryBinding.inflate(layoutInflater, parent, false)
-                    },
-
-                    update = {
+            if (categories is Result.Success) {
+                items((categories as Result.Success).data) { item ->
+                    AndroidViewBinding(ItemCategoryBinding::inflate) {
                         Glide.with(this.root)
                             .load(item.icon)
                             .placeholder(R.drawable.food_placeholder)
                             .into(this.ivCategoryImage)
                         this.tvCategoryTitle.text = item.name
+
+                        this.root.setOnClickListener {
+                            val intent = Intent(requireActivity(), RecipeSearchActivity::class.java)
+                            intent.putExtra(RecipeSearchActivity.EXTRA_CATEGORY, item.id)
+                            startActivity(intent)
+                        }
                     }
-                )
+                }
             }
         }
     }
 
     @Composable
-    fun SetFoodList(foodList: List<Recipe>){
-        
+    fun SetFoodList(){
+        val foodList by viewModel.recommendations.observeAsState()
+
         LazyRow(
             modifier = Modifier
                 .padding(PaddingValues(bottom = 8.dp)),
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 16.dp),
         ) {
-            items(foodList){ item ->
-                AndroidViewBinding(
-                    factory = { layoutInflater, parent, _ ->
-                        ItemFoodCard1Binding.inflate(layoutInflater, parent, false)
-                    },
-
-                    update = {
+            if (foodList is Result.Success) {
+                items((foodList as Result.Success).data){ item ->
+                    AndroidViewBinding(ItemFoodCard1Binding::inflate) {
                         Glide.with(this.root)
                             .load(item.image)
                             .placeholder(R.drawable.food_placeholder)
@@ -325,7 +325,7 @@ class HomeFragment : Fragment() {
                             startActivity(intent)
                         }
                     }
-                )
+                }
             }
         }
     }

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:layout_width="160dp"
-    android:layout_height="210dp"
+    android:layout_height="230dp"
     android:layout_margin="4dp"
     android:layout_gravity="center"
     app:cardElevation="@dimen/card_elevation"
@@ -37,6 +37,15 @@
                 android:textSize="@dimen/text_size_sub2"/>
 
             <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                style="@style/DietinTextTitle"
+                android:background="@color/shimmer_text"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_sub2"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -53,8 +62,7 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/Dietin.ReadonlyChip"
-                android:layout_width="match_parent"
-                android:layout_marginEnd="20dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 app:chipBackgroundColor="@color/shimmer_image"
                 android:textSize="@dimen/text_size_sub2"

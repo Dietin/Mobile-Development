@@ -1,15 +1,18 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.history
 
+import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
+import academy.bangkit.capstone.dietin.databinding.FragmentHistoryBinding
+import academy.bangkit.capstone.dietin.utils.Utils
+import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import academy.bangkit.capstone.dietin.R
-import academy.bangkit.capstone.dietin.databinding.FragmentHistoryBinding
-import academy.bangkit.capstone.dietin.utils.Utils
-import android.app.DatePickerDialog
-import android.text.Html
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +24,8 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -28,14 +33,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import java.util.Calendar
+import java.util.Locale
 
 
 class HistoryFragment : Fragment() {
 
     private var _binding : FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var viewModel: HistoryViewModel
+    private lateinit var loader: AlertDialog
 
     private var selectedDate = Calendar.getInstance()
 
@@ -47,8 +56,30 @@ class HistoryFragment : Fragment() {
     ): View {
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().application))[HistoryViewModel::class.java]
+        setupViewModelBinding()
+        loader = Utils.generateLoader(requireActivity())
         return binding.root
+    }
+
+    private fun setupViewModelBinding() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                loader.show()
+            } else {
+                loader.dismiss()
+            }
+        }
+
+        viewModel.message.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { msg ->
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.userData.observe(viewLifecycleOwner) {
+            setAllContent(it.idealCalories)
+        }
     }
 
 
@@ -56,7 +87,6 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setListener()
-        setAllContent()
         Utils.setComposableFunction(binding.cvFoodHistory){ SetTable() }
 
     }
@@ -105,48 +135,70 @@ class HistoryFragment : Fragment() {
 
     private fun setTanggal(newDate : Calendar){
         selectedDate = newDate
+        val dateYMD = Utils.formatDate(selectedDate.time, "yyyy-MM-dd")
         binding.tvHistoryDate.text = Utils.formatDate(selectedDate.time, "dd MMMM yyyy")
+
+        viewModel.getFoodHistory(dateYMD)
     }
 
-
     //disini set semua content yang diperlukan
-    private fun setAllContent(){
+    private fun setAllContent(idealCalories: Float){
 
         //untuk penanggalan
         binding.tvHistoryDate.text = Utils.formatDate(selectedDate.time, "dd MMMM yyyy")
 
-        //untuk total kalori yang sudah dikonsumsi
-        binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, 2000))
-
         //untuk target kalori
-        binding.tvTargetCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, 2000))
-
-
-        //progress bar
-        val percent = 50
-        binding.historyCaloriesProgress.progress = percent
-
-        val color = when(percent.toFloat()){
-            in 0f .. 25f -> R.color.danger
-            in 25f .. 75f -> R.color.warning
-            in 75f .. 100f -> R.color.success
-            else -> R.color.overflow
-        }
-        binding.historyCaloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
-
-
+        binding.tvTargetCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", idealCalories)), Html.FROM_HTML_MODE_COMPACT)
     }
 
 
 
     @Composable
     fun SetTable(){
+        val currentFoodHistory by viewModel.currentFoodHistory.observeAsState()
+        val userData by viewModel.userData.observeAsState()
+
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            FoodTable(eatTime = "Makan Pagi", 50, 1500)
-            FoodTable(eatTime = "Makan Siang", 20, 200)
-            FoodTable(eatTime = "Makan Malam", 20, 300)
+            val totalCaloriesEaten = currentFoodHistory?.sumOf { it.totalCalories.toDouble() }?.toFloat() ?: 0f
+
+            //untuk total kalori yang sudah dikonsumsi
+            binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", totalCaloriesEaten)), Html.FROM_HTML_MODE_COMPACT)
+
+            //progress bar
+            val percent = totalCaloriesEaten / (userData?.idealCalories ?: 1f) * 100
+            binding.historyCaloriesProgress.progress = percent.toInt()
+
+            val color = when(percent){
+                in 0f .. 25f -> R.color.danger
+                in 25f .. 75f -> R.color.warning
+                in 75f .. 100f -> R.color.success
+                else -> R.color.overflow
+            }
+            binding.historyCaloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
+
+            binding.tvCaloriesPercent.text = "${String.format(Locale.getDefault(), "%.0f", percent)}%"
+
+            for (i in 1 .. 4) {
+                val foodHistoryGroupedByTime = currentFoodHistory?.find { it.time == i }
+                val eatTime = getString(R.string.food_time_text, when(i){
+                    1 -> getString(R.string.txt_morning)
+                    2 -> getString(R.string.txt_afternoon)
+                    3 -> getString(R.string.txt_night)
+                    4 -> getString(R.string.snacks)
+                    else -> ""
+                })
+                var percentFood = (foodHistoryGroupedByTime?.totalCalories ?: 0f) / totalCaloriesEaten
+                percentFood = if (percentFood.isNaN()) 0f else percentFood
+
+                FoodTable(
+                    eatTime = eatTime,
+                    percentFood = (percentFood * 100),
+                    totalCalories = foodHistoryGroupedByTime?.totalCalories ?: 0f,
+                    dataHistory = foodHistoryGroupedByTime?.foodHistory ?: listOf()
+                )
+            }
         }
     }
 
@@ -155,8 +207,9 @@ class HistoryFragment : Fragment() {
     @Composable
     fun FoodTable(
         eatTime : String,
-        percentFood : Int,
-        totalCalories : Int,
+        percentFood : Float,
+        totalCalories : Float,
+        dataHistory: List<FoodHistory>
     ){
         Card(
             elevation = 2.dp,
@@ -211,8 +264,12 @@ class HistoryFragment : Fragment() {
                         FoodList(foodName = it.foodName, foodCalories = it.foodCalories)
                     }
                 */
-                FoodList(foodName = "nasi goreng", foodCalories = 200)
-                FoodList(foodName = "nasi goreng", foodCalories = 200)
+                dataHistory.forEach {
+                    FoodList(
+                        foodName = it.recipe?.name ?: it.recipeId,
+                        foodCalories = it.calories.toInt()
+                    )
+                }
 
             }
         }

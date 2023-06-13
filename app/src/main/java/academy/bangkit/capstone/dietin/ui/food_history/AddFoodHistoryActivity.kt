@@ -230,6 +230,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
 
         viewModel.isSuccess.observe(this) {
             if (it) {
+                Toast.makeText(this, getString(R.string.afh_success_add_food), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainScreenActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

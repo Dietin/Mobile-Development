@@ -47,6 +47,7 @@ interface ApiService {
     suspend fun searchGlobal(
         @Header("Authorization") token: String,
         @Query("q") query: String,
+        @Query("category") category: String = "",
     ): ApiResponse<List<Recipe>>
 
     @GET("category")
@@ -59,6 +60,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("date") date: String
     ): ApiResponse<List<FoodHistoryGroup>>
+
+    @GET("foodHistory/{date}")
+    suspend fun getFoodHistory(
+        @Header("Authorization") token: String,
+        @Path("date") date: String
+    ): ApiResponse<List<FoodHistory>>
 
     @POST("foodHistory")
     suspend fun addFoodHistory(

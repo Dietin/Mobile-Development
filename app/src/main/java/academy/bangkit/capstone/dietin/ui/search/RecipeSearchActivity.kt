@@ -22,8 +22,13 @@ class RecipeSearchActivity : AppCompatActivity() {
         binding = ActivityRecipeSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        changeFragmentSearch(onSearchFrg)
-        changeFragmentSearch(beforeSearchFrg)
+        val selectedCategory = intent.getStringExtra(EXTRA_CATEGORY)
+        if (selectedCategory != null) {
+            onSearchFrg.updateCategory(selectedCategory)
+            changeFragmentSearch(onSearchFrg)
+        } else {
+            changeFragmentSearch(beforeSearchFrg)
+        }
         setupListener()
 
         // Auto focus on the search bar
@@ -42,7 +47,10 @@ class RecipeSearchActivity : AppCompatActivity() {
                 }
                 onSearchFrg.updateQuery(s.toString())
             }else{
-                changeFragmentSearch(beforeSearchFrg)
+                if (!onSearchFrg.isCategorySelected()) {
+                    // Kalau tidak ada kategori yang dipilih, baru kembali ke fragment sebelumnya
+                    changeFragmentSearch(beforeSearchFrg)
+                }
             }
         }
     }
@@ -66,5 +74,9 @@ class RecipeSearchActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         goBack()
+    }
+
+    companion object {
+        const val EXTRA_CATEGORY = "extra_category"
     }
 }

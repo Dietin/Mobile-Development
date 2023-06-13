@@ -57,14 +57,15 @@ class FavouriteFragment : Fragment() {
                 is Result.Loading -> {
                     Utils.setShimmerVisibility(binding.shimmerFavourite, true)
                     Utils.setComposableFunction(binding.cvFavouriteFood) { SetFavouriteFoods(emptyList()) }
-                    binding.llNoDataFavourite.visibility = View.GONE
+//                    binding.llNoDataFavourite.
+                    binding.llNoDataFavourite.root.visibility = View.GONE
                 }
                 is Result.Success -> {
                     if (it.data.isNotEmpty()) {
                         Utils.setComposableFunction(binding.cvFavouriteFood) { SetFavouriteFoods(it.data) }
-                        binding.llNoDataFavourite.visibility = View.GONE
+                        binding.llNoDataFavourite.root.visibility = View.GONE
                     } else {
-                        binding.llNoDataFavourite.visibility = View.VISIBLE
+                        binding.llNoDataFavourite.root.visibility = View.VISIBLE
                     }
                     Utils.setShimmerVisibility(binding.shimmerFavourite, false)
                 }

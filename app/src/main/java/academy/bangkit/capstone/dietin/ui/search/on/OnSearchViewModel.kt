@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.search.on
 
+import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
@@ -8,6 +9,7 @@ import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
 import academy.bangkit.capstone.dietin.utils.Utils
 import android.app.Application
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,18 +30,23 @@ class OnSearchViewModel(private val application: Application): ViewModel() {
     private val _listCategories = MutableLiveData<Result<List<RecipeCategory>>>()
     val listCategories: LiveData<Result<List<RecipeCategory>>> = _listCategories
 
+    val selectedCategory = mutableStateOf("0")
+
     init {
         getCategories()
     }
 
-    fun searchGlobal(query: String) = viewModelScope.launch {
+    private var searchQuery = ""
+    fun searchGlobal(query: String = searchQuery) = viewModelScope.launch {
         try {
             _searchResult.value = Result.Loading
             val token = Utils.getToken(application)
             val data = ApiConfig.getApiService().searchGlobal(
                 token = "Bearer $token",
-                query = query
+                query = query,
+                category = selectedCategory.value
             ).data
+            searchQuery = query
             _searchResult.value = Result.Success(data)
         } catch (e: IOException) {
             // No Internet Connection
@@ -57,7 +64,15 @@ class OnSearchViewModel(private val application: Application): ViewModel() {
             val token = Utils.getToken(application)
             val data = ApiConfig.getApiService().getAllCategories(
                 token = "Bearer $token"
-            ).data
+            ).data.toMutableList()
+
+            // All category:
+            data.add(0, RecipeCategory(
+                id = "0",
+                name = application.getString(R.string.rs_all_category),
+                icon = "",
+                _colourArray = "0,0,0"
+            ))
             _listCategories.value = Result.Success(data)
         } catch (e: IOException) {
             // No Internet Connection

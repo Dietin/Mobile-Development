@@ -87,10 +87,10 @@ class Onboarding4Fragment : Fragment() {
                 0f
             }
             when {
-                activity.userData.goal == 1 && beratHarapan > activity.userData.currentWeight -> {
+                activity.userData.goal == 1 && beratHarapan >= activity.userData.currentWeight -> {
                     binding.tilBeratHarapan.error = getString(R.string.ob4_error_target_weight_high)
                 }
-                activity.userData.goal == 3 && beratHarapan < activity.userData.currentWeight -> {
+                activity.userData.goal == 3 && beratHarapan <= activity.userData.currentWeight -> {
                     binding.tilBeratHarapan.error = getString(R.string.ob4_error_target_weight_low)
                 }
                 else -> {
@@ -98,6 +98,7 @@ class Onboarding4Fragment : Fragment() {
                     activity.userData.weight = beratHarapan
                 }
             }
+            updateButtonContinue()
         }
     }
 
