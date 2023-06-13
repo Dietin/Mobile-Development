@@ -177,6 +177,16 @@
     <string name="ob5_btn_upload_failed">Ulangi</string>
     <string name="ff_title">Hidangan Favorit</string>
     <string name="ff_desc">Hidangan yang kamu sukai, disajikan di satu tempat!</string>
+    <string name="hint_update_profile">Perbaharui Profil</string>
+
+
+    <string name="attribute_age">Usia</string>
+    <string name="user_age">&lt;b&gt;%d&lt;/b&gt; Tahun</string>
+    <string name="attribute_weight">Berat Badan</string>
+    <string name="user_weight">&lt;b&gt;%d&lt;/b&gt; Kg</string>
+    <string name="attribute_height">Tinggi Badan</string>
+    <string name="user_height">&lt;b&gt;%d&lt;/b&gt; Cm</string>
+
 
     <!-- Favorite Fragment -->
 

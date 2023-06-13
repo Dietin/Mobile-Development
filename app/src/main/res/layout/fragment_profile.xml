@@ -1,22 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false"
     tools:context=".ui.main_screen.profile.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_profile_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="250dp"
+        android:background="@color/satin_gold_calmer"
+        app:lottie_rawRes="@raw/lottie_profile_background"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_profile_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-36dp"
+        android:background="@drawable/banner_bottom"
+        app:cardBackgroundColor="@color/platinum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lottie_profile_background">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="110dp">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_age"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/cv_user_gender"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_user_age_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:gravity="center"
+                        android:text="@string/attribute_age"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_hour_glass"
+                        app:drawableTint="@color/satin_gold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/user_age"
+                        android:textSize="@dimen/text_size_sub1" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_gender"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_user_age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cv_user_age"
+                app:layout_constraintTop_toTopOf="@id/cv_user_age">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_user_gender_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="2dp"
+                        android:gravity="center"
+                        android:text="@string/attribute_gender"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_male_32"
+                        app:drawableTint="@color/satin_gold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="@dimen/text_size_sub1"
+                        tools:text="Pria" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_weight"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cv_user_height"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_user_age">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_user_weight_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="2dp"
+                        android:gravity="center"
+                        android:text="@string/attribute_weight"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_weight_32"
+                        app:drawableTint="@color/satin_gold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/user_weight"
+                        android:textSize="@dimen/text_size_sub1" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_height"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_user_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cv_user_weight"
+                app:layout_constraintTop_toTopOf="@id/cv_user_weight">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_user_height_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="2dp"
+                        android:gravity="center"
+                        android:text="@string/attribute_height"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_height_32"
+                        app:drawableTint="@color/satin_gold" />
+
+                    <TextView
+                        android:id="@+id/tv_user_height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/user_height"
+                        android:textSize="@dimen/text_size_sub1" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_profile_main"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginHorizontal="48dp"
+        app:cardCornerRadius="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/card_profile_detail"
+        app:layout_constraintBottom_toTopOf="@id/card_profile_detail"/>
+
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:background="@drawable/banner_all_rounded"
+        android:src="@drawable/ic_person"
+        app:layout_constraintStart_toStartOf="@id/card_profile_main"
+        app:layout_constraintEnd_toEndOf="@id/card_profile_main"
+        app:layout_constraintTop_toTopOf="@id/card_profile_main"
+        app:layout_constraintBottom_toTopOf="@id/card_profile_main"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_user_profile"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        app:lottie_rawRes="@raw/lottie_user_profile"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:background="@drawable/banner_all_rounded"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="@id/card_profile_main"
+        app:layout_constraintEnd_toEndOf="@id/card_profile_main"
+        app:layout_constraintTop_toTopOf="@id/card_profile_main"
+        app:layout_constraintBottom_toTopOf="@id/card_profile_main"/>
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        style="@style/DietinTextTitle"
+        tools:text="Nama Saya"
+        app:layout_constraintStart_toStartOf="@id/img_profile"
+        app:layout_constraintEnd_toEndOf="@id/img_profile"
+        app:layout_constraintTop_toBottomOf="@id/img_profile"/>
+
+    <TextView
+        android:id="@+id/tv_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="siapanih@gmail.com"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        app:layout_constraintStart_toStartOf="@id/tv_user_name"
+        app:layout_constraintEnd_toEndOf="@id/tv_user_name"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_update_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_update_profile"
+        android:background="@color/jet_calmer"
+        android:textColor="@color/white"
+        style="@style/DietinButton"
+        app:layout_constraintStart_toStartOf="@id/card_profile_main"
+        app:layout_constraintEnd_toEndOf="@id/card_profile_main"
+        app:layout_constraintTop_toBottomOf="@id/card_profile_main"
+        app:layout_constraintBottom_toBottomOf="@id/card_profile_main"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
