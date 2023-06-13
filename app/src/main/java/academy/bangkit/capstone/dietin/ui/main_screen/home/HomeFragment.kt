@@ -18,6 +18,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,6 +101,7 @@ class HomeFragment : Fragment() {
             else -> "Halo"
         }
         val name = Utils.getUser(requireContext())?.name
+        Log.e("HomeFragment", "setAllContent: ${Utils.getUser(requireContext())}}")
         binding.tvWelcome.text = Html.fromHtml(getString(R.string.home_welcome, greet, name), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
@@ -170,11 +172,14 @@ class HomeFragment : Fragment() {
                         totalCalories += fhg.totalCalories
                     }
 
-                    val foodCalories = AddFoodHistoryViewModel.FoodCalories(
-                        totalCalories,
-                        2000f // TODO: Get from userData
-                    )
-                    setCalories(foodCalories)
+                    lifecycleScope.launch {
+                        Log.e("totalCalories", viewModel.getUserData().toString())
+                        val foodCalories = AddFoodHistoryViewModel.FoodCalories(
+                            totalCalories,
+                            viewModel.getUserData()?.idealCalories ?: 0f
+                            )
+                        setCalories(foodCalories)
+                    }
                 }
                 is Result.Error -> {
                     Utils.setShimmerVisibility(binding.shimmerUserEat, false)
@@ -223,10 +228,6 @@ class HomeFragment : Fragment() {
                             else -> Pair("Cemilan", R.drawable.ic_eat_time_morning)
                         }
                         this.tvEatTitle.text = timeData.first
-//                        this.tvEatTitle.text = getString(
-//                            R.string.eat_title,
-//                            timeData.first
-//                        )
 
                         this.ivEatIcon.setImageResource(timeData.second)
                     }

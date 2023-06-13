@@ -1,11 +1,11 @@
 package academy.bangkit.capstone.dietin.utils
 
 import academy.bangkit.capstone.dietin.R
+import academy.bangkit.capstone.dietin.data.remote.model.DataUser
 import academy.bangkit.capstone.dietin.data.remote.model.User
 import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -13,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import kotlinx.coroutines.flow.first
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -39,6 +40,16 @@ object Utils {
     suspend fun setUser(context: Context, value: User?) {
         val pref = AppPreferences.getInstance(context.dataStore)
         pref.setUser(value)
+    }
+
+    suspend fun getUserData(context: Context): DataUser? {
+        val pref = AppPreferences.getInstance(context.dataStore)
+        return pref.getUserData().first()
+    }
+
+    suspend fun setUserData(context: Context, value: DataUser?) {
+        val pref = AppPreferences.getInstance(context.dataStore)
+        pref.setUserData(value)
     }
 
     suspend fun getIsUserFirstTime(context: Context): Int {
@@ -74,7 +85,7 @@ object Utils {
         view.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                MaterialTheme {
+                Mdc3Theme {
                     composable()
                 }
             }

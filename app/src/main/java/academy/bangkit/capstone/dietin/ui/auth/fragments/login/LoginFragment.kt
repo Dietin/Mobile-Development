@@ -85,10 +85,6 @@ class LoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 if (it.token.isNotEmpty()) {
-                    // Save token to preferences
-                    Utils.setToken(requireContext(), it.token)
-                    Utils.setUser(requireContext(), it.user)
-
                     // Go to homepage
                     val intent = Intent(requireContext(), MainScreenActivity::class.java)
                     startActivity(intent)

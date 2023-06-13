@@ -77,10 +77,11 @@ class OnboardingActivity : AppCompatActivity() {
                 weight = 0f,
                 height = 0f,
                 bmr = 0f,
-                activityLevel = 0,
+                activityLevel = 0f,
                 gender = -1, // 0 laki2, 1 perempuan
                 idealCalories = 0f,
                 goal = 0,
+                currentWeight = 0f,
                 user = user
             )
             userData = viewModel.userData.value!!

@@ -16,8 +16,11 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
@@ -31,6 +34,7 @@ class AddFoodHistoryActivity : AppCompatActivity() {
     private var maxCalories = 2010.0f
     private var currentCalories = 1620.0f
     private var jumlahPorsi = 1f
+    private var isFavorite = false
 
     private var selectedDate = Calendar.getInstance()
     private var selectedWaktuMakan = 0
@@ -49,6 +53,14 @@ class AddFoodHistoryActivity : AppCompatActivity() {
         setupViewModelBinding()
         loader = Utils.generateLoader(this)
         setContentView(binding.root)
+
+        val recipeIntent = intent.getParcelableExtra<Recipe>(EXTRA_RECIPE)
+        if (recipeIntent != null) {
+            setupData(recipeIntent)
+        } else {
+            Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
         binding.btnNavigateUp.setOnClickListener {
             onBackPressed()
@@ -73,18 +85,29 @@ class AddFoodHistoryActivity : AppCompatActivity() {
             viewModel.addFoodHistory(food)
         }
 
-        val recipeIntent = intent.getParcelableExtra<Recipe>(EXTRA_RECIPE)
-        if (recipeIntent != null) {
-            setupData(recipeIntent)
-        } else {
-            Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-            finish()
+        binding.btnFavourite.setOnClickListener {
+            it.isEnabled = false
+            lifecycleScope.launch {
+                val result = if (isFavorite) {
+                    viewModel.removeFavourite()
+                } else {
+                    viewModel.setFavourite()
+                }
+
+                if (result) {
+                    isFavorite = !isFavorite
+                    setFavouriteBtnState(isFavorite)
+                }
+                it.isEnabled = true
+            }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setupData(recipe: Recipe) {
         this.recipe = recipe
+
+        viewModel.setRecipeId(recipe.id)
 
         // Initialize UI
         Glide.with(this)
@@ -219,12 +242,19 @@ class AddFoodHistoryActivity : AppCompatActivity() {
             getLayoutParamsLL(binding.lpiKaloriTerpenuhi).weight = currentCaloriesPerc
         }
 
-//        viewModel.loadingTask.observe(this) {
-//            if (it <= 0) {
-//                // Semua loading sudah selesai
-//                loader.dismiss()
-//            }
-//        }
+        viewModel.isFavourite.observe(this) {
+            setFavouriteBtnState(it)
+            isFavorite = it
+            binding.btnFavourite.isEnabled = true
+        }
+    }
+
+    private fun setFavouriteBtnState(state: Boolean) {
+        if (state) {
+            binding.btnFavourite.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_filled)
+        } else {
+            binding.btnFavourite.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_outlined)
+        }
     }
 
     companion object {

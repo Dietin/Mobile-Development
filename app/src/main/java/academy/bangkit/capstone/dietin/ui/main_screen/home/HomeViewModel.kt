@@ -38,6 +38,8 @@ class HomeViewModel(private val application: Application) : ViewModel() {
         getCaloriesHistory()
     }
 
+    suspend fun getUserData() = Utils.getUserData(application)
+
     fun getAllRecommendations() = viewModelScope.launch {
         try {
             _recommendations.value = Result.Loading
@@ -50,12 +52,10 @@ class HomeViewModel(private val application: Application) : ViewModel() {
             _recommendations.value = Result.Success(data)
         } catch (e: IOException) {
             // No Internet Connection
-            _message.value = Event(e.message.toString())
             _recommendations.value = Result.Error(e.message.toString())
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
-            _message.value = Event(errorResponse.message)
             _recommendations.value = Result.Error(errorResponse.message)
         }
     }
@@ -70,12 +70,10 @@ class HomeViewModel(private val application: Application) : ViewModel() {
             _categories.value = Result.Success(data)
         } catch (e: IOException) {
             // No Internet Connection
-            _message.value = Event(e.message.toString())
             _categories.value = Result.Error(e.message.toString())
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
-            _message.value = Event(errorResponse.message)
             _categories.value = Result.Error(errorResponse.message)
         }
     }
@@ -101,12 +99,10 @@ class HomeViewModel(private val application: Application) : ViewModel() {
             _foodCaloriesHistory.value = Result.Success(fchFiltered)
         } catch (e: IOException) {
             // No Internet Connection
-            _message.value = Event(e.message.toString())
             _foodCaloriesHistory.value = Result.Error(e.message.toString())
         } catch (e: HttpException) {
             // Error Response (4xx, 5xx)
             val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
-            _message.value = Event(errorResponse.message)
             _foodCaloriesHistory.value = Result.Error(errorResponse.message)
         }
     }

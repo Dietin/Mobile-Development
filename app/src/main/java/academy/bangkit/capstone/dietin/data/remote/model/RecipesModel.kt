@@ -47,7 +47,31 @@ data class RecipeIngredient(
     @SerializedName("recipe_id")
     val recipeId: Int,
     @SerializedName("amount")
-    val amount: Float
+    val amount: Float,
+    @SerializedName("recipe_ingredients_detail")
+    val ingredient: RecipeIngredientDetail
+)
+
+data class RecipeIngredientDetail(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("recipe_ingredients_weights")
+    val weights: List<RecipeIngredientWeights>
+)
+
+data class RecipeIngredientWeights(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("recipe_ingredient_id")
+    val recipeIngredientId: Int,
+    @SerializedName("amount")
+    val amount: Float,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("grams")
+    val grams: Float
 )
 
 @Parcelize

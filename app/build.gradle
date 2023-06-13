@@ -60,6 +60,9 @@ dependencies {
     // Lottie
     implementation "com.airbnb.android:lottie:6.0.0"
 
+    // Circle Image View
+    implementation "de.hdodenhof:circleimageview:3.1.0"
+
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
@@ -83,6 +86,8 @@ dependencies {
     implementation 'androidx.compose.runtime:runtime:1.4.3'
     implementation 'androidx.compose.ui:ui-viewbinding:1.4.3'
     implementation 'androidx.compose.ui:ui-tooling:1.4.3'
+    implementation "androidx.compose.runtime:runtime-livedata:1.5.0-beta01"
+    implementation "com.google.accompanist:accompanist-themeadapter-material3:0.31.3-beta"
 
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

@@ -4,7 +4,6 @@ import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentOnboarding4Binding
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +42,7 @@ class Onboarding4Fragment : Fragment() {
         }
 
         // Tinggi on text change
-        binding.tilTinggi.editText?.doOnTextChanged { text, start, before, count ->
+        binding.tilTinggi.editText?.doOnTextChanged { text, _, _, _ ->
             val tinggi = try {
                 text.toString().toFloat()
             } catch (e: Exception) {
@@ -54,25 +53,51 @@ class Onboarding4Fragment : Fragment() {
         }
 
         // Berat on text change
-        binding.tilBerat.editText?.doOnTextChanged { text, start, before, count ->
+        binding.tilBerat.editText?.doOnTextChanged { text, _, _, _ ->
             val berat = try {
                 text.toString().toFloat()
             } catch (e: Exception) {
                 0f
             }
-            activity.userData.weight = berat
+            activity.userData.currentWeight = berat
             updateButtonContinue()
         }
 
         // Umur on text change
-        binding.tilUmur.editText?.doOnTextChanged { text, start, before, count ->
+        binding.tilUmur.editText?.doOnTextChanged { text, _, _, _ ->
             val umur = try {
                 text.toString().toInt()
             } catch (e: Exception) {
                 0
             }
             activity.userData.age = umur
+
+            if (umur < 17 && umur != 0) {
+                binding.tilUmur.error = "Umur minimal 17 tahun"
+            } else {
+                binding.tilUmur.error = null
+            }
             updateButtonContinue()
+        }
+
+        binding.tilBeratHarapan.editText?.doOnTextChanged { text, start, before, count ->
+            val beratHarapan = try {
+                text.toString().toFloat()
+            } catch (e: Exception) {
+                0f
+            }
+            when {
+                activity.userData.goal == 1 && beratHarapan > activity.userData.currentWeight -> {
+                    binding.tilBeratHarapan.error = "Berat harapan harus lebih kecil dari berat sekarang"
+                }
+                activity.userData.goal == 3 && beratHarapan < activity.userData.currentWeight -> {
+                    binding.tilBeratHarapan.error = "Berat harapan harus lebih besar dari berat sekarang"
+                }
+                else -> {
+                    binding.tilBeratHarapan.error = null
+                    activity.userData.weight = beratHarapan
+                }
+            }
         }
     }
 
@@ -82,7 +107,6 @@ class Onboarding4Fragment : Fragment() {
     }
 
     private fun setupData() {
-        Log.e("activity.userData.gender", activity.userData.gender.toString())
         binding.actGender.setText(when(activity.userData.gender) {
             0 -> "Pria"
             1 -> "Wanita"
@@ -112,7 +136,8 @@ class Onboarding4Fragment : Fragment() {
             activity.userData.gender != -1 &&
             activity.userData.height != 0f &&
             activity.userData.weight != 0f &&
-            activity.userData.age != 0
+            activity.userData.age >= 17 &&
+            binding.tilBeratHarapan.error == null
         ) {
             activity.setButtonContinueState(true)
         } else {

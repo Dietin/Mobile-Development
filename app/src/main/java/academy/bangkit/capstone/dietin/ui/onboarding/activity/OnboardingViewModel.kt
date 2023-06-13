@@ -30,11 +30,40 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
     fun uploadUserData() = viewModelScope.launch {
         _isLoading.value = true
         try {
+            // Flip gender: 0 -> 1, 1 -> 0
+            userData.value!!.gender = if (userData.value!!.gender == 0) 1 else 0
             val token = Utils.getToken(application)
-            ApiConfig.getApiService().onboarding(
+            val data = ApiConfig.getApiService().onboarding(
                 token = "Bearer $token",
                 dataUser = userData.value!!
+            ).data
+
+            // Save user data
+            predictCalories(data)
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+            _isSuccess.value = false
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+            _isSuccess.value = false
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    fun predictCalories(data: DataUser) = viewModelScope.launch {
+        _isLoading.value = true
+        try {
+            ApiConfig.getApiServiceML().predictCalories(
+                userId = data.userId,
+                body = userData.value!!
             )
+
+            // Save to preference
+            Utils.setUserData(application, data)
             _isSuccess.value = true
         } catch (e: IOException) {
             // No Internet Connection

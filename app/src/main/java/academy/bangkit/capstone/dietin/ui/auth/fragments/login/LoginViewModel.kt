@@ -4,6 +4,7 @@ import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
 import academy.bangkit.capstone.dietin.data.remote.model.LoginInnerResponse
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
+import academy.bangkit.capstone.dietin.utils.Utils
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,10 +31,17 @@ class LoginViewModel(private val application: Application): ViewModel() {
     fun clientLogin(email: String, password: String) = viewModelScope.launch {
         try {
             _isLoading.value = true
-            _loginResult.value = ApiConfig.getApiService().login(
+            val data = ApiConfig.getApiService().login(
                 email = email,
                 password = password
-            ).data!!
+            ).data
+
+            // Set preferences
+            Utils.setToken(application, data.token)
+            Utils.setUser(application, data.user)
+            Utils.setUserData(application, data.dataUser)
+
+            _loginResult.value = data
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())

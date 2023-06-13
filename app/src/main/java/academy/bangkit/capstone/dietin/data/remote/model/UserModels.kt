@@ -25,13 +25,15 @@ data class DataUser(
     @SerializedName("bmr")
     val bmr: Float,
     @SerializedName("activity_level")
-    var activityLevel: Int,
+    var activityLevel: Float,
     @SerializedName("gender")
     var gender: Int,
     @SerializedName("idealCalories")
     val idealCalories: Float,
-    @SerializedName("goal")
-    var goal: Int?, // Sebenarnya tidak ada di API, tapi untuk memudahkan di UI, jadi ditambahkan
+    @SerializedName("diet_objective")
+    var goal: Int, // Sebenarnya tidak ada di API, tapi untuk memudahkan di UI, jadi ditambahkan
+    @SerializedName("current_weight")
+    var currentWeight: Float,
     @SerializedName("user")
     val user: User?,
 )

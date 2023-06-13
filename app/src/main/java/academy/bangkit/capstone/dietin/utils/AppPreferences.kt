@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.utils
 
+import academy.bangkit.capstone.dietin.data.remote.model.DataUser
 import academy.bangkit.capstone.dietin.data.remote.model.User
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.map
 class AppPreferences private constructor(private val dataStore: DataStore<Preferences>) {
     private val TOKEN_KEY = stringPreferencesKey(token_key)
     private val USER_KEY = stringPreferencesKey(user_key)
+    private val USER_DATA_KEY = stringPreferencesKey(user_data_key)
     private val IS_USER_FIRST_TIME_KEY = intPreferencesKey(iuft_key)
 
     /**
@@ -45,6 +47,18 @@ class AppPreferences private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    fun getUserData(): Flow<DataUser?> {
+        return dataStore.data.map { p ->
+            Gson().fromJson(p[USER_DATA_KEY] ?: "null", DataUser::class.java)
+        }
+    }
+
+    suspend fun setUserData(value: DataUser?) {
+        dataStore.edit { p ->
+            p[USER_DATA_KEY] = Gson().toJson(value)
+        }
+    }
+
     fun getIsUserFirstTime(): Flow<Int> {
         return dataStore.data.map { p ->
             p[IS_USER_FIRST_TIME_KEY] ?: 0
@@ -60,6 +74,7 @@ class AppPreferences private constructor(private val dataStore: DataStore<Prefer
     companion object {
         const val token_key = "token"
         const val user_key = "user"
+        const val user_data_key = "user_data"
         const val iuft_key = "is_user_first_time"
         private var INSTANCE: AppPreferences? = null
 

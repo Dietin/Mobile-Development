@@ -31,6 +31,8 @@ data class LoginInnerResponse(
     val user: User,
     @SerializedName("access_token")
     val token: String,
+    @SerializedName("data_user")
+    val dataUser: DataUser
 )
 
 

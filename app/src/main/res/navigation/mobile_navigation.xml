@@ -19,10 +19,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="academy.bangkit.capstone.dietin.ui.main_screen.search.SearchFragment"
+        android:id="@+id/navigation_favourite"
+        android:name="academy.bangkit.capstone.dietin.ui.main_screen.favourite.FavouriteFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_favourite" />
 
     <fragment
         android:id="@+id/navigation_history"

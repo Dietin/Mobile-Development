@@ -1,14 +1,11 @@
 package academy.bangkit.capstone.dietin.di
 
-import android.content.Context
+import academy.bangkit.capstone.dietin.data.remote.ApplicationRepository
+import android.app.Application
 
 object Injection {
-    /**
-     * TODO: Provide repository
-     * @see com.dicoding.newsapp.di.Injection
-     */
-    fun provideRepository(context: Context): Any {
-        return Any()
+    fun provideRepository(application: Application): ApplicationRepository {
+        return ApplicationRepository.getInstance(application)
     }
 
 //    fun provideRepository(context: Context): NewsRepository {

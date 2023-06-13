@@ -28,7 +28,7 @@ interface ApiService {
     suspend fun onboarding(
         @Header("Authorization") token: String,
         @Body dataUser: DataUser
-    )
+    ): ApiResponse<DataUser>
 
     @GET("recipe")
     suspend fun getRecommendations(
@@ -36,6 +36,12 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): ApiResponse<List<Recipe>>
+
+    @GET("recipe/{id}")
+    suspend fun getRecipeDetail(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): ApiResponse<Recipe>
 
     @GET("recipe/search")
     suspend fun searchGlobal(
@@ -66,25 +72,38 @@ interface ApiService {
     ): ApiResponse<List<SearchHistory>>
 
     @POST("searchHistory")
+    @FormUrlEncoded
     suspend fun addSearchHistory(
         @Header("Authorization") token: String,
-        @Body searchHistory: SearchHistory
+        @Field("recipe_id") recipeId: Int,
     ): ApiResponse<SearchHistory>
+
+    @DELETE("deleteAllSearchHistory")
+    suspend fun deleteAllSearchHistory(
+        @Header("Authorization") token: String
+    ): ApiResponse<Nothing>
 
     @GET("favorite")
     suspend fun getFavouriteRecipes(
         @Header("Authorization") token: String
     ): ApiResponse<List<FavouriteRecipe>>
 
+    @GET("checkFavorite/{id}")
+    suspend fun checkIsFavourite(
+        @Header("Authorization") token: String,
+        @Path("id") recipeId: Int
+    ): ApiResponse<FavouriteRecipe?>
+
     @POST("favorite")
+    @FormUrlEncoded
     suspend fun addFavouriteRecipe(
         @Header("Authorization") token: String,
-        @Body favourite: FavouriteRecipe
+        @Field("recipe_id") recipeId: Int
     ): ApiResponse<FavouriteRecipe>
 
     @DELETE("favorite/{id}")
     suspend fun deleteFavouriteRecipe(
         @Header("Authorization") token: String,
-        @Path("id") id: Int
+        @Path("id") recipeId: Int
     ): ApiResponse<Nothing>
 }

@@ -3,12 +3,14 @@ package academy.bangkit.capstone.dietin.utils
 import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationViewModel
 import academy.bangkit.capstone.dietin.ui.auth.fragments.login.LoginViewModel
 import academy.bangkit.capstone.dietin.ui.auth.fragments.register.RegisterViewModel
+import academy.bangkit.capstone.dietin.ui.food_detail.FoodDetailViewModel
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.home.HomeViewModel
 import academy.bangkit.capstone.dietin.ui.main_screen.profile.ProfileViewModel
-import academy.bangkit.capstone.dietin.ui.main_screen.search.before.BeforeSearchViewModel
-import academy.bangkit.capstone.dietin.ui.main_screen.search.on.OnSearchViewModel
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
+import academy.bangkit.capstone.dietin.ui.search.RecipeSearchViewModel
+import academy.bangkit.capstone.dietin.ui.search.before.BeforeSearchViewModel
+import academy.bangkit.capstone.dietin.ui.search.on.OnSearchViewModel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +28,8 @@ class ViewModelFactory private constructor(private val application: Application)
             modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> OnboardingViewModel(application) as T
             modelClass.isAssignableFrom(OnSearchViewModel::class.java) -> OnSearchViewModel(application) as T
             modelClass.isAssignableFrom(BeforeSearchViewModel::class.java) -> BeforeSearchViewModel(application) as T
+            modelClass.isAssignableFrom(RecipeSearchViewModel::class.java) -> RecipeSearchViewModel(application) as T
+            modelClass.isAssignableFrom(FoodDetailViewModel::class.java) -> FoodDetailViewModel(application) as T
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
     }

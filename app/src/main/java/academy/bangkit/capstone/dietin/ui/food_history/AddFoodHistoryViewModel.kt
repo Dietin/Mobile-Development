@@ -3,6 +3,7 @@ package academy.bangkit.capstone.dietin.ui.food_history
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
+import academy.bangkit.capstone.dietin.di.Injection
 import academy.bangkit.capstone.dietin.utils.Event
 import academy.bangkit.capstone.dietin.utils.Utils
 import android.app.Application
@@ -28,15 +29,23 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
     private val _calories = MutableLiveData<FoodCalories>()
     val calories: LiveData<FoodCalories> = _calories
 
-    // Holder: berapa banyak task lagi yang harus dikerjakan sebelum loading selesai
-//    private var _loadingTask = MutableLiveData<Int>(1)
-//    val loadingTask: LiveData<Int> = _loadingTask
+    private val _isFavourite = MutableLiveData<Boolean>()
+    val isFavourite: LiveData<Boolean> = _isFavourite
 
-//    init {
-//        loadingTask.observeForever {
-//            _isLoading.value = it > 0
-//        }
-//    }
+    private var recipeId = 0
+
+    suspend fun setFavourite() = Injection.provideRepository(application).addFavourite(recipeId)
+    suspend fun removeFavourite() = Injection.provideRepository(application).removeFavourite(recipeId)
+
+    fun setRecipeId(recipeId: Int) {
+        if (this.recipeId == 0) {
+            this.recipeId = recipeId
+        }
+
+        viewModelScope.launch {
+            _isFavourite.value = Injection.provideRepository(application).checkIsFavourite(recipeId) != null
+        }
+    }
 
     fun getCalories(date: String) = viewModelScope.launch {
         val recommendedCalories = 2000f

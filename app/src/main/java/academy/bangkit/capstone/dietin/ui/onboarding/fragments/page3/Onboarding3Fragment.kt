@@ -59,16 +59,16 @@ class Onboarding3Fragment : Fragment() {
             card.setOnClickListener {
                 uncheckAllRadioCard(linearLayout)
                 updateRadioCard(card, true)
-                activity.userData.activityLevel = i+1
+                activity.userData.activityLevel = i+1f
                 activity.setButtonContinueState(true)
             }
 
-            if (selected-1 == i) {
+            if (selected.toInt()-1 == i) {
                 updateRadioCard(card, true)
             }
         }
 
-        if (selected == 0) {
+        if (selected.toInt() == 0) {
             activity.setButtonContinueState(false)
         } else {
             activity.setButtonContinueState(true)

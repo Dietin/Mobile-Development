@@ -79,6 +79,7 @@ class FirstFragment : Fragment() {
     private suspend fun logout() {
         Utils.setToken(requireContext(), "")
         Utils.setUser(requireContext(), null)
+        Utils.setUserData(requireContext(), null)
         // Start AuthenticationActivity
         val intent = Intent(requireContext(), AuthenticationActivity::class.java)
         startActivity(intent)

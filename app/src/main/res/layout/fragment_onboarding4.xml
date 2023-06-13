@@ -114,6 +114,27 @@
                 android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Berapa berat badan yang kamu harapkan dengan menggunakan aplikasi ini?" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBeratHarapan"
+            style="@style/DietinTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:suffixText="kg">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Berat Badan Harapan"
+                android:inputType="number|numberDecimal"
+                android:lines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
