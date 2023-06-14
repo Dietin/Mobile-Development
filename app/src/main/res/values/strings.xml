@@ -204,4 +204,11 @@
 
     <!-- RecipeSearchActivity -->
     <string name="rs_all_category">Semua</string>
+    <string name="dietin_premium">Dietin Premium</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="subscription_price">Dapatkan Sekarang\nRp. 10.000 / Bulan</string>
+    <string name="subscription_title_1">Rencana Premium\nTahunan</string>
+    <string name="_2000_recipes">+ 10000+ recipes\n+ Location based recipes\n+ Protein Summary\n+ Fat Summary</string>
+    <string name="hint_total_protein">Total Protein</string>
 </resources>

@@ -42,6 +42,7 @@ class LoginFragment : Fragment() {
 
             val listElements : ArrayList<Pair<View, String>> = ArrayList()
 
+            listElements.add(Pair(binding.mainLogo, "se_main_logo"))
             listElements.add(Pair(binding.inputEmail, "se_name"))
             listElements.add(Pair(binding.inputPassword, "se_password"))
             listElements.add(Pair(binding.btnLogin, "se_main_button"))

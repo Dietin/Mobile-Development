@@ -148,6 +148,80 @@
 
 
                     <TextView
+                        android:id="@+id/tv_total_protein"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_total_protein"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="@id/divider_1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_total_calories_value"
+                        app:layout_constraintTop_toBottomOf="@id/divider_1"/>
+
+                    <TextView
+                        android:id="@+id/tv_total_protein_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|end"
+                        android:clickable="true"
+                        app:layout_constraintTop_toTopOf="@id/tv_total_protein"
+                        app:layout_constraintEnd_toEndOf="@id/divider_1"
+                        app:drawableTint="@color/satin_gold"
+                        app:drawableStartCompat="@drawable/ic_lock" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/platinum"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:thickness="1dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_total_protein_value"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_total_fat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_total_protein"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_sub2"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="@id/divider_2"
+                        app:layout_constraintEnd_toStartOf="@id/tv_total_calories_value"
+                        app:layout_constraintTop_toBottomOf="@id/divider_2"/>
+
+                    <TextView
+                        android:id="@+id/tv_total_fat_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|end"
+                        android:clickable="true"
+                        app:layout_constraintTop_toTopOf="@id/tv_total_fat"
+                        app:layout_constraintEnd_toEndOf="@id/divider_2"
+                        app:drawableStartCompat="@drawable/ic_lock"
+                        app:drawableTint="@color/satin_gold" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/platinum"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        app:thickness="1dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_total_fat_value"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+                    <TextView
                         android:id="@+id/tv_total_calories"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -155,9 +229,9 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_sub2"
                         android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="@id/divider_1"
+                        app:layout_constraintStart_toStartOf="@id/divider_3"
                         app:layout_constraintEnd_toStartOf="@id/tv_total_calories_value"
-                        app:layout_constraintTop_toBottomOf="@id/divider_1"/>
+                        app:layout_constraintTop_toBottomOf="@id/divider_3"/>
 
 
                     <TextView
@@ -169,11 +243,11 @@
                         android:textColor="@color/white"
                         android:gravity="center_vertical|end"
                         app:layout_constraintTop_toTopOf="@id/tv_total_calories"
-                        app:layout_constraintEnd_toEndOf="@id/divider_1"/>
+                        app:layout_constraintEnd_toEndOf="@id/divider_3"/>
 
 
                     <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/divider_2"
+                        android:id="@+id/divider_4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/platinum"
@@ -191,9 +265,9 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_sub2"
                         android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="@id/divider_2"
+                        app:layout_constraintStart_toStartOf="@id/divider_4"
                         app:layout_constraintEnd_toStartOf="@id/tv_target_calories_value"
-                        app:layout_constraintTop_toBottomOf="@id/divider_2"/>
+                        app:layout_constraintTop_toBottomOf="@id/divider_4"/>
 
 
                     <TextView
@@ -206,7 +280,7 @@
                         android:textStyle="bold"
                         android:gravity="center_vertical|end"
                         app:layout_constraintTop_toTopOf="@id/tv_target_calories"
-                        app:layout_constraintEnd_toEndOf="@id/divider_2"/>
+                        app:layout_constraintEnd_toEndOf="@id/divider_4"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

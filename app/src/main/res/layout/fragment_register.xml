@@ -45,13 +45,14 @@
             android:clipToPadding="false">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/main_logo"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
                 android:src="@mipmap/ic_launcher"
-                android:contentDescription="@string/app_name" />
+                android:contentDescription="@string/app_name"
+                android:transitionName="se_main_logo"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/top_card"

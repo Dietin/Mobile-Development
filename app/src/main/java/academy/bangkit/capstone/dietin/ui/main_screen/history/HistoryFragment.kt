@@ -3,9 +3,11 @@ package academy.bangkit.capstone.dietin.ui.main_screen.history
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.databinding.FragmentHistoryBinding
+import academy.bangkit.capstone.dietin.ui.subscription.SubscriptionActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -127,6 +129,16 @@ class HistoryFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             selectedDate.add(Calendar.DAY_OF_MONTH, -1)
             setTanggal(selectedDate)
+        }
+
+        binding.tvTotalProteinValue.setOnClickListener {
+            val subsIntent = Intent(requireContext(), SubscriptionActivity::class.java)
+            startActivity(subsIntent)
+        }
+
+        binding.tvTotalFatValue.setOnClickListener {
+            val subsIntent = Intent(requireContext(), SubscriptionActivity::class.java)
+            startActivity(subsIntent)
         }
 
 
