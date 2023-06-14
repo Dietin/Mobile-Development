@@ -26,6 +26,8 @@
         android:layout_marginHorizontal="64dp"
         android:layout_marginVertical="108dp"
         app:shimmer_base_alpha="0.9"
+        app:shimmer_highlight_alpha="0.5"
+        app:shimmer_duration="1200"
         app:shimmer_auto_start="true">
 
         <androidx.cardview.widget.CardView
