@@ -40,19 +40,20 @@
             android:gravity="center"
             android:layout_weight="1">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_pick_date"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:padding="0dp"
-                style="@style/DietinTextButton"
-                android:text="@string/hint_pick_date"
                 android:textColor="@color/platinum"
+                android:text="@string/hint_pick_date"
                 android:textSize="@dimen/text_size_sub4"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                app:drawableEndCompat="@drawable/ic_arrow_dropdown_down"
-                app:drawableTint="@color/platinum" />
+                android:gravity="center"
+                style="@style/DietinTextButton"
+                app:icon="@drawable/ic_arrow_dropdown_down"
+                app:iconGravity="textEnd"
+                app:iconTint="@color/platinum"
+                app:drawableTint="@color/platinum"/>
 
             <TextView
                 android:id="@+id/tv_history_date"
@@ -87,17 +88,20 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clipToPadding="false"
+            android:padding="24dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 app:cardBackgroundColor="@color/gunmetal_calmer"
                 app:cardCornerRadius="16dp">
 
@@ -188,7 +192,7 @@
                         android:id="@+id/tv_total_fat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/hint_total_protein"
+                        android:text="@string/hint_total_fat"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_sub2"
                         android:layout_marginTop="16dp"
@@ -291,9 +295,9 @@
                 android:id="@+id/cv_food_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"/>
+                android:layout_marginTop="24dp"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
 
     </ScrollView>

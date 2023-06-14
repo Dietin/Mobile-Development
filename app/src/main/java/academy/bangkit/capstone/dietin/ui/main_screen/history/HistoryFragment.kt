@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +32,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -164,14 +167,13 @@ class HistoryFragment : Fragment() {
     }
 
 
-
     @Composable
     fun SetTable(){
         val currentFoodHistory by viewModel.currentFoodHistory.observeAsState()
         val userData by viewModel.userData.observeAsState()
 
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
             val totalCaloriesEaten = currentFoodHistory?.sumOf { it.totalCalories.toDouble() }?.toFloat() ?: 0f
 
@@ -225,6 +227,7 @@ class HistoryFragment : Fragment() {
     ){
         Card(
             elevation = 2.dp,
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -241,6 +244,7 @@ class HistoryFragment : Fragment() {
                     Text(
                         text = eatTime,
                         fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.inter)),
                         color = colorResource(id = R.color.white)
                     )
 
@@ -249,6 +253,7 @@ class HistoryFragment : Fragment() {
                     Text(
                         text = "${String.format(Locale.getDefault(), "%,.1f", percentFood)}%",
                         fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.inter)),
                         color = colorResource(id = R.color.white),
                         modifier = Modifier
                             .padding(end = 16.dp)
@@ -258,6 +263,7 @@ class HistoryFragment : Fragment() {
                     Text(
                         text = "$totalCalories kal",
                         fontSize = 12.sp,
+                        fontFamily = FontFamily(Font(R.font.inter)),
                         fontWeight = FontWeight.Bold,
                         color = colorResource(id = R.color.satin_gold),
                         modifier = Modifier.align(Alignment.CenterVertically)
@@ -265,12 +271,18 @@ class HistoryFragment : Fragment() {
 
                 }
 
-                dataHistory.forEach {
-                    FoodList(
-                        foodName = it.recipe?.name ?: it.recipeId,
-                        foodCalories = it.calories.toInt()
-                    )
+                if(dataHistory.isNotEmpty()){
+                    dataHistory.forEach {
+                        FoodList(
+                            foodName = it.recipe?.name ?: it.recipeId,
+                            foodCalories = it.calories.toInt()
+                        )
+                    }
+                } else {
+                    FoodList(foodName = "-", foodCalories = 0)
                 }
+
+
 
             }
         }
@@ -285,9 +297,15 @@ class HistoryFragment : Fragment() {
         Row(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         ){
-            Text(text = foodName)
+            Text(
+                text = foodName,
+                fontFamily = FontFamily(Font(R.font.inter)),
+            )
             Spacer(modifier = Modifier.weight(1f))
-            Text(text = "${foodCalories} Kalori")
+            Text(
+                text = "${foodCalories} Kalori",
+                fontFamily = FontFamily(Font(R.font.inter)),
+            )
         }
     }
 
