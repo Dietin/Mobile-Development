@@ -1,201 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Diet!n</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="loading">•••</string>
-    <string name="no_data">Tidak ada data</string>
-
-    <!--    login & register resource -->
-    <string name="login_welcome">Selamat Datang!</string>
-    <string name="login">Masuk ke Akun</string>
-    <string name="login_hint_forget_password"><u>Lupa Password</u></string>
-    <string name="login_hint_no_account">Belum ada Akun? <u><b>Daftar</b></u>.</string>
-    <string name="login_hint_log_in">Masuk</string>
-    <string name="login_hint_login_with_google">Masuk dengan Google</string>
-    <string name="login_or">atau</string>
-
-    <string name="register_welcome">Salam Kenal! :)</string>
-    <string name="register">Daftar Akun Baru</string>
-    <string name="register_hint_have_account">Sudah memiliki Akun? <u><b>Masuk</b></u>.</string>
-
-    <string name="attribute_username">Username</string>
-    <string name="attribute_password">Password</string>
-    <string name="attribute_email">Email</string>
-    <string name="attribute_name">Nama</string>
-    <string name="attribute_gender">Jenis Kelamin</string>
-    <string name="login_hint_make_account">Buat Akun</string>
-
     <string-array name="genders">
-        <item>Pria</item>
-        <item>Wanita</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
     <string-array name="diet_tips">
-        <item>bahwa dengan minum teh hijau secara teratur dapat meningkatkan metabolisme dan membantu penurunan berat badan karena kandungan katekinnya yang tinggi?</item>
-        <item>bahwa rempah-rempah tertentu seperti kunyit dan kayu manis memiliki sifat antiradang dan dapat mendukung pencernaan yang sehat jika dimasukkan ke dalam makananmu?</item>
-        <item>bahwa mengonsumsi asam lemak omega-3, yang ditemukan dalam makanan seperti salmon dan kenari, dapat membantu menurunkan risiko penyakit jantung dan meningkatkan kesehatan otak?</item>
-        <item>bahwa dark chocolate dengan persentase kakao yang tinggi (70% atau lebih) mengandung antioksidan dan mungkin memiliki efek positif pada kesehatan jantung jika dikonsumsi dalam jumlah sedang?</item>
-        <item>bahwa probiotik, yang biasa ditemukan dalam yogurt dan makanan fermentasi, dapat meningkatkan mikrobioma usus yang sehat dan mendukung kesehatan pencernaan?</item>
-        <item>bahwa alpukat adalah sumber lemak sehat yang baik dan mengandung serat, yang dapat membantu mengatur kadar kolesterol dan membuat kamu merasa kenyang lebih lama?</item>
-        <item>bahwa buah beri, seperti blueberry dan stroberi, dikemas dengan antioksidan yang dapat melindungi dari kerusakan sel dan membantu meningkatkan daya ingat dan fungsi kognitif?</item>
-        <item>bahwa sayuran silangan seperti brokoli, kol, dan kembang kol kaya akan vitamin, mineral, dan serat, dan mungkin memiliki sifat melawan kanker?</item>
-        <item>bahwa memasukkan legum seperti lentil, buncis, dan kacang hitam ke dalam makanan kamu dapat memberikan sumber protein, serat, dan nutrisi nabati yang baik?</item>
-        <item>bahwa minum air dalam jumlah yang cukup dapat meningkatkan metabolisme, membantu pencernaan, dan membantu menjaga kesehatan kulit?</item>
+        <item>that drinking green tea regularly can boost metabolism and aid in weight loss due to its high concentration of catechins?</item>
+        <item>that certain spices like turmeric and cinnamon have anti-inflammatory properties and can support healthy digestion when incorporated into your diet?</item>
+        <item>that consuming omega-3 fatty acids, found in foods like salmon and walnuts, can help lower the risk of heart disease and improve brain health?</item>
+        <item>that dark chocolate with a high percentage of cocoa (70% or more) contains antioxidants and may have positive effects on heart health when consumed in moderation?</item>
+        <item>that probiotics, commonly found in yogurt and fermented foods, can promote a healthy gut microbiome and support digestive health?</item>
+        <item>that avocados are a good source of healthy fats and contain fiber, which can help regulate cholesterol levels and keep you feeling full for longer?</item>
+        <item>that berries, such as blueberries and strawberries, are packed with antioxidants that can protect against cell damage and help improve memory and cognitive function?</item>
+        <item>that cruciferous vegetables like broccoli, cabbage, and cauliflower are rich in vitamins, minerals, and fiber, and may have cancer-fighting properties?</item>
+        <item>that incorporating legumes like lentils, chickpeas, and black beans into your diet can provide a good source of plant-based protein, fiber, and nutrients?</item>
+        <item>that drinking an adequate amount of water can improve metabolism, aid in digestion, and help maintain healthy skin?</item>
     </string-array>
 
-    <!-- Navigation bar buttons -->
+    <string name="loading" translatable="false">•••</string>
+
+    <string name="app_name">Diet!n</string>
+    <string name="no_data">No data</string>
+    <string name="login_welcome">Welcome!</string>
+    <string name="login">Log in to your account</string>
+    <string name="login_hint_no_account">No account yet? <u><b>Register</b></u>.</string>
+    <string name="login_hint_log_in">Log in</string>
+    <string name="login_or">or</string>
+    <string name="register_welcome">Hello there!</string>
+    <string name="register">Register Your Account</string>
+    <string name="register_hint_have_account">Already have an account? <u><b>Log in</b></u>.</string>
+    <string name="attribute_password">Password</string>
+    <string name="attribute_email">Email</string>
+    <string name="attribute_name">Name</string>
+    <string name="attribute_gender">Gender</string>
+    <string name="login_hint_make_account">Create Your Account</string>
     <string name="title_home">Home</string>
-    <string name="title_search">Cari Hidangan</string>
-    <string name="title_favourite">Favorit</string>
-    <string name="title_profile">Profil</string>
-    <string name="title_history">History</string>
-
-    <!-- Fragment Home -->
-    <string name="home_welcome">Selamat %s, &lt;b&gt;%s&lt;/b&gt;!</string>
-    <string name="home_calories_target">Target: &lt;b&gt;%s Kalori&lt;/b&gt;</string>
-    <string name="eat_title">Makan %s</string>
-    <string name="tv_eat_time">%s WIB</string>
+    <string name="title_search">Find Meals</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_diary">Diary</string>
+    <string name="home_welcome">Good %s, &lt;b&gt;%s&lt;/b&gt;!</string>
+    <string name="home_calories_target">Target: &lt;b&gt;%s calories&lt;/b&gt;</string>
     <string name="user_calories">&lt;b&gt;%d&lt;/b&gt;</string>
-    <string name="calories">Kalori</string>
-    <string name="home_intro">Makan apa hari ini?</string>
-    <string name="food_cal">%s kal</string>
-    <string name="home_percent_calories">&lt;b&gt;%.0f%%&lt;/b&gt;&lt;br&gt;Terpenuhi</string>
-
-    <string name="hint_view_diary">Lihat Diary</string>
-    <string name="hint_search_food">Cari Makanan atau Resep</string>
-    <string name="hint_recommended">Rekomendasi Untukmu</string>
-    <string name="hint_did_you_know">Tahukah kamu…?</string>
-
-    <string name="msa_morning_desc">Awali pagimu dengan sarapan yang sehat dan bergizi!</string>
-    <string name="msa_afternoon_desc">Waktunya makan siang! Diet tidak berarti kamu harus menahan lapar, lho!</string>
-    <string name="msa_evening_desc">Makan malam yang sehat dan bergizi dapat membantu kamu tidur lebih nyenyak!</string>
-    <string name="msa_snack_desc">Jam nanggung? Cemilan sehat dapat membantu kamu tetap fokus!</string>
-
-    <!-- Greetings -->
-    <string name="txt_morning">pagi</string>
-    <string name="txt_afternoon">siang</string>
-    <string name="txt_evening">sore</string>
-    <string name="txt_night">malam</string>
-    <string name="snacks">Cemilan</string>
-    <string name="food_time_text">Makan %s</string>
-
-    <string name="hint_latest_search">Pencarian Terbaru</string>
-    <string name="hint_delete_all">Hapus semua</string>
-    <string name="title_add_food">Tambah Makanan</string>
-
-    <!-- Update Profile Fragment -->
-    <string name="title_change_profile">Mengubah Profil</string>
-    <string name="hint_change_profile">Ubah Profil</string>
-    <string name="successfully_updated">Berhasil memperbarui profil</string>
-    <string name="successfully_logout">Berhasil keluar dari akun</string>
-    <string name="session_expired">Sesi telah berakhir, silakan masuk kembali</string>
-
-    <!-- Add Food History activity -->
-    <string name="afh_food_img">Gambar makanan</string>
-    <string name="afh_num_portions">Jumlah porsi: %s</string>
-    <string name="afh_title_nutrition">Kandungan Saji</string>
-    <string name="afh_nut_label_carbs">Karbohidrat</string>
-    <string name="afh_nut_label_fats">Lemak</string>
-    <string name="afh_nut_label_proteins">Protein</string>
-    <string name="afh_title_daily_calories">Kebutuhan Kalori Harian</string>
-    <string name="afh_cal_label_fulfilled">Sudah terpenuhi</string>
-    <string name="afh_cal_label_will_fulfill">Akan dipenuhi</string>
-    <string name="afh_cal_desc">&lt;b&gt;%s&lt;/b&gt; dari &lt;b&gt;%s&lt;/b&gt; Kalori terpenuhi.</string>
-    <string name="afh_cal_over_recommended">Tampaknya kebutuhan kalori harianmu sudah tercukupi. Makanan ini akan membuat kamu kegemukan!</string>
-    <string name="afh_title_eaten_at">Kapan Dihidangkan?</string>
-    <string name="afh_eat_label_date">Tanggal</string>
-    <string name="afh_eat_label_time">Waktu</string>
-    <string name="afh_save_meal">Simpan</string>
-    <string name="afh_success_add_food">Berhasil menambahkan hidangan ke history!</string>
-    <string name="hint_pick_date">Pilih Tanggal</string>
-    <string name="hint_total_calories">Total Kalori</string>
-    <string name="hint_target_calories">Target Kalori</string>
-
-    <!-- Food Detail Activity -->
-    <string name="fd_nut_label_calories">kalori</string>
-    <string name="fd_nut_label_carbs">karbo</string>
-    <string name="fd_nut_label_fats">lemak</string>
-    <string name="fd_nut_label_proteins">protein</string>
-    <string name="fd_nut_unit_grams">%sg</string>
-    <string name="fd_title_ingredients">Bahan yang dibutuhkan</string>
-    <string name="fd_title_steps">Langkah-langkah</string>
-    <string name="fd_btn_add">Tambah ke History</string>
-
-    <!-- Onboarding pages -->
-    <string name="ob_btn_next">Lanjut</string>
-    <string name="ob_btn_loading">Memuat data…</string>
-    <string name="ob1_title">Hidup sehatmu dimulai di sini.</string>
-    <string name="ob1_desc">Diet!n akan membantumu mencapai gaya hidup sehat yang kamu inginkan.</string>
-    <string name="ob1_user_data_request">Sebelum memulai, Diet!n perlu beberapa\ndata dirimu dulu agar lebih mengenalmu!</string>
-    <string name="ob2_title">Tujuan</string>
-    <string name="ob2_desc">Apakah kamu ingin menaikkan, menurunkan, atau menjaga berat badanmu?</string>
-    <string name="ob2_o1_title">Menurunkan berat badan</string>
-    <string name="ob2_o1_desc">Kamu ingin menurunkan berat badan, misalnya karena kamu merasa terlalu gemuk atau ingin lebih sehat.</string>
-    <string name="ob2_o2_title">Menjaga berat badan</string>
-    <string name="ob2_o2_desc">Kamu ingin menjaga berat badanmu agar tetap ideal.</string>
-    <string name="ob2_o3_title">Menaikkan berat badan</string>
-    <string name="ob2_o3_desc">Kamu ingin menaikkan berat badan, misalnya karena kamu merasa terlalu kurus atau ingin lebih sehat.</string>
-    <string name="ob3_title">Tingkatan Aktivitas</string>
-    <string name="ob3_desc">Seberapa sering kamu beraktivitas setiap hari?</string>
-    <string name="ob3_o1_title">Jarang beraktivitas (sedentary)</string>
-    <string name="ob3_o1_desc">Kamu jarang beraktivitas, seperti hanya duduk atau berbaring saja. Contohnya, kamu hanya duduk di depan komputer atau TV, atau hanya berbaring di tempat tidur.</string>
-    <string name="ob3_o2_title">Sedikit beraktivitas (lightly active)</string>
-    <string name="ob3_o2_desc">Kamu sedikit beraktivitas, seperti berjalan–jalan atau berdiri. Contohnya, kamu berjalan–jalan di rumah atau di kantor. Kamu berolahraga kurang lebih 1–3 hari seminggu.</string>
-    <string name="ob3_o3_title">Cukup aktif (moderately active)</string>
-    <string name="ob3_o3_desc">Sebagian besar waktu harianmu dipakai untuk beraktifitas. Kamu berolahraga kurang lebih 3–5 hari seminggu.</string>
-    <string name="ob3_o4_title">Aktif (active)</string>
-    <string name="ob3_o4_desc">Kamu rutin melakukan aktifitas fisik setiap hari dalam skala ringan–sedang, seperti berolahraga 6–7 hari seminggu.</string>
-    <string name="ob3_o5_title">Sangat aktif (very active)</string>
-    <string name="ob3_o5_desc">Kamu sangat aktif, seperti berolahraga setiap hari dalam skala berat. Contohnya, kamu berolahraga 2 kali sehari.</string>
-    <string name="ob4_title">Data Diri</string>
-    <string name="ob4_desc">Langkah terakhir! Kami perlu data dirimu agar semua perhitungan bisa dilakukan dengan benar!</string>
-    <string name="ob4_desc_weight_height">Tinggi dan berat diperlukan untuk bisa menghitung kalori dengan benar. Jika ada perubahan, bisa diedit di menu profil!</string>
-    <string name="ob4_label_height">Tinggi</string>
-    <string name="ob4_label_weight">Berat</string>
-    <string name="ob4_desc_age">Umur diperlukan juga untuk bisa menghitung kalori dengan benar.</string>
-    <string name="ob4_label_age">Umur</string>
-    <string name="ob4_desc_target_weight">Berapa berat badan yang kamu harapkan dengan menggunakan aplikasi ini?</string>
-    <string name="ob4_label_target_weight">Berat Badan Harapan</string>
-    <string name="ob4_warning_title">Setelah kamu klik lanjut, data yang diinput akan disimpan.</string>
-    <string name="ob4_warning_desc">Silakan periksa kembali semua data yang sudah diisi sebelum menekan tombol lanjut!</string>
-    <string name="ob4_error_age">Mohon maaf, kamu belum bisa menggunakan aplikasi ini jika belum berumur 17 tahun.</string>
-    <string name="ob4_error_target_weight_high">Berat harapan harus lebih kecil dari berat sekarang</string>
-    <string name="ob4_error_target_weight_low">Berat harapan harus lebih besar dari berat sekarang</string>
-    <string name="ob5_title">Selamat datang!</string>
-    <string name="ob5_desc">Hidup sehatmu sudah dimulai saat ini!</string>
-    <string name="ob5_title_update">Memperbarui data…</string>
-    <string name="ob5_desc_update">Data dirimu sedang diperbarui…</string>
-    <string name="ob5_btn_uploading">Mengunggah data…</string>
-    <string name="ob5_btn_uploaded">Lanjutkan</string>
-    <string name="ob5_btn_upload_failed">Ulangi</string>
-
-    <!-- Favorite Fragment -->
-    <string name="ff_title">Hidangan Favorit</string>
-    <string name="ff_desc">Hidangan yang kamu sukai, disajikan di satu tempat!</string>
-    <string name="hint_update_profile">Perbarui Profil</string>
-
-
-    <string name="attribute_age">Usia</string>
-    <string name="user_age">&lt;b&gt;%d&lt;/b&gt; Tahun</string>
-    <string name="attribute_weight">Berat Badan</string>
-    <string name="user_weight">&lt;b&gt;%s&lt;/b&gt; Kg</string>
-    <string name="attribute_height">Tinggi Badan</string>
-    <string name="user_height">&lt;b&gt;%s&lt;/b&gt; Cm</string>
-    <string name="user_member_since">Bergabung sejak &lt;b&gt;%s&lt;/b&gt;</string>
-
-    <!-- RecipeSearchActivity -->
-    <string name="rs_all_category">Semua</string>
-    <string name="dietin_premium">Dietin Premium</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="subscription_price">Dapatkan Sekarang\nRp. 100.000 / Tahun</string>
-    <string name="subscription_title_1">Rencana Premium\nTahunan</string>
+    <string name="calories">Calories</string>
+    <string name="home_intro">What do you want to eat today?</string>
+    <string name="food_cal">%,.1f cal</string>
+    <string name="home_percent_calories">&lt;b&gt;%.0f%%&lt;/b&gt;&lt;br&gt;fulfilled</string>
+    <string name="hint_view_diary">View your Diary</string>
+    <string name="hint_search_food">Find Foods or Recipes</string>
+    <string name="hint_recommended">Recommendation for You</string>
+    <string name="hint_did_you_know">Did you know…?</string>
+    <string name="msa_morning_desc">Start your morning with a healthy and nutritious breakfast!</string>
+    <string name="msa_afternoon_desc">Time for lunch! Diet doesn\'t mean you have to endure hunger, you know!</string>
+    <string name="msa_evening_desc">A healthy and nutritious dinner can help you sleep better!</string>
+    <string name="msa_snack_desc">It\'s the late afternoon! Healthy snacks can help you stay focused!</string>
+    <string name="txt_morning">morning</string>
+    <string name="txt_afternoon">afternoon</string>
+    <string name="txt_evening">afternoon</string>
+    <string name="txt_night">evening</string>
+    <string name="title_breakfast">Breakfast</string>
+    <string name="title_lunch">Lunch</string>
+    <string name="title_dinner">Dinner</string>
+    <string name="title_snacks">Snacks</string>
+    <string name="hint_latest_search">Recent Searches</string>
+    <string name="hint_delete_all">Clear all</string>
+    <string name="title_add_food">Add Meal</string>
+    <string name="title_change_profile">Updating Profile</string>
+    <string name="hint_change_profile">Update</string>
+    <string name="successfully_updated">Successfully updated your profile!</string>
+    <string name="successfully_logout">Successfully logged out!</string>
+    <string name="session_expired">Session has expired, please log back in</string>
+    <string name="pf_logout_title">Log out</string>
+    <string name="pf_logout_desc">Are you sure you want to exit this application?</string>
+    <string name="pf_logout_yes">Yes</string>
+    <string name="pf_logout_no">No</string>
+    <string name="afh_food_img">Meal image</string>
+    <string name="afh_desc">&lt;b&gt;%,.1f&lt;/b&gt; calories • &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="afh_num_portions">Number of servings: %,.2f</string>
+    <string name="afh_title_nutrition">Macronutrients</string>
+    <string name="afh_nut_label_carbs">Carbohydrate</string>
+    <string name="afh_nut_label_fats">Fats</string>
+    <string name="afh_nut_label_proteins">Proteins</string>
+    <string name="afh_title_daily_calories">Daily Calorie Needs</string>
+    <string name="afh_cal_label_fulfilled">Fulfilled</string>
+    <string name="afh_cal_label_will_fulfill">Will be fulfilled</string>
+    <string name="afh_cal_desc">&lt;b&gt;%,.0f&lt;/b&gt; of &lt;b&gt;%,.0f&lt;/b&gt;&lt;br/&gt; fulfilled</string>
+    <string name="afh_cal_over_recommended">It seems that your daily calorie needs are sufficient. These foods will make you overweight!</string>
+    <string name="afh_title_eaten_at">When is it Served?</string>
+    <string name="afh_eat_label_date">Date</string>
+    <string name="afh_eat_label_time">Time</string>
+    <string name="afh_save_meal">Save</string>
+    <string name="afh_success_add_food">Successfully added dish to history!</string>
+    <string name="hint_pick_date">Select date</string>
+    <string name="hint_total_calories">Total calories</string>
+    <string name="hint_target_calories">Target calories</string>
+    <string name="afh_error_num_portions">The number of servings cannot be 0</string>
+    <string name="fd_nut_label_calories">cals</string>
+    <string name="fd_nut_label_carbs">carbs</string>
+    <string name="fd_nut_label_fats">fats</string>
+    <string name="fd_nut_label_proteins">proteins</string>
+    <string name="fd_nut_unit_grams">%,.1fg</string>
+    <string name="fd_title_ingredients">Ingredients needed</string>
+    <string name="fd_title_steps">Steps</string>
+    <string name="fd_btn_add">Add to Diary</string>
+    <string name="ob_btn_next">Continue</string>
+    <string name="ob_btn_loading">Loading data…</string>
+    <string name="ob1_title">Your healthy life starts here.</string>
+    <string name="ob1_desc">Diet!n will help you achieve the healthy lifestyle you want.</string>
+    <string name="ob1_user_data_request">Before starting, Diet!n needs some data first to get to know you better!</string>
+    <string name="ob2_title">Objective</string>
+    <string name="ob2_desc">Do you want to gain, lose or maintain your weight?</string>
+    <string name="ob2_o1_title">Lose weight</string>
+    <string name="ob2_o1_desc">You want to lose weight, for example because you feel too fat or want to be healthier.</string>
+    <string name="ob2_o2_title">Maintain weight</string>
+    <string name="ob2_o2_desc">You want to keep your weight in order to remain ideal.</string>
+    <string name="ob2_o3_title">Gain weight</string>
+    <string name="ob2_o3_desc">You want to gain weight, for example because you feel too thin or you want to be healthier.</string>
+    <string name="ob3_title">Activity Level</string>
+    <string name="ob3_desc">How often do you do activities every day?</string>
+    <string name="ob3_o1_title">Rarely active (sedentary)</string>
+    <string name="ob3_o1_desc">You rarely do activities, such as just sitting or lying down. For example, you just sit in front of the computer or TV, or just lie in bed.</string>
+    <string name="ob3_o2_title">Lightly active</string>
+    <string name="ob3_o2_desc">You do little activity, such as walking or standing. For example, you take a walk at home or at work. You exercise approximately 1–3 days a week.</string>
+    <string name="ob3_o3_title">Moderately active</string>
+    <string name="ob3_o3_desc">Most of your daily time is used for activities. You exercise about 3–5 days a week.</string>
+    <string name="ob3_o4_title">Active</string>
+    <string name="ob3_o4_desc">You routinely do physical activity every day on a light–moderate scale, such as exercising 6–7 days a week.</string>
+    <string name="ob3_o5_title">Very active</string>
+    <string name="ob3_o5_desc">You are very active, like exercising every day on a weight scale. For example, you exercise 2 times a day.</string>
+    <string name="ob4_title">Personal Data</string>
+    <string name="ob4_desc">The last step! We need your data so that all calculations can be done correctly!</string>
+    <string name="ob4_desc_weight_height">Height and weight are needed to be able to count calories correctly. If there are changes, they can be edited in the profile menu!</string>
+    <string name="ob4_label_height">Height</string>
+    <string name="ob4_label_weight">Weight</string>
+    <string name="ob4_desc_age">Age is also needed to be able to count calories correctly.</string>
+    <string name="ob4_label_age">Age</string>
+    <string name="ob4_desc_target_weight">How much weight do you expect by using this application?</string>
+    <string name="ob4_label_target_weight">Expected Weight</string>
+    <string name="ob4_warning_title">After you click continue, the data entered will be saved.</string>
+    <string name="ob4_warning_desc">Please check again all the data that has been filled in before pressing the continue button!</string>
+    <string name="ob4_error_age">Sorry, you can\'t use this app if you\'re under 17 years old.</string>
+    <string name="ob4_error_target_weight_high">The expected weight must be less than the current weight</string>
+    <string name="ob4_error_target_weight_low">The expected weight must be greater than the present weight</string>
+    <string name="ob5_title">Welcome!</string>
+    <string name="ob5_desc">Your healthy life has started now!</string>
+    <string name="ob5_title_update">Updating data…</string>
+    <string name="ob5_desc_update">Your details are being updated…</string>
+    <string name="ob5_desc_finished_update">Your data has been updated!</string>
+    <string name="ob5_btn_uploading">Uploading data…</string>
+    <string name="ob5_btn_uploaded">Continue</string>
+    <string name="ob5_btn_updated">Return to Profile</string>
+    <string name="ob5_btn_upload_failed">Retry</string>
+    <string name="ff_title">Favorite Dish</string>
+    <string name="ff_desc">The dishes you love, served in one place!</string>
+    <string name="hint_update_profile">Update Profile</string>
+    <string name="attribute_age">Age</string>
+    <string name="user_age">&lt;b&gt;%d&lt;/b&gt; years old</string>
+    <string name="attribute_weight">Weight</string>
+    <string name="user_weight">&lt;b&gt;%,.1f&lt;/b&gt; kg</string>
+    <string name="attribute_height">Height</string>
+    <string name="user_height">&lt;b&gt;%,.1f&lt;/b&gt; cm</string>
+    <string name="user_member_since">Member since &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="rs_all_category">All</string>
+    <string name="dietin_premium">Diet!n Premium</string>
+    <string name="subscription_price">Get It Now\n$1 / month</string>
+    <string name="subscription_title_1">Premium Plan\nAnnually</string>
     <string name="_2000_recipes">+ 10000+ recipes\n+ Location based recipes\n+ Protein Summary\n+ Fat Summary</string>
     <string name="hint_total_protein">Total Protein</string>
     <string name="hint_premium">Premium</string>
-    <string name="hint_total_fat">Total Lemak</string>
+    <string name="hint_total_fat">Total Fat</string>
+    <string name="fp_card_userdata_text1">Use the button below if you want to update other data, such as:</string>
+    <string name="fp_card_userdata_text2">Goal, activity level, weight, height, age, gender.</string>
+    <string name="fp_card_userdata_button">Fill in your personal data again</string>
+    <string name="ob4_suffix_age">Fill in your personal data again</string>
 </resources>

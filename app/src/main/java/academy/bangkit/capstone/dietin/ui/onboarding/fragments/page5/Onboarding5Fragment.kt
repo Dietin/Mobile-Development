@@ -5,7 +5,6 @@ import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentOnboarding5Binding
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
-import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
 import android.os.Bundle
@@ -72,10 +71,13 @@ class Onboarding5Fragment : Fragment() {
     private fun setupResponse(isSuccess: Boolean) = lifecycleScope.launch {
         if (isSuccess) {
             isUploadSuccess = true
-            setBtnGoToHome(true, getString(R.string.ob5_btn_uploaded))
 
-            // Update preferences
-            Utils.setIsUserFirstTime(requireActivity(), 0)
+            if (activity.isIntentUpdate) {
+                binding.tvDesc.text = getString(R.string.ob5_desc_finished_update)
+                setBtnGoToHome(true, getString(R.string.ob5_btn_updated))
+            } else {
+                setBtnGoToHome(true, getString(R.string.ob5_btn_uploaded))
+            }
         } else {
             isUploadSuccess = false
             setBtnGoToHome(true, getString(R.string.ob5_btn_upload_failed))

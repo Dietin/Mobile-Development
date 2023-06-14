@@ -101,7 +101,7 @@ class FavouriteFragment : Fragment() {
                     }
 
                     this.tvFoodName.text = recipe?.name
-                    this.tvFoodCal.text = getString(R.string.food_cal, recipe?.calories?.toInt())
+                    this.tvFoodCal.text = getString(R.string.food_cal, recipe?.calories)
                 }
             }
         }

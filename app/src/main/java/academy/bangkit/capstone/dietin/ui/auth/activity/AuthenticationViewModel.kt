@@ -11,6 +11,6 @@ class AuthenticationViewModel(private val application: Application): ViewModel()
     }
 
     suspend fun isFirstTime(): Boolean {
-        return Utils.getIsUserFirstTime(application) == 1
+        return Utils.getUserData(application) == null
     }
 }

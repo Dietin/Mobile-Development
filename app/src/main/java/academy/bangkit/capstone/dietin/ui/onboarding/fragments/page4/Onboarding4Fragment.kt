@@ -18,6 +18,8 @@ class Onboarding4Fragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var activity: OnboardingActivity
 
+    private var genders = arrayOf<String>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +33,7 @@ class Onboarding4Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup data
-        val genders = resources.getStringArray(R.array.genders)
+        genders = resources.getStringArray(R.array.genders)
         val dropdownAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, genders)
         binding.actGender.setAdapter(dropdownAdapter)
 
@@ -60,6 +62,9 @@ class Onboarding4Fragment : Fragment() {
                 0f
             }
             activity.userData.currentWeight = berat
+            if (activity.userData.goal == 2) {
+                activity.userData.weight = berat
+            }
             updateButtonContinue()
         }
 
@@ -87,6 +92,9 @@ class Onboarding4Fragment : Fragment() {
                 0f
             }
             when {
+                beratHarapan == 0f -> {
+                    binding.tilBeratHarapan.error = null
+                }
                 activity.userData.goal == 1 && beratHarapan >= activity.userData.currentWeight -> {
                     binding.tilBeratHarapan.error = getString(R.string.ob4_error_target_weight_high)
                 }
@@ -95,9 +103,9 @@ class Onboarding4Fragment : Fragment() {
                 }
                 else -> {
                     binding.tilBeratHarapan.error = null
-                    activity.userData.weight = beratHarapan
                 }
             }
+            activity.userData.weight = beratHarapan
             updateButtonContinue()
         }
     }
@@ -109,8 +117,8 @@ class Onboarding4Fragment : Fragment() {
 
     private fun setupData() {
         binding.actGender.setText(when(activity.userData.gender) {
-            0 -> "Pria"
-            1 -> "Wanita"
+            0 -> genders[0]
+            1 -> genders[1]
             else -> ""
         }, false)
         setGenderImage(activity.userData.gender)
@@ -119,7 +127,7 @@ class Onboarding4Fragment : Fragment() {
         } else {
             activity.userData.height.toString()
         })
-        binding.tilBerat.editText?.setText(if (activity.userData.weight == 0f) {
+        binding.tilBerat.editText?.setText(if (activity.userData.currentWeight == 0f) {
             ""
         } else {
             activity.userData.currentWeight.toString()
@@ -135,6 +143,7 @@ class Onboarding4Fragment : Fragment() {
             activity.userData.weight.toString()
         })
         if (activity.userData.goal == 2) {
+            // Jika ingin menjaga berat badan
             binding.tvBeratHarapanDesc.visibility = View.GONE
             binding.tilBeratHarapan.visibility = View.GONE
         }
@@ -145,9 +154,10 @@ class Onboarding4Fragment : Fragment() {
         if (
             activity.userData.gender != -1 &&
             activity.userData.height != 0f &&
-            activity.userData.weight != 0f &&
+            activity.userData.currentWeight != 0f &&
             activity.userData.age >= 17 &&
-            binding.tilBeratHarapan.error == null
+            binding.tilBeratHarapan.error == null &&
+            activity.userData.weight != 0f
         ) {
             activity.setButtonContinueState(true)
         } else {

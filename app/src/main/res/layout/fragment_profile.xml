@@ -255,21 +255,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Gunakan tombol di bawah jika kamu ingin memperbarui data lain, seperti:"
+                            android:text="@string/fp_card_userdata_text1"
                             android:textAlignment="center" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Goal, tingkatan aktivitas, berat, tinggi, umur, jenis kelamin."
+                            android:text="@string/fp_card_userdata_text2"
                             android:textAlignment="center" />
 
                         <Button
                             android:id="@+id/btnGoToOnboarding"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Isi kembali data diri"
+                            android:text="@string/fp_card_userdata_button"
                             android:textStyle="bold"
                             app:icon="@drawable/ic_person" />
 

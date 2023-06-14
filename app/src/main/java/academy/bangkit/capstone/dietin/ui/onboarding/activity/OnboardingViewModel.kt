@@ -57,12 +57,13 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
     fun predictCalories(data: DataUser) = viewModelScope.launch {
         _isLoading.value = true
         try {
-            ApiConfig.getApiServiceML().predictCalories(
+            val predictedDataUser = ApiConfig.getApiServiceML().predictCalories(
                 userId = data.userId,
                 body = userData.value!!
-            )
+            ).data
 
             // Save to preference
+            data.idealCalories = predictedDataUser.predictedCalories
             Utils.setUserData(application, data)
             _isSuccess.value = true
         } catch (e: IOException) {

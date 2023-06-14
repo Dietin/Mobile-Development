@@ -163,7 +163,7 @@ class HistoryFragment : Fragment() {
         binding.tvHistoryDate.text = Utils.formatDate(selectedDate.time, "dd MMMM yyyy")
 
         //untuk target kalori
-        binding.tvTargetCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", idealCalories)), Html.FROM_HTML_MODE_COMPACT)
+        binding.tvTargetCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, idealCalories), Html.FROM_HTML_MODE_COMPACT)
     }
 
 
@@ -178,7 +178,7 @@ class HistoryFragment : Fragment() {
             val totalCaloriesEaten = currentFoodHistory?.sumOf { it.totalCalories.toDouble() }?.toFloat() ?: 0f
 
             //untuk total kalori yang sudah dikonsumsi
-            binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", totalCaloriesEaten)), Html.FROM_HTML_MODE_COMPACT)
+            binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, totalCaloriesEaten), Html.FROM_HTML_MODE_COMPACT)
 
             //progress bar
             val percent = totalCaloriesEaten / (userData?.idealCalories ?: 1f) * 100
@@ -188,13 +188,13 @@ class HistoryFragment : Fragment() {
 
             for (i in 1 .. 4) {
                 val foodHistoryGroupedByTime = currentFoodHistory?.find { it.time == i }
-                val eatTime = getString(R.string.food_time_text, when(i){
-                    1 -> getString(R.string.txt_morning)
-                    2 -> getString(R.string.txt_afternoon)
-                    3 -> getString(R.string.txt_night)
-                    4 -> getString(R.string.snacks)
+                val eatTime = when(i){
+                    1 -> getString(R.string.title_breakfast)
+                    2 -> getString(R.string.title_lunch)
+                    3 -> getString(R.string.title_dinner)
+                    4 -> getString(R.string.title_snacks)
                     else -> ""
-                })
+                }
                 var percentFood = (foodHistoryGroupedByTime?.totalCalories ?: 0f) / totalCaloriesEaten
                 percentFood = if (percentFood.isNaN()) 0f else percentFood
 
@@ -253,7 +253,7 @@ class HistoryFragment : Fragment() {
                     )
 
                     Text(
-                        text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", totalCalories))).toString(),
+                        text = Html.fromHtml(getString(R.string.food_cal, totalCalories), Html.FROM_HTML_MODE_COMPACT).toString(),
                         fontSize = 12.sp,
                         fontFamily = FontFamily(Font(R.font.inter)),
                         fontWeight = FontWeight.Bold,
@@ -267,11 +267,11 @@ class HistoryFragment : Fragment() {
                     dataHistory.forEach {
                         FoodList(
                             foodName = it.recipe?.name ?: it.recipeId,
-                            foodCalories = it.calories.toInt()
+                            foodCalories = it.calories
                         )
                     }
                 } else {
-                    FoodList(foodName = "-", foodCalories = 0)
+                    FoodList(foodName = "-", foodCalories = 0f)
                 }
 
 
@@ -284,7 +284,7 @@ class HistoryFragment : Fragment() {
     @Composable
     fun FoodList(
         foodName : String,
-        foodCalories : Int
+        foodCalories : Float
     ){
         Row(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -295,7 +295,7 @@ class HistoryFragment : Fragment() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", foodCalories.toFloat()))).toString(),
+                text = Html.fromHtml(getString(R.string.food_cal, foodCalories), Html.FROM_HTML_MODE_COMPACT).toString(),
                 fontFamily = FontFamily(Font(R.font.inter)),
             )
         }

@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.inputSearch.editText?.setOnClickListener {
+        binding.cardSearchFood.setOnClickListener {
             val intent = Intent(requireContext(), RecipeSearchActivity::class.java)
             startActivity(intent)
         }
@@ -242,15 +242,13 @@ class HomeFragment : Fragment() {
                 items((foodHistories as Result.Success).data){ item ->
                     AndroidViewBinding(ItemUserEatBinding::inflate) {
                         this.tvCaloriesEaten.text = Html.fromHtml(getString(R.string.user_calories, item.totalCalories.toInt()), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    //                        this.tvEatTime.text = getString(R.string.tv_eat_time, item.time.toString())
-                        tvEatTime.visibility = View.GONE
 
                         //masih belum terlalu oke
                         val timeData = when(item.time) {
-                            1 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_morning)), R.drawable.ic_eat_time_morning)
-                            2 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_afternoon)), R.drawable.ic_eat_time_afternoon)
-                            3 -> Pair(getString(R.string.food_time_text, getString(R.string.txt_night)), R.drawable.ic_eat_time_night)
-                            else -> Pair(getString(R.string.snacks), R.drawable.ic_eat_time_morning)
+                            1 -> Pair(getString(R.string.title_breakfast), R.drawable.ic_eat_time_morning)
+                            2 -> Pair(getString(R.string.title_lunch), R.drawable.ic_eat_time_afternoon)
+                            3 -> Pair(getString(R.string.title_dinner), R.drawable.ic_eat_time_night)
+                            else -> Pair(getString(R.string.title_snacks), R.drawable.ic_eat_time_morning)
                         }
                         this.tvEatTitle.text = timeData.first
 

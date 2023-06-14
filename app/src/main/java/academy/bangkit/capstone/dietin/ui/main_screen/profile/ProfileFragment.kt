@@ -120,7 +120,16 @@ class ProfileFragment : Fragment(), BottomSheetHelper {
         }
 
         binding.btnLogout.setOnClickListener {
-            viewModel.logout()
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.pf_logout_title))
+                .setMessage(getString(R.string.pf_logout_desc))
+                .setPositiveButton(getString(R.string.pf_logout_yes)) { _, _ ->
+                    viewModel.logout()
+                }
+                .setNegativeButton(getString(R.string.pf_logout_no)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         binding.btnLanguage.setOnClickListener {
@@ -168,8 +177,8 @@ class ProfileFragment : Fragment(), BottomSheetHelper {
             }
         }
 
-        binding.tvUserWeight.text = Html.fromHtml(getString(R.string.user_weight, String.format(Locale.getDefault(), "%,.1f", dataUser?.currentWeight)), Html.FROM_HTML_MODE_COMPACT)
-        binding.tvUserHeight.text = Html.fromHtml(getString(R.string.user_height, String.format(Locale.getDefault(), "%,.1f", dataUser?.height)), Html.FROM_HTML_MODE_COMPACT)
+        binding.tvUserWeight.text = Html.fromHtml(getString(R.string.user_weight, dataUser?.currentWeight), Html.FROM_HTML_MODE_COMPACT)
+        binding.tvUserHeight.text = Html.fromHtml(getString(R.string.user_height, dataUser?.height), Html.FROM_HTML_MODE_COMPACT)
     }
 
 

@@ -27,6 +27,6 @@
     <fragment
         android:id="@+id/navigation_history"
         android:name="academy.bangkit.capstone.dietin.ui.main_screen.history.HistoryFragment"
-        android:label="@string/title_history"
+        android:label="@string/title_diary"
         tools:layout="@layout/fragment_history" />
 </navigation>

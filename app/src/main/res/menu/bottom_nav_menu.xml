@@ -18,8 +18,8 @@
 
     <item
         android:id="@+id/navigation_history"
-        android:title="@string/title_history"
-        android:icon="@drawable/ic_history"/>
+        android:icon="@drawable/ic_book"
+        android:title="@string/title_diary" />
 
     <item
         android:id="@+id/navigation_profile"

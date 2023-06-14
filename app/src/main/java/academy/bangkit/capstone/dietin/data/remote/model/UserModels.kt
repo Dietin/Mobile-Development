@@ -31,11 +31,16 @@ data class DataUser(
     @SerializedName("gender")
     var gender: Int,
     @SerializedName("idealCalories")
-    val idealCalories: Float,
+    var idealCalories: Float,
     @SerializedName("diet_objective")
     var goal: Int, // Sebenarnya tidak ada di API, tapi untuk memudahkan di UI, jadi ditambahkan
     @SerializedName("current_weight")
     var currentWeight: Float,
     @SerializedName("user")
     val user: User?,
+)
+
+data class DataUserML(
+    @SerializedName("predicted_calories")
+    val predictedCalories: Float
 )

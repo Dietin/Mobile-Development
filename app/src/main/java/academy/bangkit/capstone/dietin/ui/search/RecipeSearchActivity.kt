@@ -1,5 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.search
 
+import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.ActivityRecipeSearchBinding
 import academy.bangkit.capstone.dietin.ui.search.before.BeforeSearchFragment
 import academy.bangkit.capstone.dietin.ui.search.on.OnSearchFragment
@@ -40,17 +41,20 @@ class RecipeSearchActivity : AppCompatActivity() {
     }
 
     private fun setupListener() {
+        binding.inputSearch.editText?.hint = getString(R.string.hint_search_food)
         binding.inputSearch.editText?.addTextChangedListener { s ->
             if (s?.length!! > 0) {
                 if (activeFragment != onSearchFrg) {
                     changeFragmentSearch(onSearchFrg)
                 }
                 onSearchFrg.updateQuery(s.toString())
+                binding.inputSearch.editText?.hint = ""
             }else{
                 if (!onSearchFrg.isCategorySelected()) {
                     // Kalau tidak ada kategori yang dipilih, baru kembali ke fragment sebelumnya
                     changeFragmentSearch(beforeSearchFrg)
                 }
+                binding.inputSearch.editText?.hint = getString(R.string.hint_search_food)
             }
         }
     }

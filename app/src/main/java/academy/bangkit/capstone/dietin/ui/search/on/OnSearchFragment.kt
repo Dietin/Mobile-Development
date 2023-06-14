@@ -158,7 +158,7 @@ class OnSearchFragment : Fragment() {
                         }
 
                         this.tvFoodName.text = item.name
-                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories.toInt())
+                        this.tvFoodCal.text = getString(R.string.food_cal, item.calories)
 
                         this.root.setOnClickListener {
                             val intent = Intent(requireContext(), FoodDetailActivity::class.java)

@@ -66,7 +66,6 @@ class RegisterViewModel(private val application: Application): ViewModel() {
             val token = loginData.token
             val user = loginData.user
             Utils.setToken(application, token)
-            Utils.setIsUserFirstTime(application, 1)
             Utils.setUser(application, user)
 
             _isSuccess.value = true
