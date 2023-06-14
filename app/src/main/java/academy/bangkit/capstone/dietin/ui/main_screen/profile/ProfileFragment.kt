@@ -2,7 +2,7 @@ package academy.bangkit.capstone.dietin.ui.main_screen.profile
 
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentProfileBinding
-import academy.bangkit.capstone.dietin.di.BottomSheetHelper
+import academy.bangkit.capstone.dietin.helper.BottomSheetHelper
 import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationActivity
 import academy.bangkit.capstone.dietin.ui.main_screen.profile.edit.EditProfileFragment
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity

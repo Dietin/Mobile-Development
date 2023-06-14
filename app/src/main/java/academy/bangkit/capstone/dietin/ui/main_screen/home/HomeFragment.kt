@@ -7,6 +7,7 @@ import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
 import academy.bangkit.capstone.dietin.databinding.ItemCategoryBinding
 import academy.bangkit.capstone.dietin.databinding.ItemFoodCard1Binding
 import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
+import academy.bangkit.capstone.dietin.helper.ProgressBarHelper
 import academy.bangkit.capstone.dietin.ui.food_detail.FoodDetailActivity
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
 import academy.bangkit.capstone.dietin.ui.search.RecipeSearchActivity
@@ -35,7 +36,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -142,18 +142,9 @@ class HomeFragment : Fragment() {
         //set percent terpenuhi dari kalori
         val percent = (foodCalories.currentCalories / foodCalories.recommendedCalories) * 100
         binding.calPercent.text = Html.fromHtml(getString(R.string.home_percent_calories, percent), HtmlCompat.FROM_HTML_MODE_LEGACY)
-        binding.caloriesProgress.progress = percent.toInt()
 
-        //ini untuk namanya.. :))
-        val color = when(percent){
-            in 0f .. 25f -> R.color.danger
-            in 25f .. 75f -> R.color.warning
-            in 75f .. 100f -> R.color.success
-            else -> R.color.overflow
-        }
-        binding.caloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
+        ProgressBarHelper.setProgress(binding.caloriesProgress, percent)
 
-        //set color for calories progress
         binding.tvCaloriesTarget.text = Html.fromHtml(getString(R.string.home_calories_target, String.format(Locale.getDefault(), "%,.0f", foodCalories.recommendedCalories)), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 

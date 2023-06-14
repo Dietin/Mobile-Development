@@ -3,6 +3,7 @@ package academy.bangkit.capstone.dietin.ui.main_screen.history
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.databinding.FragmentHistoryBinding
+import academy.bangkit.capstone.dietin.helper.ProgressBarHelper
 import academy.bangkit.capstone.dietin.ui.subscription.SubscriptionActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
@@ -37,7 +38,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import java.util.Calendar
@@ -182,15 +182,7 @@ class HistoryFragment : Fragment() {
 
             //progress bar
             val percent = totalCaloriesEaten / (userData?.idealCalories ?: 1f) * 100
-            binding.historyCaloriesProgress.progress = percent.toInt()
-
-            val color = when(percent){
-                in 0f .. 25f -> R.color.danger
-                in 25f .. 75f -> R.color.warning
-                in 75f .. 100f -> R.color.success
-                else -> R.color.overflow
-            }
-            binding.historyCaloriesProgress.setIndicatorColor(ContextCompat.getColor(requireContext(), color))
+            ProgressBarHelper.setProgress(binding.historyCaloriesProgress, percent)
 
             binding.tvCaloriesPercent.text = "${String.format(Locale.getDefault(), "%.0f", percent)}%"
 
@@ -261,7 +253,7 @@ class HistoryFragment : Fragment() {
                     )
 
                     Text(
-                        text = "$totalCalories kal",
+                        text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", totalCalories))).toString(),
                         fontSize = 12.sp,
                         fontFamily = FontFamily(Font(R.font.inter)),
                         fontWeight = FontWeight.Bold,

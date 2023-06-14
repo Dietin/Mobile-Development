@@ -1,7 +1,7 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.profile.edit
 
 import academy.bangkit.capstone.dietin.databinding.FragmentEditProfileBinding
-import academy.bangkit.capstone.dietin.di.BottomSheetHelper
+import academy.bangkit.capstone.dietin.helper.BottomSheetHelper
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
