@@ -41,20 +41,23 @@ class AddFoodHistoryActivity : AppCompatActivity() {
     private var selectedDate = Calendar.getInstance()
     private var selectedWaktuMakan = 0
 
-    private val listWaktuMakan = hashMapOf(
-        1 to "Makan Pagi",
-        2 to "Makan Siang",
-        3 to "Makan Malam",
-        4 to "Cemilan"
-    )
+    private lateinit var listWaktuMakan : HashMap<Int, String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddFoodHistoryBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(application))[AddFoodHistoryViewModel::class.java]
+
         setupViewModelBinding()
         loader = Utils.generateLoader(this)
         setContentView(binding.root)
+
+        listWaktuMakan = hashMapOf(
+            1 to getString(R.string.title_breakfast),
+            2 to getString(R.string.title_lunch),
+            3 to getString(R.string.title_dinner),
+            4 to getString(R.string.title_snacks)
+        )
 
         val recipeIntent = intent.getParcelableExtra<Recipe>(EXTRA_RECIPE)
         if (recipeIntent != null) {

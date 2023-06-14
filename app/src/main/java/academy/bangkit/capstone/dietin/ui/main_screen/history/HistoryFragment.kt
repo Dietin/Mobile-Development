@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -36,6 +37,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -291,7 +293,10 @@ class HistoryFragment : Fragment() {
         ){
             Text(
                 text = foodName,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
                 fontFamily = FontFamily(Font(R.font.inter)),
+                modifier = Modifier.weight(5f)
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(

@@ -18,101 +18,116 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
 
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="64dp"
-        android:layout_marginVertical="108dp"
-        app:shimmer_base_alpha="0.9"
-        app:shimmer_highlight_alpha="0.5"
-        app:shimmer_duration="1200"
-        app:shimmer_auto_start="true">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_main"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
+            style="@style/DietinButton.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            app:icon="@drawable/ic_arrow_back"
+            app:backgroundTint="#70E5E5E5"
+            app:iconTint="@color/jet" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/satin_gold"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="32dp">
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginVertical="108dp"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_alpha="0.9"
+            app:shimmer_duration="1200"
+            app:shimmer_highlight_alpha="0.5">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/satin_gold"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="4dp">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottie_main"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="64dp"
-                    app:lottie_rawRes="@raw/lottie_subscription_main_1"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-
-                <TextView
-                    android:id="@+id/tv_subscription_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@string/subscription_title_1"
-                    style="@style/DietinTextTitle"
-                    app:layout_constraintTop_toBottomOf="@id/lottie_main"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_subscription_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center|top"
-                    android:layout_marginTop="16dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:maxLines="4"
-                    android:lines="4"
-                    android:text="@string/_2000_recipes"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_subscription_title"/>
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_main"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="64dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_subscription_main_1" />
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_buy_subscription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:text="@string/subscription_price"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:elevation="4dp"
-                    app:cornerRadius="8dp"
-                    app:backgroundTint="@color/satin_gold_calmer"
-                    app:layout_constraintTop_toBottomOf="@id/tv_subscription_description"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_subscription_title"
+                        style="@style/DietinTextTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="@string/subscription_title_1"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lottie_main" />
+
+                    <TextView
+                        android:id="@+id/tv_subscription_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center|top"
+                        android:lines="4"
+                        android:maxLines="4"
+                        android:text="@string/_2000_recipes"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_subscription_title" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_buy_subscription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginBottom="32dp"
+                        android:text="@string/subscription_price"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/satin_gold_calmer"
+                        app:cornerRadius="8dp"
+                        app:elevation="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_subscription_description" />
 
-        </androidx.cardview.widget.CardView>
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </androidx.cardview.widget.CardView>
 
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
 
 
 </FrameLayout>

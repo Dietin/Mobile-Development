@@ -84,7 +84,7 @@
     <string name="afh_title_daily_calories">Daily Calorie Needs</string>
     <string name="afh_cal_label_fulfilled">Fulfilled</string>
     <string name="afh_cal_label_will_fulfill">Will be fulfilled</string>
-    <string name="afh_cal_desc">&lt;b&gt;%,.0f&lt;/b&gt; of &lt;b&gt;%,.0f&lt;/b&gt;&lt;br/&gt; fulfilled</string>
+    <string name="afh_cal_desc">&lt;b&gt;%,.0f&lt;/b&gt; of &lt;b&gt;%,.0f&lt;/b&gt;fulfilled</string>
     <string name="afh_cal_over_recommended">It seems that your daily calorie needs are sufficient. These foods will make you overweight!</string>
     <string name="afh_title_eaten_at">When is it Served?</string>
     <string name="afh_eat_label_date">Date</string>
@@ -173,4 +173,7 @@
     <string name="fp_card_userdata_text2">Goal, activity level, weight, height, age, gender.</string>
     <string name="fp_card_userdata_button">Fill in your personal data again</string>
     <string name="ob4_suffix_age">Fill in your personal data again</string>
+
+    <string name="subscription_coming_soon">Feature Coming Soon!</string>
+
 </resources>

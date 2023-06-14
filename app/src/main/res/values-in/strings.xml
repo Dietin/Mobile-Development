@@ -187,10 +187,8 @@
     <string name="user_height">&lt;b&gt;%,.1f&lt;/b&gt; cm</string>
     <string name="user_member_since">Bergabung sejak &lt;b&gt;%s&lt;/b&gt;</string>
 
-    <!-- RecipeSearchActivity -->
     <string name="rs_all_category">Semua</string>
 
-    <!-- Subscription Page -->
     <string name="subscription_price">Dapatkan Sekarang\nRp. 100.000 / Tahun</string>
     <string name="dietin_premium">Dietin Premium</string>
     <string name="subscription_title_1">Rencana Premium\nTahunan</string>
@@ -201,4 +199,6 @@
     <string name="fp_card_userdata_text1">Gunakan tombol di bawah jika kamu ingin memperbarui data lain, seperti:</string>
     <string name="fp_card_userdata_text2">Goal, tingkatan aktivitas, berat, tinggi, umur, jenis kelamin.</string>
     <string name="fp_card_userdata_button">Isi kembali data diri</string>
+
+    <string name="subscription_coming_soon">Fitur Segera Hadir!</string>
 </resources>
