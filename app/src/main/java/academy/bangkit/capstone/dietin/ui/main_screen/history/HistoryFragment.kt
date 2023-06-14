@@ -295,7 +295,7 @@ class HistoryFragment : Fragment() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "${foodCalories} Kalori",
+                text = Html.fromHtml(getString(R.string.food_cal, String.format(Locale.getDefault(), "%.0f", foodCalories.toFloat()))).toString(),
                 fontFamily = FontFamily(Font(R.font.inter)),
             )
         }
