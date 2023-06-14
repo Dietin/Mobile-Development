@@ -10,6 +10,7 @@ import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -120,6 +121,10 @@ class ProfileFragment : Fragment(), BottomSheetHelper {
 
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.btnLanguage.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
     }
 

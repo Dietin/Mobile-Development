@@ -24,19 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/DietinButton.IconOnly"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:icon="@drawable/ic_logout"
-            app:iconTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_profile_detail"
             android:layout_width="match_parent"
@@ -366,6 +353,31 @@
             app:layout_constraintEnd_toEndOf="@id/card_profile_main"
             app:layout_constraintTop_toBottomOf="@id/card_profile_main"
             app:layout_constraintBottom_toBottomOf="@id/card_profile_main"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            style="@style/DietinButton.IconOnly"
+            app:icon="@drawable/ic_logout"
+            app:iconTint="@color/jet"
+            app:layout_constraintEnd_toEndOf="@id/card_profile_main"
+            app:layout_constraintTop_toTopOf="@id/card_profile_main" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_language"
+            style="@style/DietinButton.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-8dp"
+            app:icon="@drawable/ic_language"
+            app:iconTint="@color/jet"
+            app:layout_constraintBottom_toBottomOf="@id/btn_logout"
+            app:layout_constraintEnd_toStartOf="@id/btn_logout"
+            app:layout_constraintTop_toTopOf="@id/btn_logout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
