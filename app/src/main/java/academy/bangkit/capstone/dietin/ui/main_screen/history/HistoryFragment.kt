@@ -7,6 +7,7 @@ import academy.bangkit.capstone.dietin.helper.ProgressBarHelper
 import academy.bangkit.capstone.dietin.ui.subscription.SubscriptionActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -21,7 +22,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -84,8 +84,8 @@ class HistoryFragment : Fragment() {
             }
         }
 
-        viewModel.userData.observe(viewLifecycleOwner) {
-            setAllContent(it.idealCalories)
+        viewModel.currentCalories.observe(viewLifecycleOwner) {
+            setAllContent(it)
         }
     }
 
@@ -95,9 +95,13 @@ class HistoryFragment : Fragment() {
 
         setListener()
         Utils.setComposableFunction(binding.cvFoodHistory){ SetTable() }
-
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getFoodHistory(Utils.formatDate(selectedDate.time, "yyyy-MM-dd"))
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -146,8 +150,10 @@ class HistoryFragment : Fragment() {
             startActivity(subsIntent)
         }
 
-
-
+        binding.srlHistory.setOnRefreshListener {
+            viewModel.getFoodHistory(Utils.formatDate(selectedDate.time, "yyyy-MM-dd"))
+            binding.srlHistory.isRefreshing = false
+        }
     }
 
     private fun setTanggal(newDate : Calendar){
@@ -169,13 +175,16 @@ class HistoryFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Composable
     fun SetTable(){
         val currentFoodHistory by viewModel.currentFoodHistory.observeAsState()
-        val userData by viewModel.userData.observeAsState()
+        val currentCalories by viewModel.currentCalories.observeAsState()
 
         Column(
             verticalArrangement = Arrangement.spacedBy(24.dp),
+            modifier = Modifier
+                .padding(8.dp)
         ) {
             val totalCaloriesEaten = currentFoodHistory?.sumOf { it.totalCalories.toDouble() }?.toFloat() ?: 0f
 
@@ -183,7 +192,7 @@ class HistoryFragment : Fragment() {
             binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, totalCaloriesEaten), Html.FROM_HTML_MODE_COMPACT)
 
             //progress bar
-            val percent = totalCaloriesEaten / (userData?.idealCalories ?: 1f) * 100
+            val percent = totalCaloriesEaten / (currentCalories ?: 1f) * 100
             ProgressBarHelper.setProgress(binding.historyCaloriesProgress, percent)
 
             binding.tvCaloriesPercent.text = "${String.format(Locale.getDefault(), "%.0f", percent)}%"

@@ -40,6 +40,19 @@ data class DataUser(
     val user: User?,
 )
 
+data class WeightHistory(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("user_id")
+    val userId: Int,
+    @SerializedName("dataUser_id")
+    val dataUserId: Int,
+    @SerializedName("idealCalories")
+    val idealCalories: Float,
+    @SerializedName("date")
+    val createdAt: String,
+)
+
 data class DataUserML(
     @SerializedName("predicted_calories")
     val predictedCalories: Float
