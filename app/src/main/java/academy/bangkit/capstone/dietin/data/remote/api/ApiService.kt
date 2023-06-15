@@ -30,6 +30,18 @@ interface ApiService {
         @Body dataUser: DataUser
     ): ApiResponse<DataUser>
 
+    @POST("weightHistory")
+    suspend fun addToDataUserHistory(
+        @Header("Authorization") token: String,
+        // tidak ada body
+    ): ApiResponse<WeightHistory>
+
+    @GET("weightHistory/{date}")
+    suspend fun getWeightHistory(
+        @Header("Authorization") token: String,
+        @Path("date") date: String
+    ): ApiResponse<WeightHistory?>
+
     @GET("dataUser")
     suspend fun getDataUser(
         @Header("Authorization") token: String

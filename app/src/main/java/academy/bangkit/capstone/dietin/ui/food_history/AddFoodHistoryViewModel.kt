@@ -48,7 +48,7 @@ class AddFoodHistoryViewModel(private val application: Application): ViewModel()
     }
 
     fun getCalories(date: String) = viewModelScope.launch {
-        val recommendedCalories = 2000f
+        val recommendedCalories = Utils.getUserData(application)?.idealCalories ?: 2000f
         try {
             _isLoading.value = true
             val token = Utils.getToken(application)

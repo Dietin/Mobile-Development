@@ -1,7 +1,6 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.history
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
-import academy.bangkit.capstone.dietin.data.remote.model.DataUser
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
@@ -27,21 +26,27 @@ class HistoryViewModel(private val application: Application): ViewModel() {
     private val _currentFoodHistory = MutableLiveData<List<FoodHistoryGroupedByTime>>()
     val currentFoodHistory: LiveData<List<FoodHistoryGroupedByTime>> = _currentFoodHistory
 
-    private val _userData = MutableLiveData<DataUser>()
-    val userData: LiveData<DataUser> = _userData
+    private val _currentCalories = MutableLiveData<Float>()
+    val currentCalories: LiveData<Float> = _currentCalories
+
+    private val _requestCount = MutableLiveData(0)
 
     init {
-        getFoodHistory(Utils.getCurrentDate())
-        getUserData()
+        _requestCount.observeForever {
+            if (it == 2) {
+                _isLoading.value = false
+            }
+        }
     }
 
-    private fun getUserData() = viewModelScope.launch {
-        _userData.value = Utils.getUserData(application)
-    }
+    private suspend fun getUserData() = Utils.getUserData(application)
 
     fun getFoodHistory(date: String) = viewModelScope.launch {
         try {
             _isLoading.value = true
+            _requestCount.value = 0
+            getCaloriesHistory(date)
+
             val token = Utils.getToken(application)
             val data = ApiConfig.getApiService().getFoodHistory(
                 token = "Bearer $token",
@@ -73,7 +78,28 @@ class HistoryViewModel(private val application: Application): ViewModel() {
                 _message.value = Event(errorResponse.message)
             }
         } finally {
-            _isLoading.value = false
+            _requestCount.value = _requestCount.value?.plus(1)
+        }
+    }
+
+    private fun getCaloriesHistory(date: String) = viewModelScope.launch {
+        try {
+            val token = Utils.getToken(application)
+            val data = ApiConfig.getApiService().getWeightHistory(
+                token = "Bearer $token",
+                date = date
+            )
+
+            _currentCalories.value = data.data?.idealCalories ?: getUserData()?.idealCalories ?: 1f
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+        } finally {
+            _requestCount.value = _requestCount.value?.plus(1)
         }
     }
 
@@ -81,11 +107,5 @@ class HistoryViewModel(private val application: Application): ViewModel() {
         val time: Int,
         val totalCalories: Float,
         val foodHistory: List<FoodHistory>
-    )
-
-    fun getEmptyFHGBT(time: Int) = FoodHistoryGroupedByTime(
-        time = time,
-        totalCalories = 0f,
-        foodHistory = listOf()
     )
 }

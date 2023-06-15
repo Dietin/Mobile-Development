@@ -84,7 +84,7 @@
     <string name="afh_title_daily_calories">Daily Calorie Needs</string>
     <string name="afh_cal_label_fulfilled">Fulfilled</string>
     <string name="afh_cal_label_will_fulfill">Will be fulfilled</string>
-    <string name="afh_cal_desc">&lt;b&gt;%,.0f&lt;/b&gt; of &lt;b&gt;%,.0f&lt;/b&gt;fulfilled</string>
+    <string name="afh_cal_desc">&lt;b&gt;%,.0f&lt;/b&gt; of &lt;b&gt;%,.0f&lt;/b&gt; fulfilled</string>
     <string name="afh_cal_over_recommended">It seems that your daily calorie needs are sufficient. These foods will make you overweight!</string>
     <string name="afh_title_eaten_at">When is it Served?</string>
     <string name="afh_eat_label_date">Date</string>
@@ -163,7 +163,7 @@
     <string name="user_member_since">Member since &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="rs_all_category">All</string>
     <string name="dietin_premium">Diet!n Premium</string>
-    <string name="subscription_price">Get It Now\n$1 / month</string>
+    <string name="subscription_price">Get It Now\n$10 / year</string>
     <string name="subscription_title_1">Premium Plan\nAnnually</string>
     <string name="_2000_recipes">+ 10000+ recipes\n+ Location based recipes\n+ Protein Summary\n+ Fat Summary</string>
     <string name="hint_total_protein">Total Protein</string>
@@ -172,7 +172,7 @@
     <string name="fp_card_userdata_text1">Use the button below if you want to update other data, such as:</string>
     <string name="fp_card_userdata_text2">Goal, activity level, weight, height, age, gender.</string>
     <string name="fp_card_userdata_button">Fill in your personal data again</string>
-    <string name="ob4_suffix_age">Fill in your personal data again</string>
+    <string name="ob4_suffix_age">years old</string>
 
     <string name="subscription_coming_soon">Feature Coming Soon!</string>
 

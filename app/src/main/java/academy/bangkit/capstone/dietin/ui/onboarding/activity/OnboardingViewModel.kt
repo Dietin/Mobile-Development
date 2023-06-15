@@ -54,7 +54,7 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
         }
     }
 
-    fun predictCalories(data: DataUser) = viewModelScope.launch {
+    private fun predictCalories(data: DataUser) = viewModelScope.launch {
         _isLoading.value = true
         try {
             val predictedDataUser = ApiConfig.getApiServiceML().predictCalories(
@@ -65,6 +65,30 @@ class OnboardingViewModel(private val application: Application): ViewModel() {
             // Save to preference
             data.idealCalories = predictedDataUser.predictedCalories
             Utils.setUserData(application, data)
+
+            addToUserDataHistory()
+        } catch (e: IOException) {
+            // No Internet Connection
+            _message.value = Event(e.message.toString())
+            _isSuccess.value = false
+        } catch (e: HttpException) {
+            // Error Response (4xx, 5xx)
+            val errorResponse = Gson().fromJson(e.response()?.errorBody()?.string(), ApiErrorResponse::class.java)
+            _message.value = Event(errorResponse.message)
+            _isSuccess.value = false
+        } finally {
+            _isLoading.value = false
+        }
+    }
+
+    private fun addToUserDataHistory() = viewModelScope.launch {
+        _isLoading.value = true
+        try {
+            val token = Utils.getToken(application)
+            ApiConfig.getApiService().addToDataUserHistory(
+                token = "Bearer $token",
+            ).data
+
             _isSuccess.value = true
         } catch (e: IOException) {
             // No Internet Connection
