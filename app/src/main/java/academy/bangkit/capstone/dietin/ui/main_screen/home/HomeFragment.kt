@@ -1,6 +1,5 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.home
 
-import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.Result
 import academy.bangkit.capstone.dietin.databinding.FragmentHomeBinding
@@ -10,6 +9,7 @@ import academy.bangkit.capstone.dietin.databinding.ItemUserEatBinding
 import academy.bangkit.capstone.dietin.helper.ProgressBarHelper
 import academy.bangkit.capstone.dietin.ui.food_detail.FoodDetailActivity
 import academy.bangkit.capstone.dietin.ui.food_history.AddFoodHistoryViewModel
+import academy.bangkit.capstone.dietin.ui.main_screen.MainScreenActivity
 import academy.bangkit.capstone.dietin.ui.search.RecipeSearchActivity
 import academy.bangkit.capstone.dietin.ui.subscription.SubscriptionActivity
 import academy.bangkit.capstone.dietin.utils.Utils

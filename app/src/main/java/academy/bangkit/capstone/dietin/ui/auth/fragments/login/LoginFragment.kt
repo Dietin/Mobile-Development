@@ -1,8 +1,8 @@
 package academy.bangkit.capstone.dietin.ui.auth.fragments.login
 
-import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.databinding.FragmentLoginBinding
 import academy.bangkit.capstone.dietin.ui.auth.activity.AuthenticationActivity
+import academy.bangkit.capstone.dietin.ui.main_screen.MainScreenActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.content.Intent

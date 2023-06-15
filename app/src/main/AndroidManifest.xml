@@ -41,7 +41,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".ui.main_screen.MainScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
 

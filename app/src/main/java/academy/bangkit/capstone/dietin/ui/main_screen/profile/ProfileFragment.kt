@@ -146,9 +146,8 @@ class ProfileFragment : Fragment(), BottomSheetHelper {
         binding.tvUserName.text = user?.name
         binding.tvUserEmail.text = user?.email
 
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         val dateCreatedAt = try {
-            sdf.parse(user?.createdAt!!)!!
+            Utils.parseDate(user?.createdAt!!, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         } catch (e: Exception){
             Calendar.getInstance().time
         }

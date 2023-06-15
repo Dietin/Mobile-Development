@@ -81,6 +81,11 @@ object Utils {
         return formatter.format(time)
     }
 
+    fun parseDate(dateString: String, pattern: String = "yyyy-MM-dd"): Date {
+        val formatter = SimpleDateFormat(pattern, Locale.getDefault())
+        return formatter.parse(dateString)!!
+    }
+
     fun setComposableFunction(view: ComposeView, composable: @Composable () -> Unit) {
         view.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)

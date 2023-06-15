@@ -1,6 +1,7 @@
 package academy.bangkit.capstone.dietin.ui.main_screen.history
 
 import academy.bangkit.capstone.dietin.data.remote.model.ApiErrorResponse
+import academy.bangkit.capstone.dietin.data.remote.model.DataUser
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.service.ApiConfig
 import academy.bangkit.capstone.dietin.utils.Event
@@ -31,15 +32,22 @@ class HistoryViewModel(private val application: Application): ViewModel() {
 
     private val _requestCount = MutableLiveData(0)
 
+    var dataUser: DataUser? = null
+
     init {
         _requestCount.observeForever {
             if (it == 2) {
                 _isLoading.value = false
             }
         }
+
+        viewModelScope.launch {
+            dataUser = getUserData()
+        }
     }
 
     private suspend fun getUserData() = Utils.getUserData(application)
+    suspend fun getUser() = Utils.getUser(application)
 
     fun getFoodHistory(date: String) = viewModelScope.launch {
         try {
@@ -90,7 +98,7 @@ class HistoryViewModel(private val application: Application): ViewModel() {
                 date = date
             )
 
-            _currentCalories.value = data.data?.idealCalories ?: getUserData()?.idealCalories ?: 1f
+            _currentCalories.value = data.data?.idealCalories ?: dataUser?.idealCalories ?: 1f
         } catch (e: IOException) {
             // No Internet Connection
             _message.value = Event(e.message.toString())

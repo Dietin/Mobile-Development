@@ -1,5 +1,6 @@
-package academy.bangkit.capstone.dietin
+package academy.bangkit.capstone.dietin.ui.main_screen
 
+import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.ActivityMainScreenBinding
 import academy.bangkit.capstone.dietin.ui.search.RecipeSearchActivity
 import android.content.Intent

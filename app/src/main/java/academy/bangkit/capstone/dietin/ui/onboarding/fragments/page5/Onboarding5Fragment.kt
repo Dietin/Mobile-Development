@@ -1,8 +1,8 @@
 package academy.bangkit.capstone.dietin.ui.onboarding.fragments.page5
 
-import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.databinding.FragmentOnboarding5Binding
+import academy.bangkit.capstone.dietin.ui.main_screen.MainScreenActivity
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingActivity
 import academy.bangkit.capstone.dietin.ui.onboarding.activity.OnboardingViewModel
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory

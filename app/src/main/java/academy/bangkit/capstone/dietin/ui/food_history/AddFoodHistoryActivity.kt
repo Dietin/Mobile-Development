@@ -1,10 +1,10 @@
 package academy.bangkit.capstone.dietin.ui.food_history
 
-import academy.bangkit.capstone.dietin.MainScreenActivity
 import academy.bangkit.capstone.dietin.R
 import academy.bangkit.capstone.dietin.data.remote.model.FoodHistory
 import academy.bangkit.capstone.dietin.data.remote.model.Recipe
 import academy.bangkit.capstone.dietin.databinding.ActivityAddFoodHistoryBinding
+import academy.bangkit.capstone.dietin.ui.main_screen.MainScreenActivity
 import academy.bangkit.capstone.dietin.utils.Utils
 import academy.bangkit.capstone.dietin.utils.ViewModelFactory
 import android.annotation.SuppressLint

@@ -12,6 +12,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
@@ -53,7 +56,11 @@ class HistoryFragment : Fragment() {
     private lateinit var viewModel: HistoryViewModel
     private lateinit var loader: AlertDialog
 
+    private lateinit var datePickerDialog: DatePickerDialog
+
     private var selectedDate = Calendar.getInstance()
+    private var maxDate = Calendar.getInstance().timeInMillis
+    private var minDate = Calendar.getInstance().timeInMillis
 
 
     override fun onCreateView(
@@ -75,6 +82,17 @@ class HistoryFragment : Fragment() {
                 loader.show()
             } else {
                 loader.dismiss()
+
+                // sekalian update progress bar
+                val currentFoodHistory = viewModel.currentFoodHistory.value
+                val currentCalories = viewModel.currentCalories.value
+
+                val totalCaloriesEaten = currentFoodHistory?.sumOf { it.totalCalories.toDouble() }?.toFloat() ?: 0f
+
+                val percent = totalCaloriesEaten / (currentCalories ?: 1f) * 100
+                ProgressBarHelper.setProgress(binding.historyCaloriesProgress, percent)
+
+                binding.tvCaloriesPercent.text = String.format(Locale.getDefault(), "%.0f%%", percent)
             }
         }
 
@@ -110,24 +128,44 @@ class HistoryFragment : Fragment() {
 
     private fun setListener(){
 
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        datePickerDialog = DatePickerDialog(requireContext(), {
+                _, _year, _monthOfYear, _dayOfMonth ->
+            val newDate = Calendar.getInstance()
+            newDate.set(_year, _monthOfYear, _dayOfMonth)
+            setTanggal(newDate)
+        }, year, month, dayOfMonth)
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+
+        // tanggal default adalah hari ini, jadi disable button next:
+        binding.btnNext.apply {
+            isEnabled = false
+            alpha = 0.5f
+        }
+
         binding.btnPickDate.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-            val datePickerDialog = DatePickerDialog(requireContext(), {
-                    _, _year, _monthOfYear, _dayOfMonth ->
-                val newDate = Calendar.getInstance()
-                newDate.set(_year, _monthOfYear, _dayOfMonth)
-                setTanggal(newDate)
-            }, year, month, dayOfMonth)
-            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.datePicker.updateDate(
                 selectedDate.get(Calendar.YEAR),
                 selectedDate.get(Calendar.MONTH),
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
             datePickerDialog.show()
+        }
+
+        lifecycleScope.launch {
+            val user = viewModel.getUser()
+
+            val createdAt = try {
+                Utils.parseDate(user?.createdAt!!, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").time
+            } catch (e: Exception) {
+                Calendar.getInstance().timeInMillis
+            }
+
+            datePickerDialog.datePicker.minDate = createdAt
+            minDate = createdAt + (24 * 60 * 60 * 1000)
         }
 
         binding.btnNext.setOnClickListener {
@@ -162,6 +200,31 @@ class HistoryFragment : Fragment() {
         binding.tvHistoryDate.text = Utils.formatDate(selectedDate.time, "dd MMMM yyyy")
 
         viewModel.getFoodHistory(dateYMD)
+
+        if (newDate.timeInMillis >= maxDate){
+            binding.btnNext.apply {
+                isEnabled = false
+                alpha = 0.5f
+            }
+        } else {
+            binding.btnNext.apply {
+                isEnabled = true
+                alpha = 1f
+            }
+        }
+
+        Log.e("HistoryFragment", "${newDate.timeInMillis} | $minDate | $maxDate")
+        if (newDate.timeInMillis <= minDate){
+            binding.btnBack.apply {
+                isEnabled = false
+                alpha = 0.5f
+            }
+        } else {
+            binding.btnBack.apply {
+                isEnabled = true
+                alpha = 1f
+            }
+        }
     }
 
     //disini set semua content yang diperlukan
@@ -179,7 +242,6 @@ class HistoryFragment : Fragment() {
     @Composable
     fun SetTable(){
         val currentFoodHistory by viewModel.currentFoodHistory.observeAsState()
-        val currentCalories by viewModel.currentCalories.observeAsState()
 
         Column(
             verticalArrangement = Arrangement.spacedBy(24.dp),
@@ -190,12 +252,6 @@ class HistoryFragment : Fragment() {
 
             //untuk total kalori yang sudah dikonsumsi
             binding.tvTotalCaloriesValue.text = Html.fromHtml(getString(R.string.food_cal, totalCaloriesEaten), Html.FROM_HTML_MODE_COMPACT)
-
-            //progress bar
-            val percent = totalCaloriesEaten / (currentCalories ?: 1f) * 100
-            ProgressBarHelper.setProgress(binding.historyCaloriesProgress, percent)
-
-            binding.tvCaloriesPercent.text = "${String.format(Locale.getDefault(), "%.0f", percent)}%"
 
             for (i in 1 .. 4) {
                 val foodHistoryGroupedByTime = currentFoodHistory?.find { it.time == i }
