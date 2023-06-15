@@ -36,7 +36,7 @@
     <string name="login_hint_make_account">Create Your Account</string>
     <string name="title_home">Home</string>
     <string name="title_search">Find Meals</string>
-    <string name="title_favourite">Favourite</string>
+    <string name="title_favourite">Favorite</string>
     <string name="title_profile">Profile</string>
     <string name="title_diary">Diary</string>
     <string name="home_welcome">Good %s, &lt;b&gt;%s&lt;/b&gt;!</string>

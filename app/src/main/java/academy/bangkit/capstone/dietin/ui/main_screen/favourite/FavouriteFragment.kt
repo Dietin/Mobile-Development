@@ -51,6 +51,11 @@ class FavouriteFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavourites()
+    }
+
     private fun setupViewModelBinding() {
         viewModel.favouriteList.observe(viewLifecycleOwner) {
             when (it) {
